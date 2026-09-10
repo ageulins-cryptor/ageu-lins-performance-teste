@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Isa Xampson 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --bg:#FFF3F7; --surface:#FFFFFF; --surface-2:#FCE4ED; --line:#F5C9DA;
+    --text:#5C2A3D; --text-dim:#9C7481; --gold:#B23A5F; --red:#C23B5C;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  
+
+    --rose-deep:#B23A5F;
+    --rose:#D6567F;
+    --rose-soft:#F3A9C0;
+    --plum:#5C2A3D;
+    --text-dim:#8A6874;
+    --bg1:#FFF3F7;
+    --bg2:#FCDCE7;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{padding-top:64px;height:100%;}
+h1,h2{font-family:'Oswald',sans-serif; font-weight:600;}
+body{padding-top:64px;
+  font-family:'IBM Plex Sans', sans-serif;
+  -webkit-font-smoothing:antialiased;
+  background:var(--bg);
+  color:var(--text);
+}
+label{display:block; font-size:0.8rem; color:var(--text-dim); margin-bottom:8px;}
+
+.screen{display:none; min-height:100vh; position:relative;}
+.screen.active{display:block;}
+#screen-intro{
+  padding:calc(40px + var(--safe-top)) 24px calc(48px + var(--safe-bottom));
+  background:linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 60%, #FBCFE0 100%);
+  overflow-x:hidden;
+  position:relative;
+}
+#screen-pre, #screen-pos{
+  padding:calc(28px + var(--safe-top)) 20px calc(48px + var(--safe-bottom));
+  background:var(--bg);
+}
+#screen-treino{
+  background:var(--bg);
+  padding-bottom:calc(72px + var(--safe-bottom));
+}
+
+/* ===== INTRO ===== */
+
+  /* ---------- FLOATING BLOBS ---------- */
+  .blob{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(40px);
+    opacity:0.5;
+    z-index:0;
+    animation:float 10s ease-in-out infinite;
+  }
+  .blob1{width:260px; height:260px; background:var(--rose-soft); top:-60px; left:-80px; animation-delay:0s;}
+  .blob2{width:200px; height:200px; background:#FFD1E0; bottom:10%; right:-60px; animation-delay:2s;}
+  .blob3{width:180px; height:180px; background:#FFC2D6; bottom:-60px; left:10%; animation-delay:4s;}
+  @keyframes float{
+    0%,100%{ transform:translateY(0) translateX(0); }
+    50%{ transform:translateY(-20px) translateX(15px); }
+  }
+
+  .wrap{max-width:460px; margin:0 auto; position:relative; z-index:1;}
+
+  .fade{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .fade.show{opacity:1; transform:translateY(0);}
+
+  .eyebrow{
+    font-size:0.8rem;
+    color:var(--rose-deep);
+    letter-spacing:0.04em;
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:18px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--rose);}
+
+  .name{
+    font-size:clamp(2.6rem, 11vw, 3.6rem);
+    line-height:1;
+    color:var(--rose-deep);
+    margin-bottom:22px;
+  }
+
+  .letter{
+    display:inline-block;
+    opacity:0;
+    transform:translateY(10px);
+    animation:letterIn .5s ease forwards;
+  }
+  @keyframes letterIn{ to{ opacity:1; transform:translateY(0); } }
+
+  .message{
+    font-size:1.05rem;
+    line-height:1.6;
+    color:var(--plum);
+    margin-bottom:32px;
+  }
+  .message .highlight{color:var(--rose-deep); font-weight:600;}
+
+  /* ---------- STATS ROW ---------- */
+  .stats-row{
+    display:flex;
+    gap:14px;
+    margin-bottom:32px;
+  }
+  .stat{
+    flex:1;
+    background:rgba(255,255,255,0.6);
+    border:1px solid rgba(214,86,127,0.25);
+    border-radius:14px;
+    padding:16px 10px;
+    text-align:center;
+    backdrop-filter:blur(4px);
+  }
+  .stat .num{
+    font-family:'Oswald',sans-serif;
+    font-size:1.8rem;
+    color:var(--rose-deep);
+    line-height:1;
+  }
+  .stat .label{font-size:0.72rem; color:var(--text-dim); margin-top:6px;}
+
+  /* ---------- PILLS (respostas dela) ---------- */
+  .pills-title{font-size:0.85rem; color:var(--text-dim); margin-bottom:12px;}
+  .pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:36px;
+  }
+  .pill{
+    background:rgba(255,255,255,0.7);
+    border:1px solid rgba(214,86,127,0.3);
+    color:var(--plum);
+    padding:9px 14px;
+    border-radius:20px;
+    font-size:0.82rem;
+  }
+
+  .btn-start{
+    display:block;
+    width:100%;
+    padding:18px;
+    text-align:center;
+    text-decoration:none;
+    background:var(--rose-deep);
+    color:#fff;
+    font-weight:600;
+    font-size:1rem;
+    border-radius:12px;
+    border:none;
+    box-shadow:0 8px 24px rgba(178,58,95,0.35);
+  }
+
+/* ===== PRE-TREINO ===== */
+
+  .wrap{max-width:460px; margin:0 auto;}
+
+  .eyebrow2{
+    font-size:0.78rem; color:var(--text-dim);
+    display:flex; align-items:center; gap:8px; margin-bottom:20px;
+  }
+  .eyebrow2 .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
+
+  .hero h1{font-size:2rem; line-height:1.1; margin-bottom:10px;}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p{color:var(--text-dim); font-size:0.95rem; max-width:360px; margin-bottom:32px;}
+
+  .choice-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .choice{
+    padding:10px 14px; border-radius:20px; border:1px solid var(--line);
+    background:var(--surface-2); color:var(--text-dim); font-size:0.86rem;
+    cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .choice.active{ background:var(--gold); border-color:var(--gold); color:#fff; font-weight:600; }
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:22px; margin-bottom:20px;
+  }
+  .card h2{font-size:1.05rem; margin-bottom:4px;}
+  .card .card-sub{font-size:0.82rem; color:var(--text-dim); margin-bottom:22px;}
+
+  .scale-row{ display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
+  .scale-btn{
+    flex:1; min-width:28px; padding:10px 0; text-align:center;
+    background:var(--surface-2); border:1px solid var(--line); border-radius:6px;
+    color:var(--text-dim); font-size:0.86rem; cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .scale-btn.active{ background:var(--gold); border-color:var(--gold); color:#fff; font-weight:600; }
+
+  .wellness-item{margin-bottom:20px;}
+  .wellness-item .scale-row{margin-bottom:6px;}
+  .wellness-item .scale-caption{ display:flex; justify-content:space-between; font-size:0.72rem; color:var(--text-dim); }
+
+  input[type="text"]{
+    width:100%; background:var(--surface-2); color:var(--text); border:1px solid var(--line);
+    border-radius:8px; padding:10px 12px; font-size:0.86rem;
+  }
+
+  button.btn-block{
+    width:100%; padding:15px; border-radius:8px; border:1px solid var(--line);
+    background:var(--gold); color:#fff; font-size:0.95rem; font-weight:600; cursor:pointer;
+  }
+  button.btn-block:disabled{opacity:0.5;}
+  button.btn-skip{
+    width:100%;
+    background:none;
+    border:none;
+    color:var(--text-dim);
+    font-size:0.84rem;
+    padding:12px;
+    margin-top:6px;
+    cursor:pointer;
+    text-decoration:underline;
+  }
+
+  .status-msg{ font-size:0.82rem; margin-top:12px; text-align:center; color:var(--text-dim); }
+  .status-msg.ok{color:#8FBF7A;}
+  .status-msg.err{color:#E08A7C;}
+
+/* ===== POS-TREINO ===== */
+
+  .wrap{max-width:460px; margin:0 auto;}
+
+  .eyebrow2{
+    font-size:0.78rem; color:var(--text-dim);
+    display:flex; align-items:center; gap:8px; margin-bottom:20px;
+  }
+  .eyebrow2 .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
+
+  .hero h1{font-size:2rem; line-height:1.1; margin-bottom:10px;}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p{color:var(--text-dim); font-size:0.95rem; max-width:360px; margin-bottom:32px;}
+
+  .choice-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .choice{
+    padding:10px 14px; border-radius:20px; border:1px solid var(--line);
+    background:var(--surface-2); color:var(--text-dim); font-size:0.86rem;
+    cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .choice.active{ background:var(--gold); border-color:var(--gold); color:#fff; font-weight:600; }
+
+  .chip-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; }
+  .chip{
+    padding:10px 8px; text-align:center; border-radius:8px; border:1px solid var(--line);
+    background:var(--surface-2); color:var(--text-dim); font-size:0.82rem;
+    cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .chip.active{ background:var(--gold); border-color:var(--gold); color:#fff; font-weight:600; }
+
+  input[type="number"], textarea{
+    width:100%; background:var(--surface-2); color:var(--text); border:1px solid var(--line);
+    border-radius:8px; padding:12px 14px; font-size:0.92rem; font-family:inherit;
+  }
+  textarea{min-height:70px; resize:vertical; padding:10px 12px; font-size:0.86rem;}
+
+  .scale-row{ display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
+  .scale-btn{
+    flex:1; min-width:28px; padding:10px 0; text-align:center;
+    background:var(--surface-2); border:1px solid var(--line); border-radius:6px;
+    color:var(--text-dim); font-size:0.86rem; cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .scale-btn.active{ background:var(--gold); border-color:var(--gold); color:#fff; font-weight:600; }
+  .scale-label{ font-size:0.8rem; color:var(--gold); min-height:1.2em; margin-bottom:22px; }
+
+  .result-box{
+    display:none; background:var(--surface-2); border:1px solid var(--line);
+    border-left:3px solid var(--gold); border-radius:0 8px 8px 0;
+    padding:14px 16px; margin-bottom:20px; font-size:0.88rem;
+  }
+  .result-box .load-value{ font-family:'Oswald',sans-serif; color:var(--gold); font-size:1.4rem; }
+
+  button.btn-block{
+    width:100%; padding:15px; border-radius:8px; border:1px solid var(--line);
+    background:var(--gold); color:#fff; font-size:0.95rem; font-weight:600; cursor:pointer;
+  }
+  button.btn-block:disabled{opacity:0.5;}
+
+  .status-msg{ font-size:0.82rem; margin-top:12px; text-align:center; color:var(--text-dim); }
+  .status-msg.ok{color:#8FBF7A;}
+  .status-msg.err{color:#E08A7C;}
+
+  .done-screen{ display:none; text-align:center; padding:60px 0; }
+  .done-screen .check{ font-size:3rem; margin-bottom:16px; }
+  .done-screen h2{ font-size:1.4rem; margin-bottom:10px; }
+  .done-screen p{ color:var(--text-dim); font-size:0.92rem; }
+
+/* ===== TREINO (APP) ===== */
+
+  h1,h2,h3{font-family:'Oswald',sans-serif; font-weight:600;}
+  button{font-family:inherit;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:16px 20px;
+  }
+  .topbar h1{font-size:1.1rem;}
+  .topbar .sub{font-size:0.78rem; color:var(--text-dim); margin-top:2px;}
+
+  main{max-width:640px; margin:0 auto; padding:20px 16px 40px;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  /* ---------- DAY ACCORDION ---------- */
+  .day{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .day-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 18px;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .day-head .info .num{font-size:0.72rem; color:var(--gold); font-family:'Oswald',sans-serif;}
+  .day-head .info .name{font-size:1rem; font-weight:500; margin-top:2px;}
+  .day-head .chev{
+    color:var(--text-dim); font-size:1.2rem;
+    transition:transform .2s ease;
+  }
+  .day.open .chev{transform:rotate(180deg);}
+  .day-body{padding-top:64px;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    border-top:1px solid transparent;
+  }
+  .day.open .day-body{padding-top:64px;border-top-color:var(--line);}
+
+  .ex-row{
+    display:flex; justify-content:space-between; align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+  }
+  .ex-row:last-child{border-bottom:none;}
+  .ex-row .ex-info .ex-name{font-size:0.92rem; font-weight:500;}
+  .ex-row .ex-info .ex-sets{font-size:0.78rem; color:var(--text-dim); margin-top:2px;}
+  .ex-row .ex-info .ex-carga{font-size:0.76rem; color:var(--gold); margin-top:3px; font-weight:500;}
+  .ex-row .ex-info .ex-tecnica{font-size:0.76rem; color:var(--text-dim); margin-top:3px; font-style:italic;}
+  .ex-row .video-btn{
+    flex-shrink:0;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--surface-2);
+    color:var(--gold);
+    font-size:1rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .ex-check{
+    flex-shrink:0;
+    width:26px; height:26px;
+    border-radius:50%;
+    border:2px solid var(--line);
+    background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    color:transparent;
+    font-size:0.85rem;
+    margin-right:2px;
+  }
+  .ex-check.done{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:#fff;
+  }
+  .ex-row.done .ex-name{ text-decoration:line-through; color:var(--text-dim); }
+
+  .day-progress{
+    font-size:0.72rem;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .btn-finalizar{
+    display:block;
+    width:100%;
+    margin-top:24px;
+    padding:16px;
+    border-radius:10px;
+    border:none;
+    background:var(--gold);
+    color:#fff;
+    font-size:0.95rem;
+    font-weight:600;
+    cursor:pointer;
+  }
+
+  /* ---------- MODAL (video player) ---------- */
+  .modal-backdrop{
+    display:none;
+    position:fixed; inset:0; z-index:100;
+    background:rgba(0,0,0,0.75);
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .modal-backdrop.active{display:flex;}
+  .modal{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px 14px 0 0;
+    width:100%; max-width:640px;
+    padding:18px;
+    padding-bottom:calc(18px + var(--safe-bottom));
+  }
+  .modal-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .modal-head h3{font-size:1rem;}
+  .modal-close{color:var(--text-dim); font-size:1.4rem; line-height:1; background:none; border:none;}
+  .video-frame{
+    width:100%; aspect-ratio:16/9;
+    background:#000;
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .video-frame iframe{width:100%; height:100%; border:none;}
+  .video-controls{margin-top:12px;padding:10px 12px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;}
+  .music-open-player{margin-top:12px;width:100%;}
+  #music-modal .modal{max-width:760px;}
+  #music-modal-player-host{width:100%;height:300px;border-radius:14px;overflow:hidden;background:#000;}
+  #music-modal-player-host #musica-mini-player{position:static!important;left:auto!important;top:auto!important;width:100%!important;height:100%!important;overflow:hidden!important;pointer-events:auto!important;background:#000!important;}
+  #music-modal-player-host #musica-mini-player iframe{width:100%!important;height:100%!important;opacity:1!important;pointer-events:auto!important;}
+  .music-player-controls{margin-top:12px;padding:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;}
+  .music-seek-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;font-size:.72rem;color:var(--text-dim);}
+  .music-seek{width:100%;accent-color:var(--accent);}
+  .music-control-btns{display:flex;justify-content:center;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .music-control-btns button{min-width:44px;height:38px;padding:0 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--text);font-weight:800;cursor:pointer;}
+  .music-control-btns button:hover{filter:brightness(1.05);}
+  .music-control-btns button:disabled{opacity:.4;cursor:not-allowed;}
+  .music-player-caption{margin-top:9px;font-size:.74rem;color:var(--text-dim);text-align:center;line-height:1.4;}
+  @media(max-width:560px){#music-modal-player-host{height:220px;}.music-control-btns button{min-width:40px;height:36px;padding:0 9px;}}
+
+  .video-seek-row{display:flex;align-items:center;gap:10px;}
+  .video-seek{flex:1;accent-color:var(--rose);cursor:pointer;}
+  .video-time{min-width:86px;text-align:center;font-size:0.78rem;color:var(--text-dim);font-variant-numeric:tabular-nums;}
+  .video-control-btns{display:flex;justify-content:center;gap:8px;margin-top:8px;}
+  .video-control-btns button{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);cursor:pointer;font-size:0.82rem;}
+  .video-control-btns button:hover{background:var(--surface-2);}
+  .video-control-hint{text-align:center;margin-top:7px;font-size:0.72rem;color:var(--text-dim);}
+  .video-empty{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    height:100%; color:var(--text-dim); font-size:0.85rem; text-align:center; padding:20px;
+    gap:6px;
+  }
+
+  /* ---------- SEND VIEW ---------- */
+  select{
+    width:100%;
+    background:var(--surface-2);
+    color:var(--text);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:0.92rem;
+    margin-bottom:16px;
+  }
+  .cam-wrap{
+    width:100%; aspect-ratio:3/4; max-height:60vh;
+    background:#000;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    margin-bottom:14px;
+  }
+  .cam-wrap video{width:100%; height:100%; object-fit:cover;}
+  .cam-placeholder{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:var(--text-dim); font-size:0.85rem; gap:10px; text-align:center; padding:20px;
+  }
+  .rec-dot{
+    position:absolute; top:12px; left:12px;
+    display:none; align-items:center; gap:6px;
+    background:rgba(0,0,0,0.5); padding:6px 10px; border-radius:20px;
+    font-size:0.76rem; color:#fff;
+  }
+  .rec-dot.active{display:flex;}
+  .rec-dot .dot{width:8px; height:8px; border-radius:50%; background:var(--red); animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+  .btn-row{display:flex; gap:10px; flex-wrap:wrap;}
+  button.btn{
+    flex:1;
+    min-width:120px;
+    padding:14px 16px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--surface-2);
+    color:var(--text);
+    font-size:0.9rem;
+    font-weight:500;
+    cursor:pointer;
+  }
+  button.btn.primary{background:var(--gold); color:#fff; border-color:var(--gold);}
+  button.btn.danger{background:var(--red); color:#fff; border-color:var(--red);}
+  button.btn:disabled{opacity:0.4;}
+  .hint{font-size:0.78rem; color:var(--text-dim); margin-top:10px;}
+
+  /* ---------- BOTTOM TABS ---------- */
+  .tabbar{
+    position:fixed; bottom:0; left:0; right:0; z-index:40;
+    display:flex;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(6px);
+    border-top:1px solid var(--line);
+    padding-bottom:var(--safe-bottom);
+  }
+  .tabbar button{
+    flex:1;
+    background:none; border:none; color:var(--text-dim);
+    padding:14px 8px 12px;
+    font-size:0.78rem;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+  }
+  .tabbar button .ic{font-size:1.2rem;}
+  .tabbar button.active{color:var(--gold);}
+
+  /* ---------- STREAK ---------- */
+  .streak-badge{
+    display:inline-block;
+    margin-top:8px;
+    font-size:0.78rem;
+    font-weight:600;
+    color:var(--gold);
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    padding:4px 10px;
+    border-radius:20px;
+  }
+
+  /* ---------- SPEED BUTTONS ---------- */
+  .speed-btn{ flex:1; }
+  .speed-btn.active{ background:var(--gold); color:#fff; border-color:var(--gold); }
+
+  /* ---------- FOTOS ---------- */
+  .foto-compare{ display:flex; gap:12px; }
+  .foto-slot{ flex:1; text-align:center; }
+  .foto-label{ font-size:0.76rem; color:var(--text-dim); margin-bottom:8px; }
+  .foto-box{
+    width:100%; aspect-ratio:3/4; border-radius:10px; border:1px dashed var(--line);
+    background:var(--surface-2); display:flex; align-items:center; justify-content:center;
+    overflow:hidden; color:var(--text-dim); font-size:0.76rem; text-align:center; padding:8px;
+  }
+  .foto-box img{ width:100%; height:100%; object-fit:cover; }
+  .foto-date{ font-size:0.7rem; color:var(--text-dim); margin-top:6px; }
+
+  /* ---------- HÁBITOS ---------- */
+  .habito-item{
+    display:flex; align-items:center; gap:14px;
+    padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .habito-item:last-of-type{ border-bottom:none; }
+  .habito-check{
+    flex-shrink:0; width:30px; height:30px; border-radius:50%;
+    border:2px solid var(--line); display:flex; align-items:center; justify-content:center;
+    color:transparent; font-size:0.9rem; cursor:pointer;
+  }
+  .habito-check.done{ background:var(--gold); border-color:var(--gold); color:#fff; }
+  .habito-text{ font-size:0.92rem; }
+  .habito-streak{
+    margin-top:18px; text-align:center; font-size:0.82rem; color:var(--gold); font-weight:500;
+  }
+
+  /* ---------- BADGE TOAST ---------- */
+  .badge-toast{
+    display:none;
+    position:fixed;
+    top:calc(16px + var(--safe-top, 0px));
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--gold);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:30px;
+    font-size:0.88rem;
+    font-weight:600;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    z-index:200;
+    text-align:center;
+    white-space:nowrap;
+  }
+  .badge-toast.show{ display:block; animation:toastIn 0.3s ease; }
+  @keyframes toastIn{ from{opacity:0; transform:translateX(-50%) translateY(-10px);} to{opacity:1; transform:translateX(-50%) translateY(0);} }
+
+/* ---------- MINI NAVEGAÇÃO (voltar/avançar) ---------- */
+.mini-nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:8px 0 4px;
+}
+.mini-nav.mini-nav-only-select{
+  justify-content:flex-end;
+}
+.mini-nav-btn{
+  flex:0 0 auto;
+  background:rgba(255,255,255,0.6);
+  border:1px solid var(--line, #F5C9DA);
+  color:var(--plum, #5C2A3D);
+  font-size:0.78rem;
+  font-weight:500;
+  padding:9px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-family:'IBM Plex Sans', sans-serif;
+  white-space:nowrap;
+}
+.mini-nav-btn:disabled{
+  opacity:0.35;
+  cursor:default;
+}
+.mini-nav .hub-select{
+  position:static;
+  flex:1;
+  min-width:0;
+  max-width:none;
+  text-align:center;
+}
+
+/* ---------- HUB (capa neutra, retorno) ---------- */
+#screen-hub{ background:var(--bg); }
+.hub-wrap{ position:relative; padding-top:20px; }
+.hub-select{
+  position:absolute;
+  top:calc(14px + var(--safe-top, 0px));
+  right:16px;
+  z-index:60;
+  background:var(--surface-2, #FCE4ED);
+  color:var(--text, #5C2A3D);
+  border:1px solid var(--line, #F5C9DA);
+  border-radius:8px;
+  padding:8px 10px;
+  font-size:0.78rem;
+  font-family:'IBM Plex Sans', sans-serif;
+  max-width:150px;
+}
+.hub-hero{
+  margin-top:90px;
+  text-align:center;
+}
+.hub-eyebrow{
+  font-size:0.78rem;
+  color:var(--text-dim, #9C7481);
+  margin-bottom:14px;
+}
+.hub-title{
+  font-size:2rem;
+  color:var(--gold, #B23A5F);
+}
+.hub-sub{
+  margin-top:12px;
+  font-size:0.92rem;
+  color:var(--text-dim, #9C7481);
+  max-width:280px;
+  margin-left:auto;
+  margin-right:auto;
+}
+</style>
+
+<style id="alp-base-css">
+#alpBaseRole{position:fixed;inset:0;z-index:200000;display:flex;align-items:center;justify-content:center;padding:20px;background:#fff}
+#alpBaseLogin{position:fixed;inset:0;z-index:199999;display:none;align-items:center;justify-content:center;padding:20px;background:#fff}
+#alpBaseRole .card,#alpBaseLogin .card{width:min(460px,100%);background:#fff;border:1px solid #eee;border-radius:24px;padding:28px;box-shadow:0 18px 60px rgba(0,0,0,.12);box-sizing:border-box;text-align:center}
+#alpBaseRole h1,#alpBaseLogin h2{margin:0 0 8px}
+#alpBaseRole p,#alpBaseLogin .sub{color:#777;font-size:13px;margin:0 0 22px}
+.alp-base-roles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.alp-base-roles button{border:1px solid #eee;border-radius:16px;background:#fafafa;padding:24px 12px;cursor:pointer;font:inherit;font-weight:800}
+.alp-base-roles button:hover{transform:translateY(-1px)}
+.alp-base-ico{display:block;font-size:34px;margin-bottom:8px}
+.alp-base-label{display:block;font-size:11px;color:#777;margin-top:4px;font-weight:500}
+#alpBaseLogin label{display:block;text-align:left;font-size:12px;font-weight:800;margin:12px 0 6px}
+#alpBaseLogin input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ddd;border-radius:11px;font-size:15px}
+#alpBaseLogin .enter{width:100%;border:0;border-radius:12px;padding:13px;margin-top:16px;background:#16131a;color:#fff;font-weight:900;cursor:pointer}
+#alpBaseLogin .back{width:100%;border:0;background:none;color:#777;padding:10px;cursor:pointer}
+#alpBaseError{min-height:18px;color:#a12c50;font-size:12px;margin-top:8px}
+#alpBaseTrainer{position:fixed;inset:0;z-index:199998;display:none;background:#f7f5f7;overflow:auto}
+#alpBaseTrainer .panel{max-width:900px;margin:30px auto;background:#fff;border-radius:22px;border:1px solid #eee;padding:24px;box-sizing:border-box}
+#alpBaseTrainer h2{margin:0 0 6px}.alp-base-mini{color:#777;font-size:13px}
+#alpBaseTrainer .box{margin-top:18px;padding:18px;border:1px solid #eee;border-radius:16px}
+#alpBaseTrainer button{border:0;border-radius:11px;padding:10px 14px;cursor:pointer;font-weight:800}
+@media(max-width:600px){.alp-base-roles{grid-template-columns:1fr}}
+</style>
+
+
+<style id="music-local-warning-css">
+.music-local-warning{padding:22px;text-align:center;background:#161216;color:#fff;border-radius:10px;line-height:1.5}
+.music-local-warning strong{font-size:1rem}
+.music-local-warning p{margin:9px 0 0;color:#ddd;font-size:.82rem}
+</style>
+
+<style id="alp4-music-css">
+#musica-history .music-history-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+#musica-history .music-history-item:last-child{border-bottom:0}
+.music-history-main{min-width:0}.music-history-name{font-weight:700;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.music-history-type{font-size:.7rem;color:var(--text-dim);margin-top:3px}
+.music-history-actions{display:flex;gap:7px;flex-shrink:0}.music-history-actions button{border:1px solid var(--line);background:var(--surface-2);color:var(--text);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:.75rem}
+.music-current{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:12px}.music-current small{color:var(--text-dim)}
+#musica-mini-wrap{position:fixed;left:50%;top:8px;bottom:auto;transform:translateX(-50%);width:min(94vw,720px);height:46px;background:#17131c;color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:visible;z-index:100000;box-shadow:0 8px 24px rgba(0,0,0,.22);display:flex;flex-direction:column;box-sizing:border-box} \
+#musica-mini-head{min-height:46px;box-sizing:border-box} \
+#musica-mini-status{position:absolute;left:10px;right:10px;top:48px}
+#musica-mini-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;font-size:.78rem;font-weight:800}
+#musica-mini-head button{background:none;border:0;color:#fff;font-size:1.05rem;cursor:pointer}
+#musica-mini-player{position:fixed;left:-10000px;top:0;width:320px;height:180px;overflow:hidden;background:#000;border:0;pointer-events:none}
+#musica-mini-player iframe{width:320px;height:180px;border:0;display:block;opacity:.02;pointer-events:none}
+.music-mini-note{padding:10px;background:#151118;color:#eee;font-size:.72rem;line-height:1.35}
+#musica-mini-actions{display:flex;align-items:center;gap:5px;flex-shrink:0}
+#musica-mini-actions button{width:30px;height:30px;border:0;border-radius:8px;background:#2b2330;color:#fff;font-weight:900;cursor:pointer;font-size:.78rem;display:inline-flex;align-items:center;justify-content:center}
+#musica-mini-actions button:hover{background:#3a3041}
+#musica-mini-actions button:disabled{opacity:.35;cursor:not-allowed}
+#musica-mini-status{padding:4px 10px 7px;background:#18141b;color:#cfc7d2;font-size:.66rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:560px){#musica-mini-wrap{width:min(96vw,520px);top:6px}#musica-mini-head{align-items:center}#musica-mini-actions button{width:28px;height:28px;font-size:.72rem}}
+
+body:has(#musica-mini-wrap[style*="display: block"]){padding-top:64px;}
+</style>
+
+</head>
+<body>
+<div class="screen active" id="screen-intro">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <div class="wrap">
+    <div class="eyebrow fade" id="f1"><span class="dot"></span>Feito só pra você</div>
+
+    <h1 class="name" id="animatedName"></h1>
+
+    <p class="message fade" id="f2">
+      Bel, esse treino foi pensado <span class="highlight">especialmente pra você</span> — no seu ritmo, do seu jeito, com tudo que você me contou.
+    </p>
+
+    <div class="stats-row fade" id="f3">
+      <div class="stat"><div class="num" data-target="5">0</div><div class="label">dias por semana</div></div>
+      <div class="stat"><div class="num" data-target="4">0</div><div class="label">semanas de ciclo</div></div>
+      <div class="stat"><div class="num" data-target="1">0</div><div class="label">objetivo: você</div></div>
+    </div>
+
+    <div class="fade" id="f4">
+      <div class="pills-title">Já sei de algumas coisas sobre você 💗</div>
+      <div class="pills">
+        <div class="pill">Cor favorita: rosa 💗</div>
+        <div class="pill">Pode te chamar de Isa ou Bel</div>
+        <div class="pill">Ama treinar terça em diante</div>
+        <div class="pill">Odeia segunda 😅</div>
+        <div class="pill">Treino direto e objetivo, sem enrolação</div>
+      </div>
+    </div>
+
+    <a class="btn-start fade" id="f5" href="#" onclick="localStorage.setItem('isaIntroVista','1'); goToScreen('pre'); return false;">Começar</a>
+  </div>
+
+
+</div>
+
+<div class="screen" id="screen-hub">
+  <div class="wrap hub-wrap">
+    <div class="hub-hero">
+      <div class="hub-eyebrow">Consultoria online</div>
+      <h1 class="hub-title">Ageu Lins</h1>
+      <p class="hub-sub">Bem-vinda de volta. Escolha no menu acima pra onde você quer ir.</p>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="screen-pre">
+
+  <div class="wrap">
+    <div class="eyebrow2"><span class="dot"></span>Antes de treinar</div>
+
+    <div class="hero">
+      <h1>Como você <span class="accent">chegou hoje?</span></h1>
+      <p>Responda rapidinho antes de começar — isso ajuda a ajustar a carga do treino com precisão.</p>
+    </div>
+
+    <div class="card">
+      <label>Como você avalia hoje:</label>
+
+      <div class="wellness-item">
+        <div class="scale-caption"><span>Sono</span><span>ruim → ótimo</span></div>
+        <div class="scale-row" data-wellness="sono"></div>
+      </div>
+      <div class="wellness-item">
+        <div class="scale-caption"><span>Dor muscular</span><span>muita → nenhuma</span></div>
+        <div class="scale-row" data-wellness="dor"></div>
+        <input type="text" id="dor-local" placeholder="Onde dói? (opcional)" style="margin-top:10px;">
+        <div style="margin-top:10px;">
+          <div class="scale-caption" style="margin-bottom:6px;"><span>Essa dor te limita a treinar?</span></div>
+          <div class="choice-row" id="dor-limita-row">
+            <div class="choice" data-val="Sim">Sim</div>
+            <div class="choice" data-val="Não">Não</div>
+          </div>
+        </div>
+      </div>
+      <div class="wellness-item">
+        <div class="scale-caption"><span>Estresse</span><span>muito → nenhum</span></div>
+        <div class="scale-row" data-wellness="estresse"></div>
+      </div>
+      <div class="wellness-item">
+        <div class="scale-caption"><span>Disposição</span><span>baixa → alta</span></div>
+        <div class="scale-row" data-wellness="disposicao"></div>
+      </div>
+
+      <button class="btn-block" id="btn-pre">Enviar e ir treinar</button>
+      <button class="btn-skip" id="btn-pular-pre">Pular</button>
+      <div class="status-msg" id="status-pre"></div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="screen" id="screen-treino">
+
+
+<div class="topbar">
+  <h1>Oi, Isa 💗</h1>
+  <div class="sub">Ciclo de 4 semanas · foco em definição</div>
+  <div class="streak-badge" id="streak-badge">🔥 0 dias seguidos</div>
+</div>
+
+<main>
+  <!-- ===== VIEW 1: TREINO ===== -->
+  <div class="view active" id="view-treino">
+    <div id="days-list"></div>
+    <button class="btn-finalizar" id="btn-finalizar-treino">Concluir treino ✓</button>
+  </div>
+
+  <!-- ===== VIEW 2: ENVIAR EXECUÇÃO ===== -->
+  <div class="view" id="view-enviar">
+    <div class="card">
+      <label for="ex-select">Qual exercício você está gravando?</label>
+      <select id="ex-select"></select>
+
+      <div class="cam-wrap" id="cam-wrap">
+        <div class="rec-dot" id="rec-dot"><span class="dot"></span> Gravando</div>
+        <video id="live-video" autoplay muted playsinline style="display:none;"></video>
+        <video id="preview-video" playsinline controls style="display:none;"></video>
+        <div class="cam-placeholder" id="cam-placeholder">
+          📷<br>Toque em "Ligar câmera" para começar
+        </div>
+      </div>
+
+      <div class="btn-row" id="btn-row-speed" style="display:none;">
+        <button class="btn speed-btn" data-speed="0.25">0.25x</button>
+        <button class="btn speed-btn" data-speed="0.5">0.5x</button>
+        <button class="btn speed-btn active" data-speed="1">Normal</button>
+      </div>
+
+      <div class="btn-row" id="btn-row-setup">
+        <button class="btn primary" id="btn-start-cam">Ligar câmera</button>
+      </div>
+      <div class="btn-row" id="btn-row-record" style="display:none;">
+        <button class="btn danger" id="btn-record">Gravar</button>
+        <button class="btn" id="btn-switch-cam">Trocar câmera</button>
+      </div>
+      <div class="btn-row" id="btn-row-recording" style="display:none;">
+        <button class="btn danger" id="btn-stop">Parar gravação</button>
+      </div>
+      <div class="btn-row" id="btn-row-review" style="display:none;">
+        <button class="btn" id="btn-retake">Gravar de novo</button>
+        <button class="btn primary" id="btn-share">Enviar pelo WhatsApp</button>
+        <button class="btn" id="btn-download">Baixar</button>
+      </div>
+
+      <p class="hint" id="cam-hint">O vídeo fica só no seu aparelho até você apertar "Enviar" ou "Baixar". No iPhone, "Enviar" abre o compartilhamento nativo: escolha WhatsApp e o contato para enviar o vídeo. Depois de gravar, use os botões de velocidade acima do vídeo pra rever em câmera lenta.</p>
+    </div>
+  </div>
+
+  <!-- ===== VIEW 3: FOTOS DE PROGRESSO ===== -->
+  <div class="view" id="view-fotos">
+    <div class="card">
+      <h2 style="font-size:1.05rem; margin-bottom:4px;">Fotos de progresso</h2>
+      <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:20px;">Guarde uma foto de início e compare com a mais recente.</div>
+
+      <div class="foto-compare" id="foto-compare">
+        <div class="foto-slot">
+          <div class="foto-label">Início</div>
+          <div class="foto-box" id="foto-box-inicio"><span>Sem foto ainda</span></div>
+          <div class="foto-date" id="foto-date-inicio"></div>
+        </div>
+        <div class="foto-slot">
+          <div class="foto-label">Mais recente</div>
+          <div class="foto-box" id="foto-box-recente"><span>Sem foto ainda</span></div>
+          <div class="foto-date" id="foto-date-recente"></div>
+        </div>
+      </div>
+
+      <input type="file" id="foto-input" accept="image/*" capture="environment" style="display:none;">
+      <button class="btn primary" id="btn-tirar-foto" style="width:100%; margin-top:18px;">Adicionar foto de hoje</button>
+      <p class="hint">As fotos ficam salvas só neste aparelho/navegador.</p>
+    </div>
+  </div>
+
+  <!-- ===== VIEW 4: HÁBITOS DIÁRIOS ===== -->
+  <div class="view" id="view-habitos">
+    <div class="card">
+      <h2 style="font-size:1.05rem; margin-bottom:4px;">Hábitos de hoje</h2>
+      <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:20px;">Vale marcar todo dia, mesmo sem treino.</div>
+
+      <div class="habito-item">
+        <div class="habito-check" data-habito="agua">✓</div>
+        <div class="habito-text">Bebi água suficiente</div>
+      </div>
+      <div class="habito-item">
+        <div class="habito-check" data-habito="sono">✓</div>
+        <div class="habito-text">Dormi bem essa noite</div>
+      </div>
+      <div class="habito-item">
+        <div class="habito-check" data-habito="movimento">✓</div>
+        <div class="habito-text">Me movimentei fora do treino</div>
+      </div>
+
+      <div class="habito-streak" id="habito-streak">0 dias com todos os hábitos em dia</div>
+    </div>
+  </div>
+
+  <!-- ===== VIEW 5: MINHA MÚSICA ===== -->
+  <div class="view" id="view-musica">
+    <div class="card">
+      <h2 style="font-size:1.05rem; margin-bottom:4px;">Minha música 🎵</h2>
+      <div style="font-size:0.82rem; color:var(--text-dim); margin-bottom:16px;">
+        Salve suas playlists e músicas favoritas uma vez. Depois você pode voltar a elas quando quiser.
+      </div>
+
+      <div id="musica-form">
+        <label for="musica-link">Link da playlist ou música</label>
+        <input type="text" id="musica-link" placeholder="Cole aqui o link do YouTube ou Spotify">
+        <input type="text" id="musica-nome" placeholder="Nome para identificar (ex.: Treino pesado)" style="margin-top:10px;">
+        <button class="btn primary" id="btn-salvar-musica" style="width:100%; margin-top:14px;">Adicionar à minha biblioteca</button>
+        <p class="hint" id="musica-erro" style="display:none; color:var(--red);"></p>
+      </div>
+
+      <div id="musica-current-card" style="display:none; margin-top:16px;"></div>
+
+      <div id="musica-history" style="margin-top:18px;">
+        <div style="font-size:.82rem; color:var(--text-dim);">Nenhuma música salva ainda.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MINI PLAYER PERSISTENTE ===== -->
+  </main>
+
+<!-- ===== MINICONTROLE MUSICAL GLOBAL: FORA DAS TELAS/ABAS ===== -->
+<div id="musica-mini-wrap" style="display:flex;">
+    <div id="musica-mini-head">
+      <div id="musica-mini-title">🎵 Nenhuma música selecionada</div>
+      <div id="musica-mini-actions">
+        <button id="musica-mini-prev" type="button" aria-label="Música anterior" disabled>⏮</button>
+        <button id="musica-mini-play" type="button" aria-label="Reproduzir ou pausar" disabled>▶</button>
+        <button id="musica-mini-next" type="button" aria-label="Próxima música" disabled>⏭</button>
+        <button id="musica-mini-stop" type="button" aria-label="Parar música" disabled>⏹</button>
+        <span id="btn-musica-mini-close" aria-hidden="true" style="display:none"></span>
+      </div>
+    </div>
+    <div id="musica-mini-status">Escolha uma música em “Minha Música” para ativar os controles.</div>
+    <div id="musica-mini-player"></div>
+  </div>
+
+
+
+<!-- ===== MODAL VÍDEO DO EXERCÍCIO ===== -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">Exercício</h3>
+      <button class="modal-close" id="modal-close">&times;</button>
+    </div>
+    <div class="video-frame" id="video-frame"></div>
+    <div class="video-controls" id="video-controls" style="display:none;">
+      <div class="video-seek-row">
+        <span class="video-time" id="video-current">0:00</span>
+        <input class="video-seek" id="video-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Selecionar trecho do vídeo">
+        <span class="video-time" id="video-duration">0:00</span>
+      </div>
+      <div class="video-control-btns">
+        <button type="button" id="video-back10">↶ 10s</button>
+        <button type="button" id="video-playpause">▶/⏸</button>
+        <button type="button" id="video-forward10">10s ↷</button>
+      </div>
+      <div class="video-control-hint">Arraste a barra para escolher exatamente a parte do vídeo que deseja assistir.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL DO PLAYER MUSICAL ===== -->
+<div class="modal-backdrop" id="music-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="music-modal-title">Minha música</h3>
+      <button class="modal-close" id="music-modal-close">&times;</button>
+    </div>
+    <div id="music-modal-player-host"></div>
+    <div class="music-player-controls">
+      <div class="music-seek-row">
+        <span id="music-current-time">0:00</span>
+        <input class="music-seek" id="music-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Selecionar trecho da música">
+        <span id="music-duration">0:00</span>
+      </div>
+      <div class="music-control-btns">
+        <button type="button" id="music-modal-prev">⏮</button>
+        <button type="button" id="music-modal-back10">↶ 10s</button>
+        <button type="button" id="music-modal-playpause">▶/⏸</button>
+        <button type="button" id="music-modal-forward10">10s ↷</button>
+        <button type="button" id="music-modal-next">⏭</button>
+        <button type="button" id="music-modal-stop">⏹</button>
+      </div>
+      <div class="music-player-caption">Arraste a barra para escolher exatamente o ponto da música que deseja ouvir.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST DE CONQUISTA ===== -->
+<div class="badge-toast" id="badge-toast"></div>
+
+<div class="tabbar">
+  <button class="active" data-view="view-treino"><span class="ic">🏋️</span>Treino</button>
+  <button data-view="view-enviar"><span class="ic">🎥</span>Vídeo</button>
+  <button data-view="view-fotos"><span class="ic">📸</span>Fotos</button>
+  <button data-view="view-habitos"><span class="ic">✅</span>Hábitos</button>
+  <button data-view="view-musica"><span class="ic">🎵</span>Música</button>
+</div>
+
+
+</div>
+
+<div class="screen" id="screen-pos">
+
+  <div class="wrap">
+    <div id="form-view">
+      <div class="eyebrow2"><span class="dot"></span>Treino concluído</div>
+
+      <div class="hero">
+        <h1>Como foi o <span class="accent">treino de hoje?</span></h1>
+        <p>Preencha agora, com o treino ainda fresco na memória.</p>
+      </div>
+
+      <div class="card">
+        <h2>Carga do treino</h2>
+        <div class="card-sub">Duração e percepção de esforço da sessão.</div>
+
+        <label for="duracao">Duração da sessão (minutos)</label>
+        <input type="number" id="duracao" min="0" placeholder="Ex: 60" style="margin-bottom:22px;">
+
+        <label>Percepção de esforço (RPE — escala de Borg 0 a 10)</label>
+        <div class="scale-row" id="rpe-row"></div>
+        <div class="scale-label" id="rpe-label">&nbsp;</div>
+
+        <div class="result-box" id="result-box">
+          Carga interna da sessão: <span class="load-value" id="load-value">—</span> UA
+          <div style="color:var(--text-dim); font-size:0.76rem; margin-top:4px;">(duração × RPE, método de Foster)</div>
+        </div>
+
+        <label>Sentiu dor em algum local do corpo hoje?</label>
+        <div class="chip-grid" id="dor-mapa-grid">
+          <div class="chip" data-val="Joelho DIR">Joelho DIR</div>
+          <div class="chip" data-val="Joelho ESQ">Joelho ESQ</div>
+          <div class="chip" data-val="Ombro DIR">Ombro DIR</div>
+          <div class="chip" data-val="Ombro ESQ">Ombro ESQ</div>
+          <div class="chip" data-val="Cervical">Cervical</div>
+          <div class="chip" data-val="Lombar">Lombar</div>
+          <div class="chip" data-val="Cotovelo DIR">Cotovelo DIR</div>
+          <div class="chip" data-val="Cotovelo ESQ">Cotovelo ESQ</div>
+          <div class="chip" data-val="Mão DIR">Mão DIR</div>
+          <div class="chip" data-val="Mão ESQ">Mão ESQ</div>
+          <div class="chip" data-val="Tornozelo DIR">Tornozelo DIR</div>
+          <div class="chip" data-val="Tornozelo ESQ">Tornozelo ESQ</div>
+          <div class="chip" data-val="Pé DIR">Pé DIR</div>
+          <div class="chip" data-val="Pé ESQ">Pé ESQ</div>
+          <div class="chip" data-val="Ant. Coxa DIR">Ant. Coxa DIR</div>
+          <div class="chip" data-val="Ant. Coxa ESQ">Ant. Coxa ESQ</div>
+          <div class="chip" data-val="Post. Coxa DIR">Post. Coxa DIR</div>
+          <div class="chip" data-val="Post. Coxa ESQ">Post. Coxa ESQ</div>
+          <div class="chip" data-val="Adutor DIR">Adutor DIR</div>
+          <div class="chip" data-val="Adutor ESQ">Adutor ESQ</div>
+          <div class="chip" data-val="Tibial Ant. DIR">Tibial Ant. DIR</div>
+          <div class="chip" data-val="Tibial Ant. ESQ">Tibial Ant. ESQ</div>
+          <div class="chip" data-val="Panturrilha DIR">Panturrilha DIR</div>
+          <div class="chip" data-val="Panturrilha ESQ">Panturrilha ESQ</div>
+          <div class="chip" data-val="Glúteo DIR">Glúteo DIR</div>
+          <div class="chip" data-val="Glúteo ESQ">Glúteo ESQ</div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <div class="card-sub" style="margin-bottom:6px;">Essa dor te limitou a treinar hoje?</div>
+          <div class="choice-row" id="dor-pos-limita-row">
+            <div class="choice" data-val="Sim">Sim</div>
+            <div class="choice" data-val="Não">Não</div>
+            <div class="choice" data-val="Sem dor hoje">Sem dor hoje</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <label for="obs-pos">Quer deixar algum comentário pra mim?</label>
+          <textarea id="obs-pos" placeholder="Opcional — conte o que quiser sobre o treino de hoje"></textarea>
+        </div>
+
+        <div style="margin-top:22px;">
+          <button class="btn-block" id="btn-pos">Enviar pós-treino</button>
+          <button class="btn-skip" id="btn-pular-pos">Pular</button>
+        </div>
+        <div class="status-msg" id="status-pos"></div>
+      </div>
+    </div>
+
+    <div class="done-screen" id="done-screen">
+      <div class="check">💗</div>
+      <h2>Registrado!</h2>
+      <p>Seu preparador já vai ver como foi o treino de hoje. Até a próxima sessão!</p>
+      <a class="btn-start fade show" href="#" onclick="goToScreen('hub'); return false;" style="display:inline-block; margin-top:28px; padding:14px 28px; width:auto;">Voltar ao início</a>
+    </div>
+  </div>
+
+
+</div>
+<script>
+
+function goToScreen(name){
+  var target = document.getElementById('screen-' + name);
+  if (!target) return false;
+
+  /* Garante que nunca existam duas telas externas ativas ao mesmo tempo. */
+  document.querySelectorAll('.screen').forEach(function(s){
+    s.classList.remove('active');
+    s.setAttribute('aria-hidden','true');
+  });
+  target.classList.add('active');
+  target.setAttribute('aria-hidden','false');
+
+  /* Ao voltar para Treino, reabre sempre a view principal.
+     O mini-player continua vivo e independente da navegação. */
+  if (name === 'treino') {
+    document.querySelectorAll('#screen-treino .view').forEach(function(v){
+      v.classList.remove('active');
+    });
+    var mainView = document.getElementById('view-treino');
+    if (mainView) mainView.classList.add('active');
+    document.querySelectorAll('#screen-treino .tabbar button').forEach(function(b){
+      b.classList.toggle('active', b.dataset.view === 'view-treino');
+    });
+  }
+
+  window.scrollTo(0, 0);
+  return true;
+}
+
+/* ---------- MINI NAVEGAÇÃO (voltar/avançar) ---------- */
+/* ---------- BARRA DE NAVEGAÇÃO ÚNICA (voltar · ir para · avançar) ---------- */
+const ORDEM_TELAS = ['hub', 'pre', 'treino', 'pos'];
+const OPCOES_SELETOR = [
+  { value: '', label: 'Ir para...' },
+  { value: 'intro', label: 'Ver introdução' },
+  { value: 'hub', label: 'Início' },
+  { value: 'pre', label: 'Pré-treino' },
+  { value: 'treino', label: 'Treino' },
+  { value: 'fotos', label: 'Fotos de progresso' },
+  { value: 'habitos', label: 'Hábitos' },
+  { value: 'musica', label: 'Minha música' },
+  { value: 'pos', label: 'Pós-treino' }
+];
+function irParaOpcao(destino){
+  if (!destino) return;
+  if (destino === 'fotos' || destino === 'habitos' || destino === 'musica'){
+    if (!goToScreen('treino')) return;
+    const viewId = destino === 'fotos' ? 'view-fotos' : (destino === 'habitos' ? 'view-habitos' : 'view-musica');
+    document.querySelectorAll('#screen-treino .view').forEach(function(v){ v.classList.remove('active'); });
+    document.querySelectorAll('#screen-treino .tabbar button').forEach(function(b){
+      b.classList.toggle('active', b.dataset.view === viewId);
+    });
+    var view = document.getElementById(viewId);
+    if (view) view.classList.add('active');
+  } else {
+    goToScreen(destino);
+  }
+}
+function criarSeletor(nome){
+  const select = document.createElement('select');
+  select.className = 'hub-select';
+  select.id = 'nav-select-' + nome;
+  OPCOES_SELETOR.forEach(opt => {
+    const optionEl = document.createElement('option');
+    optionEl.value = opt.value;
+    optionEl.textContent = opt.label;
+    select.appendChild(optionEl);
+  });
+  select.addEventListener('change', (e) => {
+    irParaOpcao(e.target.value);
+    e.target.value = '';
+  });
+  return select;
+}
+
+/* Telas com voltar/avançar: barra completa de 3 partes */
+ORDEM_TELAS.forEach((nome, idx) => {
+  const screen = document.getElementById('screen-' + nome);
+  const nav = document.createElement('div');
+  nav.className = 'mini-nav';
+  const anterior = ORDEM_TELAS[(idx - 1 + ORDEM_TELAS.length) % ORDEM_TELAS.length];
+  const proxima = ORDEM_TELAS[(idx + 1) % ORDEM_TELAS.length];
+  const btnVoltar = document.createElement('button');
+  btnVoltar.className = 'mini-nav-btn';
+  btnVoltar.textContent = '‹ Voltar';
+  btnVoltar.addEventListener('click', () => goToScreen(anterior));
+  const btnAvancar = document.createElement('button');
+  btnAvancar.className = 'mini-nav-btn';
+  btnAvancar.textContent = nome === 'pos' ? 'Início ›' : 'Avançar ›';
+  btnAvancar.addEventListener('click', () => goToScreen(proxima));
+  nav.appendChild(btnVoltar);
+  nav.appendChild(criarSeletor(nome));
+  nav.appendChild(btnAvancar);
+  screen.insertBefore(nav, screen.firstChild);
+});
+
+/* Intro (sem voltar/avançar): só o seletor, numa barrinha simples */
+const introScreen = document.getElementById('screen-intro');
+const navIntro = document.createElement('div');
+navIntro.className = 'mini-nav mini-nav-only-select';
+navIntro.appendChild(criarSeletor('intro'));
+introScreen.insertBefore(navIntro, introScreen.firstChild);
+
+/* Mostra a capa animada só na primeira visita; da segunda vez em diante, cai na capa neutra (hub) */
+if (localStorage.getItem('isaIntroVista')){
+  goToScreen('hub');
+}
+
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyZl60YaH0uD2adGZ8DOqOVtvK_kkirR2WGQIm6rIiRvQNXlvABuI_dOQxu48ydRxI/exec";
+
+function buildScale(container, max, onSelect){
+  container.innerHTML = '';
+  let selected = null;
+  for (let i = 0; i <= max; i++){
+    const btn = document.createElement('div');
+    btn.className = 'scale-btn';
+    btn.textContent = i;
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selected = i;
+      onSelect(i);
+    });
+    container.appendChild(btn);
+  }
+  return { get value(){ return selected; } };
+}
+
+async function enviarParaPlanilha(payload, statusEl, btnEl, opts){
+  opts = opts || {};
+  const mustSucceed = !!opts.mustSucceed;
+  if (!SHEET_ENDPOINT){
+    if (mustSucceed){
+      statusEl.textContent = 'Endpoint da planilha ainda não configurado — registro não foi enviado.';
+      statusEl.className = 'status-msg err';
+      return false;
+    }
+    return true;
+  }
+  btnEl.disabled = true;
+  statusEl.textContent = 'Enviando...';
+  statusEl.className = 'status-msg';
+  try{
+    await fetch(SHEET_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    if (mustSucceed){
+      statusEl.textContent = 'Registro enviado!';
+      statusEl.className = 'status-msg ok';
+    }
+    return true;
+  }catch(err){
+    statusEl.textContent = mustSucceed
+      ? 'Não foi possível enviar agora. Tente novamente.'
+      : 'Não foi possível enviar agora, mas você já pode seguir pro treino.';
+    statusEl.className = 'status-msg err';
+    return !mustSucceed;
+  }finally{
+    btnEl.disabled = false;
+  }
+}
+
+/* ===== INTRO ===== */
+
+// animação do nome, letra por letra
+const nome = "Isa Xampson 2.0";
+const nameEl = document.getElementById('animatedName');
+[...nome].forEach((ch, i) => {
+  const span = document.createElement('span');
+  span.className = 'letter';
+  span.style.animationDelay = (i * 0.045) + 's';
+  span.textContent = ch === ' ' ? '\u00A0' : ch;
+  nameEl.appendChild(span);
+});
+
+// sequência de fade-ins
+const seq = ['f1','f2','f3','f4','f5'];
+seq.forEach((id, i) => {
+  setTimeout(() => {
+    document.getElementById(id).classList.add('show');
+    if (id === 'f3') animateStats();
+  }, 700 + i * 450);
+});
+
+function animateStats(){
+  document.querySelectorAll('.stat .num').forEach(el => {
+    const target = parseInt(el.dataset.target, 10);
+    let current = 0;
+    const step = () => {
+      current++;
+      el.textContent = current;
+      if (current < target) requestAnimationFrame(() => setTimeout(step, 120));
+    };
+    step();
+  });
+}
+
+/* ===== PRE-TREINO ===== */
+
+const wellnessScales = {};
+document.querySelectorAll('[data-wellness]').forEach(row => {
+  wellnessScales[row.dataset.wellness] = buildScale(row, 5, () => {});
+});
+
+document.querySelectorAll('#dor-limita-row .choice').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('#dor-limita-row .choice').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  });
+});
+
+const statusPre = document.getElementById('status-pre');
+const btnPre = document.getElementById('btn-pre');
+btnPre.addEventListener('click', async () => {
+  const dorLimita = document.querySelector('#dor-limita-row .choice.active');
+  const payload = {
+    momento: 'pre',
+    dataHora: new Date().toISOString(),
+    sono: wellnessScales.sono.value,
+    dorMuscular: wellnessScales.dor.value,
+    dorLocal: document.getElementById('dor-local').value.trim(),
+    dorLimita: dorLimita ? dorLimita.dataset.val : '',
+    estresse: wellnessScales.estresse.value,
+    disposicao: wellnessScales.disposicao.value
+  };
+  if (payload.sono === null || payload.dorMuscular === null || payload.estresse === null || payload.disposicao === null){
+    statusPre.textContent = 'Responda todas as perguntas antes de enviar.';
+    statusPre.className = 'status-msg err';
+    return;
+  }
+  statusPre.textContent = 'Enviando...';
+  statusPre.className = 'status-msg';
+  await enviarParaPlanilha(payload, statusPre, btnPre, { mustSucceed: false });
+  goToScreen('treino');
+});
+
+document.getElementById('btn-pular-pre').addEventListener('click', () => {
+  goToScreen('treino');
+});
+
+/* ===== TREINO (APP) ===== */
+
+/* =========================================================
+   DADOS DO TREINO
+   Para adicionar o vídeo de um exercício: cole o link de
+   incorporação (embed) do YouTube no campo "video" abaixo.
+   Exemplo: "https://www.youtube.com/embed/XXXXXXXXXXX"
+   Deixe "" (vazio) se ainda não tiver o vídeo.
+   ========================================================= */
+const TREINO = [
+  {
+    dia: 1, nome: "Tríceps, Core & Aeróbico",
+    exercicios: [
+      { nome: "Tríceps testa com barra W", sets: "4 x 10–12", video: "https://www.youtube.com/embed/QWlYQIIit0k" },
+      { nome: "Tríceps corda na polia", sets: "3 x 12–15", video: "https://www.youtube.com/embed/M-DTY40JG9M" },
+      { nome: "Tríceps francês com halter (unilateral)", sets: "3 x 10–12", video: "https://www.youtube.com/embed/eS93gEFXXxo" },
+      { nome: "Prancha abdominal (curta, sem sobrecarga)", sets: "3 x 20–30 s", video: "https://www.youtube.com/embed/DoOtkRaL1BI" },
+      { nome: "Ativação de transverso abdominal (respiração + contração leve)", sets: "3 x 10 repetições", video: "https://www.youtube.com/embed/PdlZV11mlz8" },
+      { nome: "Prancha lateral (cada lado, curta)", sets: "3 x 15–20 s", video: "https://www.youtube.com/embed/A0RGKVDnUok" },
+      { nome: "Esteira ou bike — intervalado", sets: "15–20 min", video: "https://www.youtube.com/embed/IXp6a6a4nQs" }
+    ]
+  },
+  {
+    dia: 2, nome: "Costas & Bíceps",
+    exercicios: [
+      { nome: "Barra fixa (pegada pronada)", sets: "4 x 8–10", video: "https://www.youtube.com/embed/JX_YM7Bp26U" },
+      { nome: "Remada curvada com barra", sets: "4 x 10–12", video: "https://www.youtube.com/embed/_vO2dAnz__c" },
+      { nome: "Puxada frente na polia", sets: "3 x 10–12", video: "https://www.youtube.com/embed/7cCiQUdIXWw" },
+      { nome: "Remada unilateral com halter", sets: "3 x 10–12", video: "https://www.youtube.com/embed/34HQ55Yds6o" },
+      { nome: "Rosca direta com barra", sets: "3 x 10–12", video: "https://www.youtube.com/embed/yopIHJ-jr3w" },
+      { nome: "Rosca alternada com halteres", sets: "3 x 10–12", video: "https://www.youtube.com/embed/nAqWZprW4yY" }
+    ]
+  },
+  {
+    dia: 3, nome: "Pernas — quadríceps",
+    exercicios: [
+      { nome: "Agachamento livre com barra", sets: "4 x 10–12", carga: "Sugestão: 40–55 kg (barra + anilhas)", tecnica: "Ao final de cada série, 30s de agachamento isométrico", video: "https://www.youtube.com/embed/rM6SDUdl9fs" },
+      { nome: "Leg press 45°", sets: "4 x 10–12", carga: "Sugestão: 120–150 kg", tecnica: "Ao final de cada série, 30s de agachamento isométrico", video: "https://www.youtube.com/embed/waAxlYvtCcI" },
+      { nome: "Cadeira extensora", sets: "4 x 15, 12, 10, 8 (decrescente)", carga: "Sugestão: 25–32 kg", tecnica: "Carga sai do máximo e vai ficando mais leve conforme as repetições descem (15→12→10→8). Ao final de cada série, 30s de agachamento isométrico", video: "https://www.youtube.com/embed/exLCpU7mT3g" },
+      { nome: "Afundo com halteres", sets: "3 x 10 (cada perna)", carga: "Sugestão: par de 6–8 kg", video: "https://www.youtube.com/embed/6Zz_RG0EHFE" },
+      { nome: "Agachamento búlgaro", sets: "3 x 10–12 (cada perna)", carga: "Sugestão: par de 8–10 kg", video: "https://www.youtube.com/embed/MzjO0-M-wns" },
+      { nome: "Panturrilha em pé", sets: "4 x 15–20", carga: "Sugestão: 55–70 kg", video: "https://www.youtube.com/embed/qWHH0We_9r0" }
+    ]
+  },
+  {
+    dia: 4, nome: "Ombro & Core",
+    exercicios: [
+      { nome: "Desenvolvimento militar com barra", sets: "4 x 10–12", video: "https://www.youtube.com/embed/51OSQ0XDQX8" },
+      { nome: "Elevação lateral com halteres", sets: "4 x 12–15", video: "https://www.youtube.com/embed/gURBTU9VSJg" },
+      { nome: "Elevação posterior (peck deck invertido)", sets: "3 x 12–15", video: "https://www.youtube.com/embed/5-HhI9yCuUo" },
+      { nome: "Encolhimento com halteres", sets: "3 x 12–15", video: "https://www.youtube.com/embed/G4Db9-p9yJM" },
+      { nome: "Prancha abdominal (curta, sem sobrecarga)", sets: "3 x 20–30 s", video: "https://www.youtube.com/embed/DoOtkRaL1BI" },
+      { nome: "Ativação de core em quatro apoios (bird-dog)", sets: "3 x 10 (cada lado)", video: "https://www.youtube.com/embed/GcIxfCvnLW8" }
+    ]
+  },
+  {
+    dia: 5, nome: "Posterior & Glúteo",
+    exercicios: [
+      { nome: "Levantamento terra romeno", sets: "4 x 10–12", carga: "Sugestão: 40–55 kg (barra + anilhas)", video: "https://www.youtube.com/embed/-9LSaXZJUXc" },
+      { nome: "Agachamento sumô com halter", sets: "3 x 12–15", carga: "Sugestão: halter único de 14–20 kg", video: "https://www.youtube.com/embed/u_TTcv8FvOk" },
+      { nome: "Elevação de quadril (hip thrust) com barra", sets: "4 x 10–12", carga: "Sugestão: 70–90 kg", video: "https://www.youtube.com/embed/3mnHo-F-U4Q" },
+      { nome: "Elevação pélvica unilateral", sets: "3 x 10–12 (cada perna)", carga: "Sugestão: peso corporal ou barra leve (10–20 kg)", video: "https://www.youtube.com/embed/r7Dk1EVQSZI" },
+      { nome: "Cadeira flexora", sets: "3 x 12–15", carga: "Sugestão: 22–30 kg", video: "https://www.youtube.com/embed/zX5saGYPgzw" },
+      { nome: "Abdução de quadril na polia/máquina", sets: "3 x 15–20 (cada lado)", carga: "Sugestão: 20–28 kg", video: "https://www.youtube.com/embed/50qHGus1TZk" },
+      { nome: "Stiff com halteres", sets: "3 x 10–12", carga: "Sugestão: par de 10–14 kg", video: "https://www.youtube.com/embed/601YoPL6y6E" },
+      { nome: "Glúteo no cross-over (coice)", sets: "3 x 15 (cada lado)", carga: "Sugestão: 5–7 kg (cabo/tornozeleira)", video: "https://www.youtube.com/embed/KoGf9T179Vg" },
+      { nome: "Glúteo em quatro apoios (coice no chão)", sets: "3 x 15 (cada lado)", carga: "Sugestão: peso corporal ou caneleira de 2–3 kg", video: "https://www.youtube.com/embed/abUpYx2Y6nA" }
+    ]
+  }
+];
+
+/* ---------- RENDER TREINO ---------- */
+const daysList = document.getElementById('days-list');
+const exSelect = document.getElementById('ex-select');
+
+TREINO.forEach((dia, di) => {
+  const dayEl = document.createElement('div');
+  dayEl.className = 'day';
+  dayEl.innerHTML = `
+    <div class="day-head">
+      <div class="info">
+        <div class="num">DIA ${String(dia.dia).padStart(2,'0')}</div>
+        <div class="name">${dia.nome}</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="day-progress" id="progress-dia-${dia.dia}">0/${dia.exercicios.length}</div>
+        <div class="chev">⌄</div>
+      </div>
+    </div>
+    <div class="day-body"></div>
+  `;
+  const body = dayEl.querySelector('.day-body');
+  dia.exercicios.forEach((ex, ei) => {
+    const row = document.createElement('div');
+    row.className = 'ex-row';
+    const cargaHtml = ex.carga ? `<div class="ex-carga">${ex.carga}</div>` : '';
+    const tecnicaHtml = ex.tecnica ? `<div class="ex-tecnica">${ex.tecnica}</div>` : '';
+    row.innerHTML = `
+      <div class="ex-check" data-dia="${dia.dia}">✓</div>
+      <div class="ex-info">
+        <div class="ex-name">${ex.nome}</div>
+        <div class="ex-sets">${ex.sets}</div>
+        ${cargaHtml}
+        ${tecnicaHtml}
+      </div>
+      <button class="video-btn" title="Ver vídeo">▶</button>
+    `;
+    row.querySelector('.ex-check').addEventListener('click', () => {
+      row.classList.toggle('done');
+      row.querySelector('.ex-check').classList.toggle('done');
+      updateProgress(dia.dia);
+    });
+    row.querySelector('.video-btn').addEventListener('click', () => openVideoModal(ex));
+    body.appendChild(row);
+
+    const opt = document.createElement('option');
+    opt.value = `${dia.nome} — ${ex.nome}`;
+    opt.textContent = `Dia ${dia.dia} · ${ex.nome}`;
+    exSelect.appendChild(opt);
+  });
+
+  dayEl.querySelector('.day-head').addEventListener('click', () => {
+    const isOpen = dayEl.classList.contains('open');
+    document.querySelectorAll('.day').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.day-body').style.maxHeight = null;
+    });
+    if (!isOpen) {
+      dayEl.classList.add('open');
+      const b = dayEl.querySelector('.day-body');
+      b.style.maxHeight = b.scrollHeight + 'px';
+    }
+  });
+
+  daysList.appendChild(dayEl);
+});
+
+/* ---------- MINHA MÚSICA — HISTÓRICO + MINI-PLAYER PERSISTENTE ---------- */
+const MUSIC_HISTORY_KEY = 'isaMusicasHistorico';
+
+function readMusicHistory(){
+  try{
+    const arr = JSON.parse(localStorage.getItem(MUSIC_HISTORY_KEY) || '[]');
+    return Array.isArray(arr) ? arr : [];
+  }catch(e){ return []; }
+}
+function writeMusicHistory(arr){
+  localStorage.setItem(MUSIC_HISTORY_KEY, JSON.stringify(arr));
+}
+function normalizeSavedMusic(raw){
+  if (!raw) return null;
+  try{
+    const obj = JSON.parse(raw);
+    if (obj && obj.src) return obj;
+  }catch(e){}
+  if (typeof raw === 'string' && raw.indexOf('youtube') >= 0){
+    return {type:'youtube', src:raw, name:'Música atual'};
+  }
+  if (typeof raw === 'string' && raw.indexOf('spotify') >= 0){
+    return {type:'spotify', src:raw, name:'Música atual'};
+  }
+  return null;
+}
+function parseMusicaLink(url){
+  url = (url || '').trim();
+  let m;
+
+  /* YouTube Mix: watch?v=VIDEO_ID&list=RD... */
+  m = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?([^#]+)/i);
+  if (m){
+    const params = new URLSearchParams(m[1]);
+    const videoId = params.get('v');
+    const listId = params.get('list');
+    if (listId && /^RD[A-Za-z0-9_-]+$/i.test(listId)){
+      return {
+        type:'youtube-mix',
+        id:videoId || listId,
+        videoId:videoId || null,
+        listId,
+        src: videoId
+          ? `https://www.youtube-nocookie.com/embed/${videoId}?playsinline=1&rel=0&list=${encodeURIComponent(listId)}`
+          : `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(listId)}&rel=0`,
+        openUrl:`https://www.youtube.com/watch?v=${videoId || ''}&list=${encodeURIComponent(listId)}`,
+        listUrl:`https://www.youtube.com/watch?v=${videoId || ''}&list=${encodeURIComponent(listId)}`
+      };
+    }
+    if (videoId) return {
+      type:'youtube', id:videoId,
+      src:`https://www.youtube-nocookie.com/embed/${videoId}?playsinline=1&rel=0`,
+      openUrl:`https://www.youtube.com/watch?v=${videoId}`
+    };
+  }
+
+  /* YouTube Mix em formato playlist?list=RD... — não transforma em playlist comum. */
+  m = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/playlist\?[^#]*list=(RD[A-Za-z0-9_-]+)/i);
+  if (m) return {
+    type:'youtube-mix', id:m[1], videoId:null, listId:m[1],
+    src:`https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(m[1])}&rel=0`,
+    openUrl:`https://www.youtube.com/playlist?list=${encodeURIComponent(m[1])}`,
+    listUrl:`https://www.youtube.com/playlist?list=${encodeURIComponent(m[1])}`
+  };
+
+  /* Playlist comum do YouTube */
+  m = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/playlist\?[^#]*list=([A-Za-z0-9_-]+)/i);
+  if (m) return {
+    type:'youtube-playlist', id:m[1], listId:m[1],
+    src:`https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(m[1])}&rel=0`,
+    openUrl:`https://www.youtube.com/playlist?list=${encodeURIComponent(m[1])}`,
+    listUrl:`https://www.youtube.com/playlist?list=${encodeURIComponent(m[1])}`
+  };
+
+  /* YouTube vídeo direto */
+  m = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i);
+  if (m) return {
+    type:'youtube', id:m[1],
+    src:`https://www.youtube-nocookie.com/embed/${m[1]}?playsinline=1&rel=0`,
+    openUrl:`https://www.youtube.com/watch?v=${m[1]}`
+  };
+
+  /* Spotify */
+  m = url.match(/(?:https?:\/\/)?open\.spotify\.com\/(intl-[^/]+\/)?(playlist|track|album|artist)\/([A-Za-z0-9]+)/i);
+  if (m) return {
+    type:'spotify', id:m[3],
+    src:`https://open.spotify.com/embed/${m[2]}/${m[3]}`,
+    openUrl:`https://open.spotify.com/${m[2]}/${m[3]}`
+  };
+
+  return null;
+}
+
+function musicPlayerMarkup(player){
+  const isLocalFile = window.location.protocol === 'file:';
+  const isOfficialOnline = window.location.hostname === 'ageu-lins-performance.pages.dev';
+
+  if (isLocalFile){
+    const service = player.type === 'spotify' ? 'Spotify' : 'YouTube';
+    return `<div style="height:100%;min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(135deg,#111,#1c1023);color:#fff;box-sizing:border-box;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🎵</div>
+      <strong style="font-size:1rem;margin-bottom:8px;">Teste local detectado</strong>
+      <span style="font-size:.82rem;line-height:1.45;opacity:.82;max-width:360px;">O navegador bloqueia o player incorporado do ${service} quando este HTML é aberto diretamente pelo computador. Na versão online, o player abre dentro do app.</span>
+      <a href="${escapeHtml(player.openUrl || '#')}" target="_blank" rel="noopener" style="margin-top:16px;display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:10px;background:#fff;color:#171018;text-decoration:none;font-weight:800;">Abrir no ${service}</a>
+      <a href="https://ageu-lins-performance.pages.dev" target="_blank" rel="noopener" style="margin-top:9px;color:#ffd7e5;font-size:.78rem;text-decoration:underline;">Testar a versão online</a>
+    </div>`;
+  }
+
+  let src = player.src;
+  if (isOfficialOnline && player.type === 'youtube'){
+    const joiner = src.includes('?') ? '&' : '?';
+    src += `${joiner}origin=${encodeURIComponent('https://ageu-lins-performance.pages.dev')}&widget_referrer=${encodeURIComponent('https://ageu-lins-performance.pages.dev')}`;
+  }
+
+  if (player.type === 'spotify'){
+    return `<iframe src="${src}" width="100%" height="100%" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" referrerpolicy="origin"></iframe>`;
+  }
+  return `<iframe src="${src}" width="100%" height="100%" title="Player de música" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="origin"></iframe>`;
+}
+
+function currentMusic(){
+  const history = readMusicHistory();
+  return history[0] || normalizeSavedMusic(localStorage.getItem('isaMusicaEmbed'));
+}
+
+function renderMusicHistory(){
+  const history = readMusicHistory();
+  const box = document.getElementById('musica-history');
+  const currentBox = document.getElementById('musica-current-card');
+
+  if (!history.length){
+    if(box) box.innerHTML = '<div style="font-size:.82rem; color:var(--text-dim);">Nenhuma música salva ainda.</div>';
+    if(currentBox) currentBox.style.display='none';
+    __alpMusicPlayer = null;
+    updateMusicControls();
+    musicStatus('Escolha uma música em “Minha Música” para ativar os controles.');
+    return;
+  }
+
+  const current = history[0];
+  if(currentBox){
+    currentBox.style.display='block';
+    currentBox.innerHTML = `<div class="music-current">
+      <strong>🎵 Tocando agora / última usada</strong><br>
+      <span>${escapeHtml(current.name || 'Música')}</span>
+      <small> · ${current.type === 'spotify' ? 'Spotify' : 'YouTube'}</small>
+      <button type="button" class="btn primary music-open-player" id="btn-open-music-player">🎧 Abrir player</button>
+    </div>`;
+  }
+  bindMusicModalButton();
+
+  if(box){
+    box.innerHTML = '<div style="font-size:.9rem;font-weight:800;margin-bottom:7px;">Minha biblioteca</div>' +
+      history.map((item, idx) => `
+        <div class="music-history-item">
+          <div class="music-history-main">
+            <div class="music-history-name">${escapeHtml(item.name || 'Música')}</div>
+            <div class="music-history-type">${item.type === 'spotify' ? 'Spotify' : 'YouTube'} · ${idx===0 ? 'última usada' : 'salva'}</div>
+          </div>
+          <div class="music-history-actions">
+            <button type="button" onclick="usarMusicaSalva(${idx})">▶ Ouvir</button>
+            <button type="button" onclick="excluirMusicaSalva(${idx})">Excluir</button>
+          </div>
+        </div>`).join('');
+  }
+}
+
+function escapeHtml(v){
+  return String(v || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+let __alpYTPlayer = null;
+let __alpMusicPlayer = null;
+let __alpYTApiReady = false;
+let __alpYTApiLoading = false;
+let __alpYTReadyQueue = [];
+
+function musicStatus(text){
+  const el = document.getElementById('musica-mini-status');
+  if (el) el.textContent = text || 'Pronto para tocar';
+}
+
+function updateMusicControls(state){
+  const wrap = document.getElementById('musica-mini-wrap');
+  const player = __alpYTPlayer;
+  const prev = document.getElementById('musica-mini-prev');
+  const play = document.getElementById('musica-mini-play');
+  const next = document.getElementById('musica-mini-next');
+  const stop = document.getElementById('musica-mini-stop');
+  const title = document.getElementById('musica-mini-title');
+  const hasMusic = !!__alpMusicPlayer;
+  const isYoutube = !!(__alpMusicPlayer && (__alpMusicPlayer.type === 'youtube' || __alpMusicPlayer.type === 'youtube-playlist' || __alpMusicPlayer.type === 'youtube-mix'));
+
+  if (wrap) wrap.style.display = 'flex';
+  if (title) title.textContent = hasMusic ? ('🎵 ' + (__alpMusicPlayer.name || 'Minha música')) : '🎵 Nenhuma música selecionada';
+  if (play) play.textContent = state === 1 ? '⏸' : '▶';
+  if (prev) prev.disabled = !hasMusic || !isYoutube || !__alpMusicPlayer.listId;
+  if (next) next.disabled = !hasMusic || !isYoutube || !__alpMusicPlayer.listId;
+  if (play) play.disabled = !hasMusic || !isYoutube || !player;
+  if (stop) stop.disabled = !hasMusic || !isYoutube || !player;
+}
+
+function drainYTQueue(){
+  __alpYTApiReady = true;
+  const queue = __alpYTReadyQueue.splice(0);
+  queue.forEach(fn => { try{ fn(); }catch(e){ console.error(e); } });
+}
+
+function ensureYouTubeApi(callback){
+  if (__alpYTApiReady && window.YT && window.YT.Player){ callback(); return; }
+  __alpYTReadyQueue.push(callback);
+  if (__alpYTApiLoading) return;
+  __alpYTApiLoading = true;
+
+  const previousReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function(){
+    if (typeof previousReady === 'function'){
+      try{ previousReady(); }catch(e){ console.error(e); }
+    }
+    drainYTQueue();
+  };
+  const script = document.createElement('script');
+  script.src = 'https://www.youtube.com/iframe_api';
+  script.async = true;
+  document.head.appendChild(script);
+}
+
+function destroyYTPlayer(){
+  if (__alpYTPlayer){
+    try{ __alpYTPlayer.destroy(); }catch(e){}
+    __alpYTPlayer = null;
+  }
+}
+
+function montarMiniPlayer(player){
+  if (typeof fecharPlayerMusical === 'function' && musicModal && musicModal.classList.contains('active')) fecharPlayerMusical();
+  const wrap = document.getElementById('musica-mini-wrap');
+  const playerEl = document.getElementById('musica-mini-player');
+  const titleEl = document.getElementById('musica-mini-title');
+  if (!wrap || !playerEl || !player) return;
+
+  destroyYTPlayer();
+  __alpMusicPlayer = player;
+  titleEl.textContent = '🎵 ' + (player.name || 'Minha música');
+  wrap.style.display = 'block';
+  playerEl.innerHTML = '';
+  musicStatus(player.type === 'spotify' ? 'Use os controles do Spotify para reproduzir.' : 'Pronto para tocar');
+
+  if (player.type === 'spotify'){
+    const iframe = document.createElement('iframe');
+    iframe.src = player.src;
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.frameBorder = '0';
+    iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'origin';
+    playerEl.appendChild(iframe);
+    updateMusicControls();
+    return;
+  }
+
+  ensureYouTubeApi(function(){
+    if (__alpMusicPlayer !== player || !document.getElementById('musica-mini-player')) return;
+    const host = document.getElementById('musica-mini-player');
+    host.innerHTML = '<div id="alp-youtube-player" style="width:100%;height:100%;"></div>';
+
+    const vars = {
+      playsinline: 1,
+      rel: 0,
+      modestbranding: 1,
+      enablejsapi: 1,
+      origin: window.location.origin
+    };
+    if (player.type === 'youtube-playlist' || player.type === 'youtube-mix'){
+      if (player.listId) vars.list = player.listId;
+      if (player.videoId) vars.start = 0;
+    }
+
+    const config = {
+      height: '100%', width: '100%',
+      videoId: player.videoId || (player.type === 'youtube' ? player.id : undefined),
+      playerVars: vars,
+      events: {
+        onReady: function(){
+          musicStatus('Pronto para tocar');
+          updateMusicControls(0);
+          syncMusicModalUI();
+          if (__alpMusicPlayer && __alpMusicPlayer.type === 'youtube-mix' && __alpMusicPlayer.listId && typeof __alpYTPlayer.setLoop === 'function') {
+            try{ __alpYTPlayer.setLoop(false); }catch(e){}
+          }
+        },
+        onStateChange: function(e){
+          const labels = {1:'Tocando', 2:'Pausada', 0:'Finalizada', 5:'Pronta para tocar'};
+          musicStatus(labels[e.data] || 'Música');
+          updateMusicControls(e.data);
+          syncMusicModalUI();
+        },
+        onError: function(e){
+          musicStatus('O YouTube não permitiu esta reprodução. Use “Abrir no YouTube”.');
+          updateMusicControls(0);
+          syncMusicModalUI();
+          console.warn('YouTube player error', e.data);
+        }
+      }
+    };
+
+    if (!config.videoId) delete config.videoId;
+    __alpYTPlayer = new YT.Player('alp-youtube-player', config);
+  });
+}
+
+function sendYTCommand(func){
+  try{
+    const iframe = document.querySelector('#alp-youtube-player iframe');
+    if (iframe && iframe.contentWindow){
+      iframe.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), 'https://www.youtube-nocookie.com');
+      iframe.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), 'https://www.youtube.com');
+      return true;
+    }
+  }catch(e){ console.warn('Falha no fallback do YouTube:', e); }
+  return false;
+}
+
+function playPauseMusic(){
+  if (__alpMusicPlayer && __alpMusicPlayer.type === 'spotify'){
+    musicStatus('Spotify: use o controle do próprio player.');
+    return;
+  }
+  if (!__alpYTPlayer) { musicStatus('Player musical ainda carregando…'); return; }
+  try{
+    const state = typeof __alpYTPlayer.getPlayerState === 'function' ? __alpYTPlayer.getPlayerState() : -1;
+    if (state === 1) {
+      if (typeof __alpYTPlayer.pauseVideo === 'function') __alpYTPlayer.pauseVideo();
+      else sendYTCommand('pauseVideo');
+    } else {
+      if (typeof __alpYTPlayer.playVideo === 'function') __alpYTPlayer.playVideo();
+      else sendYTCommand('playVideo');
+    }
+  }catch(e){
+    sendYTCommand(state === 1 ? 'pauseVideo' : 'playVideo');
+  }
+}
+function stopMusic(){
+  if (__alpMusicPlayer && __alpMusicPlayer.type === 'spotify'){
+    musicStatus('Spotify: use o controle do próprio player.');
+    return;
+  }
+  if (__alpYTPlayer){
+    try{
+      if (typeof __alpYTPlayer.stopVideo === 'function') __alpYTPlayer.stopVideo();
+      else sendYTCommand('stopVideo');
+      musicStatus('Música parada');
+    }catch(e){ sendYTCommand('stopVideo'); }
+  }
+}
+function previousMusic(){
+  if (__alpMusicPlayer && __alpMusicPlayer.listId){
+    try{
+      if (__alpYTPlayer && typeof __alpYTPlayer.previousVideo === 'function') __alpYTPlayer.previousVideo();
+      else sendYTCommand('previousVideo');
+      musicStatus('Voltando para a música anterior…');
+      return;
+    }catch(e){ sendYTCommand('previousVideo'); return; }
+  }
+  musicStatus('Não há música anterior disponível nesta faixa.');
+}
+function nextMusic(){
+  if (__alpMusicPlayer && __alpMusicPlayer.listId){
+    try{
+      if (__alpYTPlayer && typeof __alpYTPlayer.nextVideo === 'function') __alpYTPlayer.nextVideo();
+      else sendYTCommand('nextVideo');
+      musicStatus('Avançando para a próxima música…');
+      return;
+    }catch(e){ sendYTCommand('nextVideo'); return; }
+  }
+  musicStatus('Não há próxima música disponível nesta faixa.');
+}
+
+let __alpMusicModalOpen = false;
+let __alpMusicSeekTimer = null;
+const musicModal = document.getElementById('music-modal');
+const musicModalHost = document.getElementById('music-modal-player-host');
+const musicSeek = document.getElementById('music-seek');
+const musicCurrentTime = document.getElementById('music-current-time');
+const musicDuration = document.getElementById('music-duration');
+const musicModalTitle = document.getElementById('music-modal-title');
+
+function fmtMusicTime(sec){
+  sec = Math.max(0, Number(sec)||0);
+  const m = Math.floor(sec/60);
+  const s = Math.floor(sec%60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
+function syncMusicModalUI(){
+  try{
+    const p=__alpYTPlayer;
+    if(!p || typeof p.getDuration!=='function') return;
+    const dur=Number(p.getDuration()||0);
+    const cur=Number(p.getCurrentTime()||0);
+    if(musicSeek){
+      musicSeek.max = dur>0 ? dur : 100;
+      if(document.activeElement !== musicSeek) musicSeek.value = Math.min(cur,dur||cur||0);
+    }
+    if(musicCurrentTime) musicCurrentTime.textContent=fmtMusicTime(cur);
+    if(musicDuration) musicDuration.textContent=fmtMusicTime(dur);
+    const state = typeof p.getPlayerState==='function' ? p.getPlayerState() : -1;
+    const btn=document.getElementById('music-modal-playpause');
+    if(btn) btn.textContent = state===1 ? '⏸' : '▶';
+  }catch(e){}
+}
+function startMusicSeekTimer(){
+  if(__alpMusicSeekTimer) clearInterval(__alpMusicSeekTimer);
+  __alpMusicSeekTimer=setInterval(syncMusicModalUI,500);
+  syncMusicModalUI();
+}
+function stopMusicSeekTimer(){
+  if(__alpMusicSeekTimer) clearInterval(__alpMusicSeekTimer);
+  __alpMusicSeekTimer=null;
+}
+function abrirPlayerMusical(){
+  if(!__alpMusicPlayer){ musicStatus('Escolha uma música primeiro.'); return; }
+  if(!musicModal || !musicModalHost) return;
+  musicModalTitle.textContent='🎧 '+(__alpMusicPlayer.name || 'Minha música');
+  musicModal.classList.add('active');
+  const playerEl=document.getElementById('musica-mini-player');
+  if(playerEl && playerEl.parentElement!==musicModalHost){
+    musicModalHost.appendChild(playerEl);
+  }
+  if(__alpMusicPlayer.type==='spotify'){
+    musicStatus('Use os controles do Spotify no player.');
+    document.querySelectorAll('#music-modal-playpause,#music-modal-prev,#music-modal-back10,#music-modal-forward10,#music-modal-next,#music-modal-stop').forEach(b=>b.disabled=true);
+  }else{
+    document.querySelectorAll('#music-modal-playpause,#music-modal-stop').forEach(b=>b.disabled=false);
+    const listable=!!(__alpMusicPlayer.listId);
+    const multi=['music-modal-prev','music-modal-next'].map(id=>document.getElementById(id));
+    multi.forEach(b=>{if(b)b.disabled=!listable;});
+    document.querySelectorAll('#music-modal-back10,#music-modal-forward10').forEach(b=>b.disabled=!__alpYTPlayer);
+    startMusicSeekTimer();
+  }
+}
+function fecharPlayerMusical(){
+  if(!musicModal) return;
+  const playerEl=document.getElementById('musica-mini-player');
+  const wrap=document.getElementById('musica-mini-wrap');
+  if(playerEl && wrap && playerEl.parentElement!==wrap) wrap.appendChild(playerEl);
+  musicModal.classList.remove('active');
+  stopMusicSeekTimer();
+}
+
+if(musicModal){
+  document.getElementById('music-modal-close').addEventListener('click',fecharPlayerMusical);
+  musicModal.addEventListener('click',e=>{if(e.target===musicModal)fecharPlayerMusical();});
+}
+if(musicSeek){
+  musicSeek.addEventListener('input',()=>{
+    if(musicCurrentTime) musicCurrentTime.textContent=fmtMusicTime(Number(musicSeek.value));
+  });
+  musicSeek.addEventListener('change',()=>{
+    try{ if(__alpYTPlayer) __alpYTPlayer.seekTo(Number(musicSeek.value),true); }catch(e){}
+  });
+}
+function musicModalPlayPause(){
+  if(!__alpYTPlayer || !__alpMusicPlayer || __alpMusicPlayer.type==='spotify') return;
+  try{ const s=__alpYTPlayer.getPlayerState(); if(s===1)__alpYTPlayer.pauseVideo(); else __alpYTPlayer.playVideo(); }catch(e){}
+}
+function musicModalSeekBy(delta){
+  try{ if(!__alpYTPlayer)return; const cur=Number(__alpYTPlayer.getCurrentTime()||0); const dur=Number(__alpYTPlayer.getDuration()||0); __alpYTPlayer.seekTo(Math.max(0,Math.min(cur+delta,dur||cur+delta)),true); }catch(e){}
+}
+document.getElementById('music-modal-playpause').addEventListener('click',musicModalPlayPause);
+document.getElementById('music-modal-back10').addEventListener('click',()=>musicModalSeekBy(-10));
+document.getElementById('music-modal-forward10').addEventListener('click',()=>musicModalSeekBy(10));
+document.getElementById('music-modal-prev').addEventListener('click',previousMusic);
+document.getElementById('music-modal-next').addEventListener('click',nextMusic);
+document.getElementById('music-modal-stop').addEventListener('click',stopMusic);
+
+function bindMusicModalButton(){
+  const btn=document.getElementById('btn-open-music-player');
+  if(btn) btn.addEventListener('click',abrirPlayerMusical);
+}
+
+function salvarMusicaNaBiblioteca(player, name){
+  const history = readMusicHistory().filter(x => x.src !== player.src);
+  history.unshift({ ...player, name: name || 'Minha música', savedAt: new Date().toISOString() });
+  writeMusicHistory(history.slice(0,20));
+  localStorage.setItem('isaMusicaEmbed', JSON.stringify(history[0]));
+  renderMusicHistory();
+  montarMiniPlayer(history[0]);
+}
+
+function usarMusicaSalva(index){
+  const history = readMusicHistory();
+  const item = history[index];
+  if(!item) return;
+  const reordered = [item].concat(history.filter((_,i)=>i!==index));
+  writeMusicHistory(reordered);
+  localStorage.setItem('isaMusicaEmbed', JSON.stringify(item));
+  renderMusicHistory();
+  montarMiniPlayer(item);
+}
+
+function excluirMusicaSalva(index){
+  const history = readMusicHistory();
+  history.splice(index,1);
+  writeMusicHistory(history);
+  const current = history[0];
+  if(current){
+    localStorage.setItem('isaMusicaEmbed', JSON.stringify(current));
+    montarMiniPlayer(current);
+  }else{
+    localStorage.removeItem('isaMusicaEmbed');
+    __alpMusicPlayer = null;
+    destroyYTPlayer();
+    const wrap = document.getElementById('musica-mini-wrap');
+    const playerEl = document.getElementById('musica-mini-player');
+    if(wrap) wrap.style.display='flex';
+    if(playerEl) playerEl.innerHTML='';
+    updateMusicControls();
+    musicStatus('Escolha uma música em “Minha Música” para ativar os controles.');
+  }
+  renderMusicHistory();
+}
+
+document.getElementById('btn-salvar-musica').addEventListener('click', () => {
+  const link = document.getElementById('musica-link').value;
+  const name = document.getElementById('musica-nome').value.trim();
+  const player = parseMusicaLink(link);
+  const erroEl = document.getElementById('musica-erro');
+  if (!player){
+    erroEl.textContent = 'Não consegui reconhecer esse link. Cole um link de vídeo/playlist do YouTube ou conteúdo do Spotify.';
+    erroEl.style.display = 'block';
+    return;
+  }
+  erroEl.style.display = 'none';
+  salvarMusicaNaBiblioteca(player, name);
+  document.getElementById('musica-link').value='';
+  document.getElementById('musica-nome').value='';
+});
+
+document.getElementById('musica-mini-play').addEventListener('click', playPauseMusic);
+document.getElementById('musica-mini-prev').addEventListener('click', previousMusic);
+document.getElementById('musica-mini-next').addEventListener('click', nextMusic);
+document.getElementById('musica-mini-stop').addEventListener('click', stopMusic);
+const closeMini = document.getElementById('btn-musica-mini-close');
+if (closeMini && closeMini.tagName === 'BUTTON') closeMini.addEventListener('click', () => {});
+
+(function carregarBibliotecaMusica(){
+  let history = readMusicHistory();
+  if (!history.length){
+    const legacy = normalizeSavedMusic(localStorage.getItem('isaMusicaEmbed'));
+    if (legacy){
+      history=[{...legacy,name:legacy.name || 'Música atual',savedAt:new Date().toISOString()}];
+      writeMusicHistory(history);
+    }
+  }
+  renderMusicHistory();
+  const current = history[0] || currentMusic();
+  if(current) montarMiniPlayer(current);
+})();
+
+
+function updateProgress(diaNum){
+  const total = document.querySelectorAll(`.ex-check[data-dia="${diaNum}"]`).length;
+  const done = document.querySelectorAll(`.ex-check[data-dia="${diaNum}"].done`).length;
+  const el = document.getElementById(`progress-dia-${diaNum}`);
+  if (el) el.textContent = `${done}/${total}`;
+}
+
+/* ---------- STREAK, BADGES, FOTOS, HÁBITOS (localStorage) ---------- */
+function hojeISO(){
+  return new Date().toISOString().slice(0,10);
+}
+function diasEntre(a, b){
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+function getLog(chave){
+  try{ return JSON.parse(localStorage.getItem(chave)) || []; }catch(e){ return []; }
+}
+function setLog(chave, valor){
+  localStorage.setItem(chave, JSON.stringify(valor));
+}
+function calcularStreak(datas){
+  if (!datas.length) return 0;
+  const unicas = [...new Set(datas)].sort();
+  const hoje = hojeISO();
+  const ultima = unicas[unicas.length - 1];
+  if (diasEntre(ultima, hoje) > 1) return 0;
+  let streak = 1;
+  for (let i = unicas.length - 1; i > 0; i--){
+    if (diasEntre(unicas[i-1], unicas[i]) === 1) streak++;
+    else break;
+  }
+  return streak;
+}
+function mostrarBadge(texto){
+  const toast = document.getElementById('badge-toast');
+  toast.textContent = texto;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3200);
+}
+function atualizarStreakBadgeTopo(){
+  const log = getLog('isaTreinoLog');
+  const streak = calcularStreak(log);
+  const el = document.getElementById('streak-badge');
+  if (el) el.textContent = `🔥 ${streak} dia${streak === 1 ? '' : 's'} seguido${streak === 1 ? '' : 's'}`;
+}
+atualizarStreakBadgeTopo();
+
+function registrarTreinoConcluido(){
+  const log = getLog('isaTreinoLog');
+  const hoje = hojeISO();
+  if (!log.includes(hoje)) log.push(hoje);
+  setLog('isaTreinoLog', log);
+  atualizarStreakBadgeTopo();
+
+  const total = log.length;
+  if (total === 5) mostrarBadge('🏅 Uma semana de treino completa!');
+  else if (total === 20) mostrarBadge('🏆 Ciclo de 4 semanas completo!');
+  else {
+    const streak = calcularStreak(log);
+    if (streak > 1 && streak % 3 === 0) mostrarBadge(`🔥 ${streak} dias seguidos treinando!`);
+  }
+}
+
+/* ---------- FOTOS DE PROGRESSO ---------- */
+function carregarFotos(){
+  const dados = JSON.parse(localStorage.getItem('isaFotos') || '{}');
+  const boxInicio = document.getElementById('foto-box-inicio');
+  const boxRecente = document.getElementById('foto-box-recente');
+  const dateInicio = document.getElementById('foto-date-inicio');
+  const dateRecente = document.getElementById('foto-date-recente');
+  if (dados.inicio){
+    boxInicio.innerHTML = `<img src="${dados.inicio.src}">`;
+    dateInicio.textContent = dados.inicio.data;
+  }
+  if (dados.recente){
+    boxRecente.innerHTML = `<img src="${dados.recente.src}">`;
+    dateRecente.textContent = dados.recente.data;
+  }
+}
+carregarFotos();
+
+document.getElementById('btn-tirar-foto').addEventListener('click', () => {
+  document.getElementById('foto-input').click();
+});
+document.getElementById('foto-input').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const img = new Image();
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxW = 480;
+      const scale = Math.min(1, maxW / img.width);
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      const src = canvas.toDataURL('image/jpeg', 0.8);
+      const dados = JSON.parse(localStorage.getItem('isaFotos') || '{}');
+      const registro = { src, data: hojeISO() };
+      if (!dados.inicio) dados.inicio = registro;
+      dados.recente = registro;
+      localStorage.setItem('isaFotos', JSON.stringify(dados));
+      carregarFotos();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+/* ---------- HÁBITOS DIÁRIOS ---------- */
+function chaveHabitosHoje(){
+  return 'isaHabitos_' + hojeISO();
+}
+function carregarHabitos(){
+  const salvos = JSON.parse(localStorage.getItem(chaveHabitosHoje()) || '{}');
+  document.querySelectorAll('.habito-check').forEach(el => {
+    el.classList.toggle('done', !!salvos[el.dataset.habito]);
+  });
+  atualizarHabitoStreak();
+}
+function atualizarHabitoStreak(){
+  const log = getLog('isaHabitosCompletosLog');
+  const streak = calcularStreak(log);
+  document.getElementById('habito-streak').textContent =
+    `${streak} dia${streak === 1 ? '' : 's'} com todos os hábitos em dia`;
+}
+document.querySelectorAll('.habito-check').forEach(el => {
+  el.addEventListener('click', () => {
+    el.classList.toggle('done');
+    const salvos = {};
+    document.querySelectorAll('.habito-check').forEach(c => { salvos[c.dataset.habito] = c.classList.contains('done'); });
+    localStorage.setItem(chaveHabitosHoje(), JSON.stringify(salvos));
+
+    const todosFeitos = Object.values(salvos).every(Boolean);
+    const log = getLog('isaHabitosCompletosLog');
+    const hoje = hojeISO();
+    if (todosFeitos && !log.includes(hoje)){
+      log.push(hoje);
+      setLog('isaHabitosCompletosLog', log);
+    } else if (!todosFeitos && log.includes(hoje)){
+      setLog('isaHabitosCompletosLog', log.filter(d => d !== hoje));
+    }
+    atualizarHabitoStreak();
+  });
+});
+carregarHabitos();
+
+document.getElementById('btn-finalizar-treino').addEventListener('click', () => {
+  registrarTreinoConcluido();
+  goToScreen('pos');
+});
+
+/* ---------- MODAL VÍDEO ---------- */
+const modalBackdrop = document.getElementById('modal-backdrop');
+const modalTitle = document.getElementById('modal-title');
+const videoFrame = document.getElementById('video-frame');
+const videoControls = document.getElementById('video-controls');
+const videoSeek = document.getElementById('video-seek');
+const videoCurrent = document.getElementById('video-current');
+const videoDuration = document.getElementById('video-duration');
+const videoPlayPause = document.getElementById('video-playpause');
+const videoBack10 = document.getElementById('video-back10');
+const videoForward10 = document.getElementById('video-forward10');
+let __alpExerciseYTPlayer = null;
+let __alpExerciseSeekTimer = null;
+
+function fmtVideoTime(sec){
+  sec = Math.max(0, Number(sec)||0);
+  const m = Math.floor(sec/60);
+  const s = Math.floor(sec%60);
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+function extractYouTubeId(url){
+  try{
+    const u = new URL(url, window.location.href);
+    if (u.hostname.includes('youtu.be')) return u.pathname.slice(1).split('/')[0];
+    const v = u.searchParams.get('v');
+    if (v) return v;
+    const m = u.pathname.match(/\/(embed|shorts|live)\/([^/?#]+)/);
+    return m ? m[2] : null;
+  }catch(e){ return null; }
+}
+function resetVideoControls(){
+  if (__alpExerciseSeekTimer){ clearInterval(__alpExerciseSeekTimer); __alpExerciseSeekTimer = null; }
+  try{ if (__alpExerciseYTPlayer) __alpExerciseYTPlayer.destroy(); }catch(e){}
+  __alpExerciseYTPlayer = null;
+  if (videoControls) videoControls.style.display = 'none';
+  if (videoSeek) videoSeek.value = 0;
+  if (videoCurrent) videoCurrent.textContent = '0:00';
+  if (videoDuration) videoDuration.textContent = '0:00';
+}
+function syncExerciseVideoUI(){
+  if (!__alpExerciseYTPlayer || typeof __alpExerciseYTPlayer.getCurrentTime !== 'function') return;
+  try{
+    const cur = __alpExerciseYTPlayer.getCurrentTime() || 0;
+    const dur = __alpExerciseYTPlayer.getDuration() || 0;
+    if (videoCurrent) videoCurrent.textContent = fmtVideoTime(cur);
+    if (videoDuration) videoDuration.textContent = fmtVideoTime(dur);
+    if (videoSeek && dur > 0 && !videoSeek.dataset.dragging) {
+      videoSeek.max = dur;
+      videoSeek.value = cur;
+    }
+    const state = __alpExerciseYTPlayer.getPlayerState ? __alpExerciseYTPlayer.getPlayerState() : -1;
+    if (videoPlayPause) videoPlayPause.textContent = state === 1 ? '⏸' : '▶';
+  }catch(e){}
+}
+function buildExerciseYouTubePlayer(videoUrl){
+  const id = extractYouTubeId(videoUrl);
+  if (!id){
+    videoFrame.innerHTML = `<iframe src="${videoUrl}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    return;
+  }
+  ensureYouTubeApi(function(){
+    const host = document.createElement('div');
+    host.id = 'alp-exercise-youtube-player';
+    host.style.width = '100%';
+    host.style.height = '100%';
+    videoFrame.innerHTML = '';
+    videoFrame.appendChild(host);
+    __alpExerciseYTPlayer = new YT.Player(host.id,{
+      videoId:id,
+      width:'100%',
+      height:'100%',
+      playerVars:{playsinline:1,rel:0,modestbranding:1,enablejsapi:1,origin:window.location.origin},
+      events:{
+        onReady:function(){
+          if (videoControls) videoControls.style.display='block';
+          syncExerciseVideoUI();
+          if (__alpExerciseSeekTimer) clearInterval(__alpExerciseSeekTimer);
+          __alpExerciseSeekTimer=setInterval(syncExerciseVideoUI,500);
+        },
+        onStateChange:function(){ syncExerciseVideoUI(); }
+      }
+    });
+  });
+}
+function openVideoModal(ex){
+  resetVideoControls();
+  modalTitle.textContent = ex.nome;
+  if (ex.video && ex.video.trim() !== "") {
+    buildExerciseYouTubePlayer(ex.video);
+  } else {
+    videoFrame.innerHTML = `<div class="video-empty">🎬<br>Vídeo ainda não cadastrado para este exercício.</div>`;
+  }
+  modalBackdrop.classList.add('active');
+}
+if (videoSeek){
+  videoSeek.addEventListener('pointerdown',()=>{ videoSeek.dataset.dragging='1'; });
+  videoSeek.addEventListener('pointerup',()=>{ delete videoSeek.dataset.dragging; });
+  videoSeek.addEventListener('change',()=>{
+    try{ if (__alpExerciseYTPlayer && typeof __alpExerciseYTPlayer.seekTo==='function') __alpExerciseYTPlayer.seekTo(Number(videoSeek.value), true); }catch(e){}
+  });
+  videoSeek.addEventListener('input',()=>{
+    if (videoCurrent) videoCurrent.textContent = fmtVideoTime(Number(videoSeek.value));
+  });
+}
+if (videoPlayPause) videoPlayPause.addEventListener('click',()=>{
+  try{
+    if (!__alpExerciseYTPlayer) return;
+    const state = __alpExerciseYTPlayer.getPlayerState();
+    if (state === 1) __alpExerciseYTPlayer.pauseVideo(); else __alpExerciseYTPlayer.playVideo();
+  }catch(e){}
+});
+if (videoBack10) videoBack10.addEventListener('click',()=>{
+  try{ if (__alpExerciseYTPlayer) __alpExerciseYTPlayer.seekTo(Math.max(0, (__alpExerciseYTPlayer.getCurrentTime()||0)-10), true); }catch(e){}
+});
+if (videoForward10) videoForward10.addEventListener('click',()=>{
+  try{ if (__alpExerciseYTPlayer) __alpExerciseYTPlayer.seekTo(Math.min(__alpExerciseYTPlayer.getDuration()||0, (__alpExerciseYTPlayer.getCurrentTime()||0)+10), true); }catch(e){}
+});
+
+document.getElementById('modal-close').addEventListener('click', () => {
+  resetVideoControls();
+  modalBackdrop.classList.remove('active');
+  videoFrame.innerHTML = '';
+});
+modalBackdrop.addEventListener('click', (e) => {
+  if (e.target === modalBackdrop) {
+    resetVideoControls();
+    modalBackdrop.classList.remove('active');
+    videoFrame.innerHTML = '';
+  }
+});
+
+/* ---------- TABS ---------- */
+document.querySelectorAll('.tabbar button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    var viewId = btn.dataset.view;
+    var view = document.getElementById(viewId);
+    if (!view) return;
+
+    /* Troca somente entre as views da tela de treino. */
+    var scope = btn.closest('.screen');
+    if (!scope) scope = document;
+    scope.querySelectorAll('.tabbar button').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    scope.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+    view.classList.add('active');
+    window.scrollTo(0, 0);
+  });
+});
+
+/* ---------- GRAVAÇÃO DE VÍDEO ---------- */
+let stream = null;
+let mediaRecorder = null;
+let recordedChunks = [];
+let recordedBlob = null;
+let facingMode = 'user';
+
+const liveVideo = document.getElementById('live-video');
+const previewVideo = document.getElementById('preview-video');
+const camPlaceholder = document.getElementById('cam-placeholder');
+const recDot = document.getElementById('rec-dot');
+
+const rowSetup = document.getElementById('btn-row-setup');
+const rowRecord = document.getElementById('btn-row-record');
+const rowRecording = document.getElementById('btn-row-recording');
+const rowReview = document.getElementById('btn-row-review');
+const camHint = document.getElementById('cam-hint');
+
+function getSupportedRecordingOptions(){
+  const options = [
+    { mimeType: 'video/mp4;codecs=avc1.42E01E,mp4a.40.2', ext: 'mp4', label: 'MP4' },
+    { mimeType: 'video/mp4', ext: 'mp4', label: 'MP4' },
+    { mimeType: 'video/webm;codecs=vp8,opus', ext: 'webm', label: 'WebM' },
+    { mimeType: 'video/webm', ext: 'webm', label: 'WebM' }
+  ];
+  for (const option of options){
+    try{
+      if (window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(option.mimeType)){
+        return option;
+      }
+    }catch(e){}
+  }
+  return { mimeType: '', ext: 'webm', label: 'vídeo' };
+}
+
+let recordingOptions = getSupportedRecordingOptions();
+
+async function startCamera(){
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode }, audio: true
+    });
+    liveVideo.srcObject = stream;
+    liveVideo.style.display = 'block';
+    previewVideo.style.display = 'none';
+    camPlaceholder.style.display = 'none';
+    rowSetup.style.display = 'none';
+    rowRecord.style.display = 'flex';
+    camHint.textContent = 'Pronto para gravar. No iPhone, o envio pelo botão "Enviar pelo WhatsApp" abre o compartilhamento do aparelho para escolher o WhatsApp e o contato.';
+  }catch(err){
+    camHint.textContent = 'Não foi possível acessar a câmera. Verifique se o app está aberto num link https:// e se a permissão de câmera foi liberada.';
+  }
+}
+
+async function switchCamera(){
+  facingMode = facingMode === 'user' ? 'environment' : 'user';
+  if (stream) stream.getTracks().forEach(t => t.stop());
+  await startCamera();
+}
+
+function startRecording(){
+  recordedChunks = [];
+  recordingOptions = getSupportedRecordingOptions();
+  try{
+    mediaRecorder = recordingOptions.mimeType ? new MediaRecorder(stream, { mimeType: recordingOptions.mimeType }) : new MediaRecorder(stream);
+  }catch(err){
+    try{
+      mediaRecorder = new MediaRecorder(stream);
+      recordingOptions = { mimeType: mediaRecorder.mimeType || '', ext: 'webm', label: 'vídeo' };
+    }catch(e){
+      camHint.textContent = 'Este navegador não conseguiu iniciar a gravação. No iPhone, use Safari atualizado e permita câmera e microfone.';
+      return;
+    }
+  }
+
+  mediaRecorder.ondataavailable = (e) => {
+    if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+  };
+
+  mediaRecorder.onerror = () => {
+    camHint.textContent = 'Ocorreu um erro durante a gravação. Tente novamente.';
+  };
+
+  mediaRecorder.onstop = () => {
+    const actualType = (mediaRecorder && mediaRecorder.mimeType) || recordingOptions.mimeType || 'video/webm';
+    const safeType = actualType.split(';')[0] || 'video/webm';
+    const ext = safeType === 'video/mp4' ? 'mp4' : 'webm';
+    recordingOptions.ext = ext;
+    recordedBlob = new Blob(recordedChunks, { type: safeType });
+
+    if (previewVideo.dataset.objectUrl) {
+      try{ URL.revokeObjectURL(previewVideo.dataset.objectUrl); }catch(e){}
+    }
+    const url = URL.createObjectURL(recordedBlob);
+    previewVideo.dataset.objectUrl = url;
+    liveVideo.style.display = 'none';
+    previewVideo.src = url;
+    previewVideo.load();
+    previewVideo.style.display = 'block';
+    previewVideo.playbackRate = 1;
+    recDot.classList.remove('active');
+    rowRecording.style.display = 'none';
+    rowReview.style.display = 'flex';
+    document.getElementById('btn-row-speed').style.display = 'flex';
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.toggle('active', b.dataset.speed === '1'));
+    camHint.textContent = `Vídeo gravado em ${ext.toUpperCase()}. No iPhone, toque em "Enviar" e escolha WhatsApp para enviar o vídeo.`;
+    if (stream) stream.getTracks().forEach(t => t.stop());
+    liveVideo.srcObject = null;
+  };
+
+  try{ mediaRecorder.start(1000); }catch(err){
+    try{ mediaRecorder.start(); }catch(e){
+      camHint.textContent = 'Não foi possível iniciar a gravação. Tente novamente.';
+      return;
+    }
+  }
+  recDot.classList.add('active');
+  rowRecord.style.display = 'none';
+  rowRecording.style.display = 'flex';
+  camHint.textContent = `Gravando… formato ${recordingOptions.label || 'vídeo'}.`;
+}
+
+function stopRecording(){
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+}
+
+function retake(){
+  recordedBlob = null;
+  if (previewVideo.dataset.objectUrl) {
+    try{ URL.revokeObjectURL(previewVideo.dataset.objectUrl); }catch(e){}
+    delete previewVideo.dataset.objectUrl;
+  }
+  previewVideo.removeAttribute('src');
+  previewVideo.load();
+  previewVideo.style.display = 'none';
+  camPlaceholder.style.display = 'flex';
+  rowReview.style.display = 'none';
+  rowSetup.style.display = 'flex';
+  document.getElementById('btn-row-speed').style.display = 'none';
+  camHint.textContent = 'O vídeo fica só no seu aparelho até você apertar "Enviar" ou "Baixar".';
+}
+
+document.querySelectorAll('.speed-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    previewVideo.playbackRate = parseFloat(btn.dataset.speed);
+  });
+});
+
+function fileNameFromSelect(){
+  const label = exSelect.value.replace(/[^a-zA-Z0-9]+/g, '_').toLowerCase();
+  const ext = recordingOptions && recordingOptions.ext ? recordingOptions.ext : ((recordedBlob && recordedBlob.type === 'video/mp4') ? 'mp4' : 'webm');
+  return `execucao_${label || 'exercicio'}.${ext}`;
+}
+
+async function shareVideo(){
+  if (!recordedBlob) return;
+  const filename = fileNameFromSelect();
+  const mime = recordedBlob.type || (recordingOptions && recordingOptions.mimeType ? recordingOptions.mimeType.split(';')[0] : 'video/webm');
+  const file = new File([recordedBlob], filename, { type: mime });
+
+  // No iPhone/Safari, este é o caminho correto para entregar o vídeo ao WhatsApp:
+  // a folha nativa de compartilhamento permite selecionar WhatsApp e o contato.
+  if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+    try{
+      await navigator.share({
+        files: [file],
+        title: 'Execução do exercício',
+        text: `Execução: ${exSelect.value}`
+      });
+      camHint.textContent = 'Compartilhamento aberto. No iPhone, escolha WhatsApp e selecione o contato para enviar o vídeo.';
+      return;
+    }catch(e){
+      if (e && e.name === 'AbortError') {
+        camHint.textContent = 'Envio cancelado. Toque em "Enviar" novamente para compartilhar o vídeo.';
+        return;
+      }
+    }
+  }
+
+  // Fallback para navegadores sem compartilhamento de arquivos.
+  downloadVideo();
+  camHint.textContent = 'Seu navegador não liberou o compartilhamento direto do vídeo. O arquivo foi salvo para você enviar pelo WhatsApp manualmente.';
+}
+
+function downloadVideo(){
+  if (!recordedBlob) return;
+  const url = URL.createObjectURL(recordedBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileNameFromSelect();
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+document.getElementById('btn-start-cam').addEventListener('click', startCamera);
+document.getElementById('btn-switch-cam').addEventListener('click', switchCamera);
+document.getElementById('btn-record').addEventListener('click', startRecording);
+document.getElementById('btn-stop').addEventListener('click', stopRecording);
+document.getElementById('btn-retake').addEventListener('click', retake);
+document.getElementById('btn-share').addEventListener('click', shareVideo);
+document.getElementById('btn-download').addEventListener('click', downloadVideo);
+
+/* ===== POS-TREINO ===== */
+
+const RPE_LABELS = ["Repouso total","Muito, muito leve","Muito leve","Leve","Moderado","Um pouco forte","Forte","Forte+","Muito forte","Muito, muito forte","Máximo esforço"];
+const rpeRow = document.getElementById('rpe-row');
+const rpeLabel = document.getElementById('rpe-label');
+const rpeScale = buildScale(rpeRow, 10, (v) => { rpeLabel.textContent = RPE_LABELS[v]; updateResult(); });
+
+const resultBox = document.getElementById('result-box');
+const loadValue = document.getElementById('load-value');
+const duracaoInput = document.getElementById('duracao');
+
+function updateResult(){
+  const dur = parseFloat(duracaoInput.value);
+  const rpe = rpeScale.value;
+  if (!isNaN(dur) && dur > 0 && rpe !== null){
+    loadValue.textContent = Math.round(dur * rpe);
+    resultBox.style.display = 'block';
+  } else {
+    resultBox.style.display = 'none';
+  }
+}
+duracaoInput.addEventListener('input', updateResult);
+
+document.querySelectorAll('#dor-mapa-grid .chip').forEach(el => {
+  el.addEventListener('click', () => { el.classList.toggle('active'); });
+});
+
+document.querySelectorAll('#dor-pos-limita-row .choice').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('#dor-pos-limita-row .choice').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  });
+});
+
+const statusPos = document.getElementById('status-pos');
+const btnPos = document.getElementById('btn-pos');
+btnPos.addEventListener('click', async () => {
+  const dur = parseFloat(duracaoInput.value);
+  const rpe = rpeScale.value;
+  if (isNaN(dur) || dur <= 0){
+    statusPos.textContent = 'Preencha a duração da sessão.';
+    statusPos.className = 'status-msg err';
+    return;
+  }
+  if (rpe === null){
+    statusPos.textContent = 'Selecione o RPE da sessão.';
+    statusPos.className = 'status-msg err';
+    return;
+  }
+  const locaisDor = Array.from(document.querySelectorAll('#dor-mapa-grid .chip.active')).map(c => c.dataset.val);
+  const dorLimitaPos = document.querySelector('#dor-pos-limita-row .choice.active');
+  const payload = {
+    momento: 'pos',
+    dataHora: new Date().toISOString(),
+    duracaoMin: dur,
+    rpe: rpe,
+    cargaInterna: Math.round(dur * rpe),
+    locaisDor: locaisDor.join(', '),
+    dorLimitaPos: dorLimitaPos ? dorLimitaPos.dataset.val : '',
+    observacao: document.getElementById('obs-pos').value.trim()
+  };
+  const ok = await enviarParaPlanilha(payload, statusPos, btnPos, { mustSucceed: true });
+  if (ok){
+    document.getElementById('form-view').style.display = 'none';
+    document.getElementById('done-screen').style.display = 'block';
+  }
+});
+
+document.getElementById('btn-pular-pos').addEventListener('click', () => {
+  goToScreen('intro');
+});
+</script>
+
+<div id="alpBaseRole">
+  <div class="card">
+    <h1>AGEU LINS PERFORMANCE</h1>
+    <p>Escolha a área que deseja acessar.</p>
+    <div class="alp-base-roles">
+      <button type="button" onclick="ALPBASE.choose('athlete')">
+        <span class="alp-base-ico">💗</span>
+        Área do aluno
+        <span class="alp-base-label">Sua experiência personalizada</span>
+      </button>
+      <button type="button" onclick="ALPBASE.choose('trainer')">
+        <span class="alp-base-ico">👤</span>
+        Área do treinador
+        <span class="alp-base-label">Gestão e acompanhamento</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="alpBaseLogin">
+  <div class="card">
+    <h2 id="alpBaseTitle">Área do aluno</h2>
+    <div class="sub" id="alpBaseSub">Entre para continuar.</div>
+    <label for="alpBaseUser">Login</label>
+    <input id="alpBaseUser" autocomplete="username" placeholder="Digite seu login">
+    <label for="alpBasePass">Senha</label>
+    <input id="alpBasePass" type="password" autocomplete="current-password" placeholder="Digite sua senha">
+    <button class="enter" type="button" onclick="ALPBASE.login()">Entrar</button>
+    <div id="alpBaseError"></div>
+    <button class="back" type="button" onclick="ALPBASE.back()">← Voltar</button>
+  </div>
+</div>
+
+<div id="alpBaseTrainer">
+  <div class="panel">
+    <h2>AGEU LINS PERFORMANCE</h2>
+    <div class="alp-base-mini">Área do treinador</div>
+    <div class="box">
+      <strong>Base estável de administração</strong>
+      <p class="alp-base-mini">Nenhum módulo novo foi colocado aqui. O objetivo desta versão é garantir que o acesso separado funcione sem interferir na experiência da Isa.</p>
+      <button type="button" onclick="ALPBASE.logout()" style="background:#111;color:#fff">Sair</button>
+    </div>
+  </div>
+</div>
+
+
+<script id="alp-base-js">
+(function(){
+  var role='athlete';
+  var ACCOUNTS={
+    athlete:{user:'isa',pass:'isa2026'},
+    trainer:{user:'ageu',pass:'1234'}
+  };
+
+  function show(id, yes, display){
+    var el=document.getElementById(id);
+    if(el) el.style.display=yes?(display||'flex'):'none';
+  }
+
+  window.ALPBASE={
+    choose:function(r){
+      role=r;
+      var title=document.getElementById('alpBaseTitle');
+      var sub=document.getElementById('alpBaseSub');
+      var err=document.getElementById('alpBaseError');
+      if(title) title.textContent=r==='athlete'?'Área do aluno':'Área do treinador';
+      if(sub) sub.textContent=r==='athlete'?'Entre para acessar sua introdução personalizada.':'Entre para acessar a área administrativa.';
+      if(err) err.textContent='';
+      document.getElementById('alpBaseUser').value='';
+      document.getElementById('alpBasePass').value='';
+      show('alpBaseRole',false);
+      show('alpBaseLogin',true,'flex');
+      show('alpBaseTrainer',false);
+    },
+
+    login:function(){
+      var u=(document.getElementById('alpBaseUser').value||'').trim().toLowerCase();
+      var p=document.getElementById('alpBasePass').value||'';
+      var err=document.getElementById('alpBaseError');
+      var acc=ACCOUNTS[role];
+
+      if(u!==acc.user || p!==acc.pass){
+        err.textContent='Login ou senha incorretos.';
+        return;
+      }
+
+      show('alpBaseLogin',false);
+
+      if(role==='athlete'){
+        // Critical: force the ORIGINAL Isa introduction after login.
+        try{localStorage.removeItem('isaIntroVista');}catch(e){}
+        if(typeof goToScreen==='function') goToScreen('intro');
+      }else{
+        show('alpBaseTrainer',true,'block');
+      }
+    },
+
+    back:function(){
+      show('alpBaseLogin',false);
+      show('alpBaseTrainer',false);
+      show('alpBaseRole',true,'flex');
+    },
+
+    logout:function(){
+      show('alpBaseTrainer',false);
+      show('alpBaseLogin',false);
+      show('alpBaseRole',true,'flex');
+      role='athlete';
+    }
+  };
+
+  // Always begin at role selection. This layer does not touch the original app.
+  document.addEventListener('DOMContentLoaded',function(){
+    show('alpBaseRole',true,'flex');
+    show('alpBaseLogin',false);
+    show('alpBaseTrainer',false);
+
+    // If the old app already routed itself to hub, restore the original intro
+    // only after the athlete successfully logs in, not automatically here.
+  });
+})();
+</script>
+
+</body>
+</html>
