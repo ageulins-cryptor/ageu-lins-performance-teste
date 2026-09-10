@@ -2680,8 +2680,23 @@ document.getElementById('btn-pular-pos').addEventListener('click', () => {
     <label for="alpBasePass">Senha</label>
     <input id="alpBasePass" type="password" autocomplete="current-password" placeholder="Sua senha">
     <label style="display:flex;align-items:center;gap:8px;margin-top:12px;text-align:left;font-size:12px"><input id="alpRemember" type="checkbox" style="width:auto"> Lembrar usuário neste aparelho</label><button class="enter" id="alpBaseEnter" type="button" onclick="ALPBASE.login()">Entrar</button>
+    <button type="button" id="alpForgotPassword" style="margin-top:12px;border:0;background:none;color:#7b314e;text-decoration:underline;cursor:pointer;font-weight:700">Esqueci minha senha</button>
     <div id="alpBaseError" role="alert"></div>
     <div id="alpBaseLoading" style="display:none">Verificando acesso…</div>
+  </div>
+</div>
+
+<div id="alpPasswordRecovery" style="display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;background:rgba(36,20,29,.28);backdrop-filter:blur(4px);padding:20px">
+  <div style="width:min(430px,100%);background:#fff;border:1px solid #ead8df;border-radius:22px;padding:30px;box-shadow:0 20px 60px rgba(72,35,50,.18);text-align:center">
+    <div class="alp-login-mark">ALP</div>
+    <h2 style="margin:0 0 8px;color:#5c2a3d">Criar nova senha</h2>
+    <p style="margin:0 0 20px;color:#7b6a72;font-size:13px">Escolha uma nova senha para acessar o AGEU LINS PERFORMANCE.</p>
+    <label for="alpNewPass" style="display:block;text-align:left;font-size:12px;font-weight:700;color:#6f5360;margin-bottom:6px">Nova senha</label>
+    <input id="alpNewPass" type="password" autocomplete="new-password" minlength="6" placeholder="Mínimo de 6 caracteres" style="width:100%;box-sizing:border-box;padding:13px;border:1px solid #decbd3;border-radius:12px;margin-bottom:12px">
+    <label for="alpNewPass2" style="display:block;text-align:left;font-size:12px;font-weight:700;color:#6f5360;margin-bottom:6px">Confirmar nova senha</label>
+    <input id="alpNewPass2" type="password" autocomplete="new-password" minlength="6" placeholder="Repita a nova senha" style="width:100%;box-sizing:border-box;padding:13px;border:1px solid #decbd3;border-radius:12px">
+    <button class="enter" id="alpSaveNewPass" type="button" style="margin-top:16px;width:100%">Salvar nova senha</button>
+    <div id="alpRecoveryMsg" role="alert" style="margin-top:12px;font-size:12px"></div>
   </div>
 </div>
 
@@ -3178,9 +3193,12 @@ saveConfig(){const n=document.getElementById('trainer-config-name').value.trim()
   let sb=null;
   function showLogin(){const el=document.getElementById('alpBaseLogin');if(el)el.style.display='flex';}
   function hideLogin(){const el=document.getElementById('alpBaseLogin');if(el)el.style.display='none';}
+  function showRecovery(){const el=document.getElementById('alpPasswordRecovery');if(el)el.style.display='flex';hideLogin();}
   function setBusy(b){const btn=document.getElementById('alpBaseEnter'),load=document.getElementById('alpBaseLoading');if(btn){btn.disabled=b;btn.textContent=b?'Entrando…':'Entrar';}if(load)load.style.display=b?'block':'none';}
   function error(msg){const e=document.getElementById('alpBaseError');if(e)e.textContent=msg||'';}
+  function recoveryMsg(msg,ok){const e=document.getElementById('alpRecoveryMsg');if(e){e.textContent=msg||'';e.style.color=ok?'#2d7a50':'#9b3153';}}
   function client(){if(window.__ALP_SB_CLIENT){sb=window.__ALP_SB_CLIENT;return sb;}if(sb)return sb;if(!window.supabase)throw new Error('A biblioteca do Supabase não carregou.');sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});window.__ALP_SB_CLIENT=sb;return sb;}
+  function isRecoveryUrl(){return /(^|[&#?])type=recovery(&|$)/i.test(location.hash)||/[?&]type=recovery(&|$)/i.test(location.search);}
   async function enterArea(profile){
     hideLogin();
     if(profile.role==='trainer'){
@@ -3198,6 +3216,44 @@ saveConfig(){const n=document.getElementById('trainer-config-name').value.trim()
     }catch(e){console.warn('Falha ao sincronizar prescrição',e);if(typeof renderTreinoScreen==='function')renderTreinoScreen([])}
     try{localStorage.removeItem('isaIntroVista');}catch(e){}
     if(typeof goToScreen==='function')goToScreen('intro');
+  }
+  async function startPasswordRecovery(){
+    const u=(document.getElementById('alpBaseUser')?.value||'').trim();
+    error('');
+    if(!u){error('Digite seu usuário primeiro.');document.getElementById('alpBaseUser')?.focus();return;}
+    try{
+      const c=client();
+      const {data:authEmail,error:resolveError}=await c.rpc('resolve_login_email',{p_login:u});
+      if(resolveError)throw resolveError;
+      if(!authEmail)throw new Error('Usuário não encontrado.');
+      const redirectTo=location.origin+location.pathname;
+      const {error:resetError}=await c.auth.resetPasswordForEmail(authEmail,{redirectTo});
+      if(resetError)throw resetError;
+      error('Enviamos um link de recuperação para o e-mail cadastrado. Verifique sua caixa de entrada.');
+    }catch(e){console.error('ALP password recovery',e);error(String(e?.message||e));}
+  }
+  async function finishPasswordRecovery(){
+    const p1=document.getElementById('alpNewPass')?.value||'';
+    const p2=document.getElementById('alpNewPass2')?.value||'';
+    recoveryMsg('');
+    if(p1.length<6){recoveryMsg('A senha precisa ter pelo menos 6 caracteres.');return;}
+    if(p1!==p2){recoveryMsg('As senhas não coincidem.');return;}
+    const btn=document.getElementById('alpSaveNewPass');
+    if(btn){btn.disabled=true;btn.textContent='Salvando…';}
+    try{
+      const c=client();
+      const {error:updateError}=await c.auth.updateUser({password:p1});
+      if(updateError)throw updateError;
+      recoveryMsg('Senha alterada com sucesso. Voltando para o login…',true);
+      await c.auth.signOut();
+      history.replaceState({},document.title,location.pathname+location.search);
+      setTimeout(()=>{
+        const f=document.getElementById('alpPasswordRecovery');if(f)f.style.display='none';
+        document.getElementById('alpNewPass').value='';document.getElementById('alpNewPass2').value='';
+        error('Senha alterada. Entre novamente com seu usuário e a nova senha.');showLogin();
+      },900);
+    }catch(e){console.error('ALP update password',e);recoveryMsg(String(e?.message||e));}
+    finally{if(btn){btn.disabled=false;btn.textContent='Salvar nova senha';}}
   }
   window.ALPBASE={
     async login(){
@@ -3224,13 +3280,17 @@ saveConfig(){const n=document.getElementById('trainer-config-name').value.trim()
         try{await sb?.auth?.signOut();}catch(_){}
       }finally{setBusy(false);}
     },
-    async logout(){try{await client().auth.signOut();}catch(e){}try{localStorage.removeItem('alp_auth_login');localStorage.removeItem('alp_auth_role');}catch(e){}location.reload();}
+    logout(){try{client().auth.signOut();}catch(e){}try{localStorage.removeItem('alp_auth_login');localStorage.removeItem('alp_auth_role');}catch(e){}location.reload();}
   };
   document.addEventListener('DOMContentLoaded',async function(){
     try{const saved=localStorage.getItem('alp_saved_login');if(saved){const el=document.getElementById('alpBaseUser');if(el)el.value=saved;const ck=document.getElementById('alpRemember');if(ck)ck.checked=true;}}catch(e){}
-    // Começa sempre pelo login; sessão existente é restaurada automaticamente.
+    document.getElementById('alpForgotPassword')?.addEventListener('click',startPasswordRecovery);
+    document.getElementById('alpSaveNewPass')?.addEventListener('click',finishPasswordRecovery);
     try{
-      const c=client();const {data}=await c.auth.getSession();const session=data?.session;
+      const c=client();
+      c.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY')showRecovery();});
+      if(isRecoveryUrl()){showRecovery();return;}
+      const {data}=await c.auth.getSession();const session=data?.session;
       if(session?.user?.id){
         const {data:profile}=await c.from('profiles').select('*').eq('id',session.user.id).maybeSingle();
         if(profile&&profile.status==='active'){await enterArea(profile);return;}
