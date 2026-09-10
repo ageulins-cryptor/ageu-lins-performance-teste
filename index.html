@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Isa Xampson 2.0</title>
+<title>AGEU LINS PERFORMANCE — Treinador V3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -685,27 +685,17 @@ label{display:block; font-size:0.8rem; color:var(--text-dim); margin-bottom:8px;
 </style>
 
 <style id="alp-base-css">
-#alpBaseRole{position:fixed;inset:0;z-index:200000;display:flex;align-items:center;justify-content:center;padding:20px;background:#fff}
-#alpBaseLogin{position:fixed;inset:0;z-index:199999;display:none;align-items:center;justify-content:center;padding:20px;background:#fff}
-#alpBaseRole .card,#alpBaseLogin .card{width:min(460px,100%);background:#fff;border:1px solid #eee;border-radius:24px;padding:28px;box-shadow:0 18px 60px rgba(0,0,0,.12);box-sizing:border-box;text-align:center}
-#alpBaseRole h1,#alpBaseLogin h2{margin:0 0 8px}
-#alpBaseRole p,#alpBaseLogin .sub{color:#777;font-size:13px;margin:0 0 22px}
-.alp-base-roles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.alp-base-roles button{border:1px solid #eee;border-radius:16px;background:#fafafa;padding:24px 12px;cursor:pointer;font:inherit;font-weight:800}
-.alp-base-roles button:hover{transform:translateY(-1px)}
-.alp-base-ico{display:block;font-size:34px;margin-bottom:8px}
-.alp-base-label{display:block;font-size:11px;color:#777;margin-top:4px;font-weight:500}
-#alpBaseLogin label{display:block;text-align:left;font-size:12px;font-weight:800;margin:12px 0 6px}
-#alpBaseLogin input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ddd;border-radius:11px;font-size:15px}
-#alpBaseLogin .enter{width:100%;border:0;border-radius:12px;padding:13px;margin-top:16px;background:#16131a;color:#fff;font-weight:900;cursor:pointer}
-#alpBaseLogin .back{width:100%;border:0;background:none;color:#777;padding:10px;cursor:pointer}
-#alpBaseError{min-height:18px;color:#a12c50;font-size:12px;margin-top:8px}
-#alpBaseTrainer{position:fixed;inset:0;z-index:199998;display:none;background:#f7f5f7;overflow:auto}
-#alpBaseTrainer .panel{max-width:900px;margin:30px auto;background:#fff;border-radius:22px;border:1px solid #eee;padding:24px;box-sizing:border-box}
-#alpBaseTrainer h2{margin:0 0 6px}.alp-base-mini{color:#777;font-size:13px}
-#alpBaseTrainer .box{margin-top:18px;padding:18px;border:1px solid #eee;border-radius:16px}
-#alpBaseTrainer button{border:0;border-radius:11px;padding:10px 14px;cursor:pointer;font-weight:800}
-@media(max-width:600px){.alp-base-roles{grid-template-columns:1fr}}
+#alpBaseLogin{position:fixed;inset:0;z-index:200000;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(160deg,#fff 0%,#fff7fa 100%)}
+#alpBaseLogin .card{width:min(420px,100%);background:#fff;border:1px solid #eadfe4;border-radius:24px;padding:30px;box-shadow:0 18px 60px rgba(92,42,61,.12);box-sizing:border-box;text-align:center}
+#alpBaseLogin h1{margin:0 0 8px;font-family:'Oswald',sans-serif;color:#5c2a3d;font-size:28px}
+#alpBaseLogin .sub{color:#777;font-size:13px;margin:0 0 24px}
+#alpBaseLogin label{display:block;text-align:left;font-size:12px;font-weight:800;margin:12px 0 6px;color:#6f4b5a}
+#alpBaseLogin input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #ddd;border-radius:12px;font:inherit;background:#fff}
+#alpBaseLogin .enter{width:100%;margin-top:18px;border:0;border-radius:12px;background:#b23a5f;color:#fff;padding:13px 16px;font:inherit;font-weight:800;cursor:pointer}
+#alpBaseLogin .enter:disabled{opacity:.6;cursor:wait}
+#alpBaseError{min-height:20px;margin-top:12px;color:#b4233f;font-size:12px}
+#alpBaseLoading{color:#8a6874;font-size:12px;margin-top:8px}
+.alp-login-mark{width:52px;height:52px;margin:0 auto 14px;border-radius:15px;display:flex;align-items:center;justify-content:center;background:#5c2a3d;color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:1px}
 </style>
 
 
@@ -739,8 +729,32 @@ label{display:block; font-size:0.8rem; color:var(--text-dim); margin-bottom:8px;
 body:has(#musica-mini-wrap[style*="display: block"]){padding-top:64px;}
 </style>
 
+
+<style id="trainer-v1-css">
+#alpBaseTrainer{background:#f6f4f6!important;color:#27232a;overflow:auto}
+.trainer-app{min-height:100vh;display:flex;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.trainer-sidebar{width:240px;background:#16131a;color:#fff;padding:24px 16px;box-sizing:border-box;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;flex:0 0 240px}
+.trainer-brand{display:flex;align-items:center;gap:12px;padding:4px 8px 28px}.trainer-brand-mark{width:38px;height:38px;border-radius:12px;background:#fff;color:#16131a;display:grid;place-items:center;font-weight:900}.trainer-brand strong{display:block;font-size:13px;letter-spacing:.12em}.trainer-brand span{display:block;color:#a9a2ad;font-size:9px;letter-spacing:.18em;margin-top:2px}
+.trainer-nav{display:flex;flex-direction:column;gap:6px}.trainer-nav-item,.trainer-logout{width:100%;border:0;background:transparent;color:#bdb6c2;text-align:left;border-radius:11px;padding:11px 12px;display:flex;align-items:center;gap:10px;font-weight:700;cursor:pointer}.trainer-nav-item.active,.trainer-nav-item:hover,.trainer-logout:hover{background:#2a2530;color:#fff}.trainer-nav-item span,.trainer-logout span{font-size:13px}.trainer-side-bottom{margin-top:auto;display:flex;flex-direction:column;gap:6px}
+.trainer-main{flex:1;min-width:0;padding:32px;box-sizing:border-box}.trainer-topbar{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:26px}.trainer-kicker{font-size:10px;letter-spacing:.2em;font-weight:900;color:#a56b82}.trainer-topbar h1{font-size:28px;margin:5px 0 4px}.trainer-topbar p{margin:0;color:#77717b;font-size:14px}.trainer-top-actions{display:flex;align-items:center;gap:12px}.trainer-today{font-size:12px;color:#77717b;text-align:right}.trainer-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#ead8e1;color:#7d3e5a;font-weight:900}
+.trainer-stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.trainer-stat-card,.trainer-card{background:#fff;border:1px solid #e9e4ea;border-radius:18px;box-shadow:0 8px 30px rgba(26,18,28,.04)}.trainer-stat-card{padding:18px}.trainer-stat-card span{display:block;font-size:12px;color:#77717b}.trainer-stat-card strong{display:block;font-size:30px;margin:5px 0 3px}.trainer-stat-card small{font-size:10px;color:#a09aa3}
+.trainer-content-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:18px}.trainer-card{padding:20px}.trainer-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:14px}.trainer-card h2{font-size:16px;margin:0}.trainer-card-head p{font-size:11px;color:#8a848d;margin:4px 0 0}.trainer-primary{background:#17131a;color:#fff;border:0;border-radius:10px;padding:10px 13px;font-weight:800;cursor:pointer}.trainer-primary:hover{background:#2a2330}
+.trainer-table-wrap{overflow:auto}.trainer-table{width:100%;border-collapse:collapse;font-size:12px}.trainer-table th{text-align:left;color:#99929c;font-size:10px;font-weight:800;padding:10px 8px;border-bottom:1px solid #eee}.trainer-table td{padding:12px 8px;border-bottom:1px solid #f2eef2;vertical-align:middle}.trainer-student-cell{display:flex;align-items:center;gap:9px;min-width:150px}.trainer-student-avatar{width:34px;height:34px;border-radius:10px;background:#f0e6eb;display:grid;place-items:center;font-size:16px}.trainer-student-name{font-weight:800}.trainer-student-sub{font-size:10px;color:#918a93;margin-top:2px}.status-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:900}.status-active{background:#e8f3eb;color:#2e6a41}.status-attention{background:#fff3df;color:#9a6517}.status-inactive{background:#efedf0;color:#746d76}.trainer-link-btn{border:0;background:#f4eff2;color:#6e3550;border-radius:9px;padding:7px 10px;font-size:10px;font-weight:900;cursor:pointer}
+.trainer-alerts{display:flex;flex-direction:column;gap:10px}.trainer-alert{padding:12px;border:1px solid #f0e8ee;border-radius:13px;background:#fcfafb}.trainer-alert strong{font-size:12px;display:block}.trainer-alert p{font-size:10px;color:#7d777f;margin:4px 0 0}.trainer-alert .alert-tag{font-size:8px;color:#a56b82;font-weight:900;letter-spacing:.08em}
+.trainer-toolbar{display:flex;gap:10px;margin-bottom:18px}.trainer-search{flex:1;border:1px solid #e7e1e8;border-radius:11px;display:flex;align-items:center;gap:8px;padding:0 12px}.trainer-search span{color:#9a939c}.trainer-search input,.trainer-toolbar select,.trainer-settings-grid input{border:0;outline:none;padding:11px 0;font:inherit;width:100%;background:transparent}.trainer-toolbar select{max-width:180px;border:1px solid #e7e1e8;border-radius:11px;padding:10px;background:#fff;color:#4b454d}
+.trainer-student-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.trainer-student-card{border:1px solid #ece7ed;border-radius:14px;padding:15px}.trainer-student-card-head{display:flex;justify-content:space-between;gap:12px}.trainer-student-card .trainer-student-cell{min-width:0}.trainer-student-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.trainer-meta-box{background:#faf8fa;border-radius:10px;padding:8px}.trainer-meta-box small{display:block;font-size:8px;color:#979099}.trainer-meta-box strong{display:block;font-size:11px;margin-top:2px}.trainer-card-actions{display:flex;gap:8px}.trainer-card-actions button{flex:1;border-radius:9px;padding:9px;border:1px solid #e9e4ea;background:#fff;font-weight:800;font-size:10px;cursor:pointer}.trainer-card-actions .primary-light{background:#f4eaf0;color:#6e3550;border-color:#ead6e0}
+.trainer-empty-section{min-height:360px;display:grid;place-items:center;text-align:center}.trainer-empty-section>*{grid-column:1}.trainer-empty-icon{font-size:42px;margin-bottom:-150px}.trainer-empty-section h2{margin-top:10px}.trainer-empty-section p{max-width:420px;color:#827b84;font-size:13px}.trainer-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:15px}.trainer-settings-grid label span{display:block;font-size:10px;font-weight:800;margin-bottom:6px;color:#666068}.trainer-settings-grid label{border:1px solid #e7e1e8;border-radius:12px;padding:0 12px}.trainer-inline-msg{font-size:11px;color:#2e6a41;margin-top:10px;min-height:15px}
+.trainer-modal-backdrop{position:fixed;inset:0;z-index:400000;background:rgba(14,11,16,.52);display:none;align-items:center;justify-content:center;padding:20px}.trainer-modal{width:min(560px,100%);background:#fff;border-radius:20px;padding:22px;box-shadow:0 25px 90px rgba(0,0,0,.25)}.trainer-modal h3{margin:0 0 4px}.trainer-modal p{margin:0 0 16px;color:#817a83;font-size:12px}.trainer-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.trainer-form-grid label{font-size:10px;font-weight:800}.trainer-form-grid label.full{grid-column:1/-1}.trainer-form-grid input,.trainer-form-grid select{width:100%;box-sizing:border-box;margin-top:6px;border:1px solid #e1dbe2;border-radius:10px;padding:10px;font:inherit}.trainer-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.trainer-secondary{border:1px solid #e3dde4;background:#fff;border-radius:10px;padding:10px 13px;font-weight:800;cursor:pointer}
+.trainer-prontuario{position:fixed;inset:0;z-index:300001;background:#f7f5f7;display:none;overflow:auto}.trainer-record-shell{max-width:1100px;margin:0 auto;padding:28px}.trainer-record-top{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}.trainer-record-back{border:0;background:#fff;border:1px solid #e7e1e8;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}.trainer-record-hero{display:flex;align-items:center;gap:14px;margin:24px 0}.trainer-record-avatar{width:64px;height:64px;border-radius:18px;background:#ead8e1;display:grid;place-items:center;font-size:28px}.trainer-record-hero h2{margin:0;font-size:24px}.trainer-record-hero p{margin:5px 0 0;color:#7d767e;font-size:12px}.trainer-record-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.trainer-record-box{background:#fff;border:1px solid #e9e4ea;border-radius:16px;padding:16px}.trainer-record-box h3{margin:0 0 8px;font-size:13px}.trainer-record-box p{margin:0;color:#7b747c;font-size:12px;line-height:1.5}
+@media(max-width:900px){.trainer-sidebar{width:76px;flex-basis:76px;padding:20px 10px}.trainer-brand div:last-child,.trainer-nav-item span,.trainer-logout span{display:none}.trainer-nav-item,.trainer-logout{justify-content:center}.trainer-stats-grid{grid-template-columns:repeat(2,1fr)}.trainer-content-grid{grid-template-columns:1fr}.trainer-student-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.trainer-main{padding:18px}.trainer-topbar{flex-direction:column}.trainer-stats-grid,.trainer-record-grid{grid-template-columns:1fr}.trainer-toolbar{flex-direction:column}.trainer-toolbar select{max-width:none}.trainer-form-grid,.trainer-settings-grid{grid-template-columns:1fr}.trainer-form-grid label.full{grid-column:auto}.trainer-sidebar{display:none}}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="ageu-build" content="LAB-SYNC-2026-09-10"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 </head>
 <body>
+<div style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#fff3cd;border-bottom:1px solid #f0d98a;padding:8px 14px;text-align:center;font:700 12px system-ui;color:#7a5b00">🧪 AMBIENTE DE TESTE — sincronização Supabase — NÃO altera o link de produção da Isa</div>
 <div class="screen active" id="screen-intro">
 
   <div class="blob blob1"></div>
@@ -1459,69 +1473,35 @@ const TREINO = [
 /* ---------- RENDER TREINO ---------- */
 const daysList = document.getElementById('days-list');
 const exSelect = document.getElementById('ex-select');
-
-TREINO.forEach((dia, di) => {
-  const dayEl = document.createElement('div');
-  dayEl.className = 'day';
-  dayEl.innerHTML = `
-    <div class="day-head">
-      <div class="info">
-        <div class="num">DIA ${String(dia.dia).padStart(2,'0')}</div>
-        <div class="name">${dia.nome}</div>
-      </div>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <div class="day-progress" id="progress-dia-${dia.dia}">0/${dia.exercicios.length}</div>
-        <div class="chev">⌄</div>
-      </div>
-    </div>
-    <div class="day-body"></div>
-  `;
-  const body = dayEl.querySelector('.day-body');
-  dia.exercicios.forEach((ex, ei) => {
-    const row = document.createElement('div');
-    row.className = 'ex-row';
-    const cargaHtml = ex.carga ? `<div class="ex-carga">${ex.carga}</div>` : '';
-    const tecnicaHtml = ex.tecnica ? `<div class="ex-tecnica">${ex.tecnica}</div>` : '';
-    row.innerHTML = `
-      <div class="ex-check" data-dia="${dia.dia}">✓</div>
-      <div class="ex-info">
-        <div class="ex-name">${ex.nome}</div>
-        <div class="ex-sets">${ex.sets}</div>
-        ${cargaHtml}
-        ${tecnicaHtml}
-      </div>
-      <button class="video-btn" title="Ver vídeo">▶</button>
-    `;
-    row.querySelector('.ex-check').addEventListener('click', () => {
-      row.classList.toggle('done');
-      row.querySelector('.ex-check').classList.toggle('done');
-      updateProgress(dia.dia);
+const ATHLETE_WORKOUTS_KEY = 'alpStudentWorkoutsV2';
+function getWorkoutOverrides(){ try{ return JSON.parse(localStorage.getItem(ATHLETE_WORKOUTS_KEY)||'{}') || {}; }catch(e){ return {}; } }
+function getAthleteWorkout(login){ const all=getWorkoutOverrides(); const w=all[String(login||'').toLowerCase()]; return Array.isArray(w) && w.length ? w : []; }
+function renderTreinoScreen(workout){
+  if(!daysList || !exSelect) return;
+  daysList.innerHTML=''; exSelect.innerHTML='';
+  const data=Array.isArray(workout)?workout:[];
+  if(!data.length){
+    daysList.innerHTML='<div class="alp-student-no-workout"><h2>Seu treino ainda não foi publicado</h2><p>O treinador está preparando sua prescrição. Assim que ela for aprovada e publicada, ela aparecerá automaticamente aqui.</p></div>';
+    return;
+  }
+  data.forEach((dia,di)=>{
+    const dayEl=document.createElement('div'); dayEl.className='day';
+    dayEl.innerHTML=`<div class="day-head"><div class="info"><div class="num">DIA ${String(dia.dia).padStart(2,'0')}</div><div class="name">${dia.nome||('Dia '+(di+1))}</div></div><div style="display:flex;align-items:center;gap:10px"><div class="day-progress" id="progress-dia-${dia.dia}">0/${(dia.exercicios||[]).length}</div><div class="chev">⌄</div></div></div><div class="day-body"></div>`;
+    const body=dayEl.querySelector('.day-body');
+    (dia.exercicios||[]).forEach(ex=>{
+      const row=document.createElement('div'); row.className='ex-row';
+      const cargaHtml=ex.carga?`<div class="ex-carga">${ex.carga}</div>`:'';
+      const tecnicaHtml=ex.tecnica?`<div class="ex-tecnica">${ex.tecnica}</div>`:'';
+      row.innerHTML=`<div class="ex-check" data-dia="${dia.dia}">✓</div><div class="ex-info"><div class="ex-name">${ex.nome||''}</div><div class="ex-sets">${ex.sets||''}</div>${cargaHtml}${tecnicaHtml}</div><button class="video-btn" title="Ver vídeo">▶</button>`;
+      row.querySelector('.ex-check').addEventListener('click',()=>{row.classList.toggle('done');row.querySelector('.ex-check').classList.toggle('done');updateProgress(dia.dia)});
+      row.querySelector('.video-btn').addEventListener('click',()=>openVideoModal(ex));
+      body.appendChild(row);
+      const opt=document.createElement('option'); opt.value=`${dia.nome||('Dia '+(di+1))} — ${ex.nome||''}`; opt.textContent=`Dia ${dia.dia} · ${ex.nome||''}`; exSelect.appendChild(opt);
     });
-    row.querySelector('.video-btn').addEventListener('click', () => openVideoModal(ex));
-    body.appendChild(row);
-
-    const opt = document.createElement('option');
-    opt.value = `${dia.nome} — ${ex.nome}`;
-    opt.textContent = `Dia ${dia.dia} · ${ex.nome}`;
-    exSelect.appendChild(opt);
+    dayEl.querySelector('.day-head').addEventListener('click',()=>{const isOpen=dayEl.classList.contains('open');document.querySelectorAll('.day').forEach(d=>{d.classList.remove('open');d.querySelector('.day-body').style.maxHeight=null});if(!isOpen){dayEl.classList.add('open');const b=dayEl.querySelector('.day-body');b.style.maxHeight=b.scrollHeight+'px'}});
+    daysList.appendChild(dayEl);
   });
-
-  dayEl.querySelector('.day-head').addEventListener('click', () => {
-    const isOpen = dayEl.classList.contains('open');
-    document.querySelectorAll('.day').forEach(d => {
-      d.classList.remove('open');
-      d.querySelector('.day-body').style.maxHeight = null;
-    });
-    if (!isOpen) {
-      dayEl.classList.add('open');
-      const b = dayEl.querySelector('.day-body');
-      b.style.maxHeight = b.scrollHeight + 'px';
-    }
-  });
-
-  daysList.appendChild(dayEl);
-});
-
+}
 /* ---------- MINHA MÚSICA — HISTÓRICO + MINI-PLAYER PERSISTENTE ---------- */
 const MUSIC_HISTORY_KEY = 'isaMusicasHistorico';
 
@@ -1784,6 +1764,11 @@ function montarMiniPlayer(player){
     return;
   }
 
+  // NÃO carrega o YouTube ao abrir o app/selecionar música.
+  // O player real só será criado após uma ação explícita do usuário.
+  playerEl.innerHTML = '<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#fff;background:#171018;font-size:.8rem;padding:18px;text-align:center">🎵 Player pronto. Toque em Ouvir para carregar o YouTube.</div>';
+  return;
+
   ensureYouTubeApi(function(){
     if (__alpMusicPlayer !== player || !document.getElementById('musica-mini-player')) return;
     const host = document.getElementById('musica-mini-player');
@@ -1851,7 +1836,27 @@ function playPauseMusic(){
     musicStatus('Spotify: use o controle do próprio player.');
     return;
   }
-  if (!__alpYTPlayer) { musicStatus('Player musical ainda carregando…'); return; }
+  if (!__alpMusicPlayer) { musicStatus('Escolha uma música primeiro.'); return; }
+  if (!__alpYTPlayer){
+    musicStatus('Carregando player…');
+    ensureYouTubeApi(function(){
+      const player=__alpMusicPlayer;
+      if(!player) return;
+      const host=document.getElementById('musica-mini-player');
+      if(!host) return;
+      host.innerHTML='<div id="alp-youtube-player" style="width:100%;height:100%;"></div>';
+      const vars={playsinline:1,rel:0,modestbranding:1,enablejsapi:1,origin:window.location.origin};
+      if(player.type==='youtube-playlist'||player.type==='youtube-mix'){ if(player.listId) vars.list=player.listId; }
+      const config={height:'100%',width:'100%',videoId:player.videoId || (player.type==='youtube'?player.id:undefined),playerVars:vars,events:{
+        onReady:function(){ musicStatus('Tocando'); updateMusicControls(1); try{__alpYTPlayer.playVideo();}catch(e){} },
+        onStateChange:function(e){ const labels={1:'Tocando',2:'Pausada',0:'Finalizada',5:'Pronta para tocar'}; musicStatus(labels[e.data]||'Música'); updateMusicControls(e.data); syncMusicModalUI(); },
+        onError:function(){ musicStatus('O YouTube não permitiu esta reprodução. Use “Abrir no YouTube”.'); updateMusicControls(0); }
+      }};
+      if(!config.videoId) delete config.videoId;
+      __alpYTPlayer=new YT.Player('alp-youtube-player',config);
+    });
+    return;
+  }
   try{
     const state = typeof __alpYTPlayer.getPlayerState === 'function' ? __alpYTPlayer.getPlayerState() : -1;
     if (state === 1) {
@@ -2665,128 +2670,576 @@ document.getElementById('btn-pular-pos').addEventListener('click', () => {
 });
 </script>
 
-<div id="alpBaseRole">
-  <div class="card">
-    <h1>AGEU LINS PERFORMANCE</h1>
-    <p>Escolha a área que deseja acessar.</p>
-    <div class="alp-base-roles">
-      <button type="button" onclick="ALPBASE.choose('athlete')">
-        <span class="alp-base-ico">💗</span>
-        Área do aluno
-        <span class="alp-base-label">Sua experiência personalizada</span>
-      </button>
-      <button type="button" onclick="ALPBASE.choose('trainer')">
-        <span class="alp-base-ico">👤</span>
-        Área do treinador
-        <span class="alp-base-label">Gestão e acompanhamento</span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <div id="alpBaseLogin">
   <div class="card">
-    <h2 id="alpBaseTitle">Área do aluno</h2>
-    <div class="sub" id="alpBaseSub">Entre para continuar.</div>
-    <label for="alpBaseUser">Login</label>
-    <input id="alpBaseUser" autocomplete="username" placeholder="Digite seu login">
+    <div class="alp-login-mark">ALP</div>
+    <h1>AGEU LINS PERFORMANCE</h1>
+    <div class="sub">Entre com seu usuário e senha para continuar.</div>
+    <label for="alpBaseUser">Usuário</label>
+    <input id="alpBaseUser" autocomplete="username" placeholder="Seu usuário">
     <label for="alpBasePass">Senha</label>
-    <input id="alpBasePass" type="password" autocomplete="current-password" placeholder="Digite sua senha">
-    <button class="enter" type="button" onclick="ALPBASE.login()">Entrar</button>
-    <div id="alpBaseError"></div>
-    <button class="back" type="button" onclick="ALPBASE.back()">← Voltar</button>
+    <input id="alpBasePass" type="password" autocomplete="current-password" placeholder="Sua senha">
+    <label style="display:flex;align-items:center;gap:8px;margin-top:12px;text-align:left;font-size:12px"><input id="alpRemember" type="checkbox" style="width:auto"> Lembrar usuário neste aparelho</label><button class="enter" id="alpBaseEnter" type="button" onclick="ALPBASE.login()">Entrar</button>
+    <div id="alpBaseError" role="alert"></div>
+    <div id="alpBaseLoading" style="display:none">Verificando acesso…</div>
   </div>
 </div>
 
 <div id="alpBaseTrainer">
-  <div class="panel">
-    <h2>AGEU LINS PERFORMANCE</h2>
-    <div class="alp-base-mini">Área do treinador</div>
-    <div class="box">
-      <strong>Base estável de administração</strong>
-      <p class="alp-base-mini">Nenhum módulo novo foi colocado aqui. O objetivo desta versão é garantir que o acesso separado funcione sem interferir na experiência da Isa.</p>
-      <button type="button" onclick="ALPBASE.logout()" style="background:#111;color:#fff">Sair</button>
+  <div class="trainer-app">
+    <aside class="trainer-sidebar">
+      <div class="trainer-brand">
+        <div class="trainer-brand-mark">A</div>
+        <div>
+          <strong>AGEU LINS</strong>
+          <span>PERFORMANCE</span>
+        </div>
+      </div>
+      <nav class="trainer-nav">
+        <button class="trainer-nav-item active" data-section="dashboard" type="button">⌂ <span>Dashboard</span></button>
+        <button class="trainer-nav-item" data-section="alunos" type="button">👥 <span>Alunos</span></button>
+        <button class="trainer-nav-item" data-section="treinos" type="button">🏋️ <span>Treinos</span></button>
+        <button class="trainer-nav-item" data-section="monitoramento" type="button">📊 <span>Monitoramento</span></button>
+        <button class="trainer-nav-item" data-section="videos" type="button">🎥 <span>Vídeos</span></button>
+        <button class="trainer-nav-item" data-section="evolucao" type="button">📸 <span>Evolução</span></button>
+      </nav>
+      <div class="trainer-side-bottom">
+        <button class="trainer-nav-item" data-section="config" type="button">⚙️ <span>Configurações</span></button>
+        <button class="trainer-logout" type="button" onclick="ALPBASE.logout()">↩ <span>Sair</span></button>
+      </div>
+    </aside>
+
+    <main class="trainer-main">
+      <header class="trainer-topbar">
+        <div>
+          <div class="trainer-kicker">CENTRAL DO TREINADOR</div>
+          <h1 id="trainer-section-title">Olá, Ageu 👋</h1>
+          <p id="trainer-section-subtitle">Acompanhe seus alunos e veja o que precisa da sua atenção.</p>
+        </div>
+        <div class="trainer-top-actions">
+          <div class="trainer-today" id="trainer-today"></div>
+          <div class="trainer-avatar">AL</div>
+        </div>
+      </header>
+
+      <section class="trainer-section" id="trainer-dashboard-section">
+        <div class="trainer-stats-grid">
+          <article class="trainer-stat-card"><span>Alunos ativos</span><strong id="stat-active">0</strong><small>cadastrados na plataforma</small></article>
+          <article class="trainer-stat-card"><span>Em atenção</span><strong id="stat-attention">0</strong><small>precisam de acompanhamento</small></article>
+          <article class="trainer-stat-card"><span>Treinos registrados</span><strong id="stat-workouts">0</strong><small>histórico disponível</small></article>
+          <article class="trainer-stat-card"><span>Adesão média</span><strong id="stat-adherence">0%</strong><small>estimativa da carteira</small></article>
+        </div>
+
+        <div class="trainer-content-grid">
+          <div class="trainer-card trainer-card-wide">
+            <div class="trainer-card-head">
+              <div><h2>Alunos</h2><p>Visão rápida da sua carteira.</p></div>
+              <button class="trainer-primary" type="button" onclick="TrainerUI.openStudentModal()">+ Novo aluno</button>
+            </div>
+            <div class="trainer-table-wrap">
+              <table class="trainer-table">
+                <thead><tr><th>Aluno</th><th>Objetivo</th><th>Último treino</th><th>Adesão</th><th>Status</th><th></th></tr></thead>
+                <tbody id="trainer-dashboard-students"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="trainer-card">
+            <div class="trainer-card-head"><div><h2>⚠️ Atenção necessária</h2><p>Alertas do acompanhamento.</p></div></div>
+            <div id="trainer-alerts" class="trainer-alerts"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trainer-section" id="trainer-alunos-section" style="display:none">
+        <div class="trainer-card">
+          <div class="trainer-card-head">
+            <div><h2>Gestão de alunos</h2><p>Cadastre, pesquise e abra o prontuário de cada aluno.</p></div>
+            <button class="trainer-primary" type="button" onclick="TrainerUI.openStudentModal()">+ Novo aluno</button>
+          </div>
+          <div class="trainer-toolbar">
+            <div class="trainer-search"><span>⌕</span><input id="trainer-search-input" placeholder="Pesquisar por nome, apelido ou login"></div>
+            <select id="trainer-status-filter"><option value="all">Todos os status</option><option value="active">Ativos</option><option value="attention">Atenção</option><option value="inactive">Inativos</option></select>
+          </div>
+          <div class="trainer-student-grid" id="trainer-student-grid"></div>
+        </div>
+      </section>
+
+      <section class="trainer-section" id="trainer-placeholder-section" style="display:none">
+        <div class="trainer-card trainer-empty-section">
+          <div class="trainer-empty-icon">🚧</div>
+          <h2 id="trainer-placeholder-title">Módulo</h2>
+          <p id="trainer-placeholder-text">Este módulo será conectado aos dados reais dos alunos nas próximas etapas.</p>
+        </div>
+      </section>
+
+      <section class="trainer-section" id="trainer-config-section" style="display:none">
+        <div class="trainer-card">
+          <div class="trainer-card-head"><div><h2>Configurações</h2><p>Preferências da Central do Treinador.</p></div></div>
+          <div class="trainer-settings-grid">
+            <label><span>Nome do treinador</span><input id="trainer-config-name" value="Ageu Lins"></label>
+            <label><span>Nome da plataforma</span><input value="AGEU LINS PERFORMANCE" disabled></label>
+          </div>
+          <button class="trainer-primary" type="button" onclick="TrainerUI.saveConfig()">Salvar preferências</button>
+          <div id="trainer-config-msg" class="trainer-inline-msg"></div>
+
+          <div class="cloud-panel">
+            <div class="cloud-panel-head">
+              <div><h3>☁️ Sincronização online</h3><p>A base Supabase já está configurada. Prescrições e cadastro de alunos podem ser sincronizados entre dispositivos.</p></div>
+              <span id="cloud-status-pill" class="cloud-status-pill offline">Desconectado</span>
+            </div>
+            <div class="cloud-grid">
+              <label><span>Supabase Project URL</span><input id="supabase-url" placeholder="https://seu-projeto.supabase.co"></label>
+              <label><span>Publishable Key</span><input id="supabase-key" placeholder="sb_publishable_..."></label>
+              <label><span>Workspace ID</span><input id="supabase-workspace" value="ageu-lins-performance"></label>
+            </div>
+            <div class="cloud-actions">
+              <button class="trainer-secondary" type="button" onclick="SupabaseCloud.testConnection()">Testar conexão</button>
+              <button class="trainer-primary" type="button" onclick="SupabaseCloud.saveConfig()">Salvar conexão</button>
+              <button class="trainer-secondary" type="button" onclick="SupabaseCloud.showSQL()">Ver SQL de configuração</button>
+            </div>
+            <div id="cloud-status-msg" class="trainer-inline-msg"></div>
+            <pre id="cloud-sql-box" class="cloud-sql-box" style="display:none"></pre>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="trainer-modal-backdrop" id="trainer-anamnesis-modal">
+  <div class="trainer-modal anamnesis-modal">
+    <div class="trainer-modal-head-row"><div><div class="trainer-kicker">ANAMNESE PADRÃO</div><h3 id="anamnesis-title">Anamnese do aluno</h3></div><button type="button" class="trainer-close-x" onclick="TrainerUI.closeAnamnesis()">×</button></div>
+    <p id="anamnesis-subtitle">Respostas utilizadas como contexto individual para a prescrição assistida por IA.</p>
+    <div id="anamnesis-content" class="anamnesis-grid"></div>
+    <div class="trainer-modal-actions"><button class="trainer-secondary" type="button" onclick="TrainerUI.closeAnamnesis()">Fechar</button></div>
+  </div>
+</div>
+
+<div class="trainer-modal-backdrop" id="trainer-prescription-modal">
+  <div class="trainer-modal trainer-prescription-modal">
+    <div class="trainer-modal-head-row">
+      <div><div class="trainer-kicker">PRESCRIÇÃO</div><h3 id="prescription-title">Treino do aluno</h3><div style="margin-top:6px;font-size:11px;color:#7b6470">A IA usa a anamnese padrão salva no Supabase como contexto principal.</div></div>
+      <button type="button" class="trainer-close-x" onclick="TrainerUI.closePrescription()">×</button>
+    </div>
+    <p id="prescription-subtitle">Edite e salve a prescrição deste aluno.</p><div id="prescription-status-pill" class="alp-prescription-status">Rascunho</div>
+    <div class="prescription-toolbar">
+      <select id="prescription-day-select"></select>
+      <button class="trainer-secondary" type="button" onclick="TrainerUI.addDay()">+ Dia</button>
+      <button class="trainer-ai-btn" type="button" onclick="TrainerAI.open()">✨ Prescrever com IA</button>
+    </div>
+    <div class="prescription-day-head">
+      <label>Nome do dia<input id="prescription-day-name"></label>
+      <button class="trainer-danger" type="button" onclick="TrainerUI.removeDay()">Excluir dia</button>
+    </div>
+    <div id="prescription-exercises" class="prescription-exercises"></div>
+    <button class="trainer-secondary prescription-add-ex" type="button" onclick="TrainerUI.addExercise()">+ Adicionar exercício</button>
+    <div class="trainer-modal-actions">
+      <button class="trainer-secondary" type="button" onclick="TrainerUI.closePrescription()">Cancelar</button>
+      <button class="trainer-primary" type="button" onclick="TrainerUI.savePrescription()">Salvar</button>
+    </div>
+    <div class="alp-prescription-actions"><button class="trainer-secondary" type="button" onclick="TrainerUI.submitReview()">Enviar para validação</button><button class="trainer-primary" type="button" onclick="TrainerUI.publishPrescription()">✓ Aprovar e publicar</button><button class="trainer-danger" type="button" onclick="TrainerUI.rejectPrescription()">Rejeitar</button></div>
+    <div id="prescription-msg" class="trainer-inline-msg"></div>
+  </div>
+</div>
+
+<div class="trainer-modal-backdrop" id="trainer-ai-modal">
+  <div class="trainer-modal trainer-ai-modal">
+    <div class="trainer-modal-head-row">
+      <div><div class="trainer-kicker">COPILOTO DE PRESCRIÇÃO</div><h3>✨ Prescrever com IA</h3></div>
+      <button type="button" class="trainer-close-x" onclick="TrainerAI.close()">×</button>
+    </div>
+    <p class="trainer-ai-intro">Descreva o contexto do aluno. A IA gera uma proposta para você revisar. Nada é publicado automaticamente.</p>
+    <div id="ai-anamnesis-banner" style="margin:10px 0;padding:10px 12px;border-radius:10px;background:#fff7e7;border:1px solid #f1dfb2;color:#8b6418;font-size:12px">📋 A IA usará a anamnese padrão deste aluno como contexto principal.</div>
+    <div class="trainer-ai-grid">
+      <label><span>Objetivo</span><select id="ai-goal"><option value="Hipertrofia">Hipertrofia</option><option value="Emagrecimento">Emagrecimento</option><option value="Performance">Performance</option><option value="Condicionamento">Condicionamento</option><option value="Saúde e bem-estar">Saúde e bem-estar</option></select></label>
+      <label><span>Nível</span><select id="ai-level"><option>Iniciante</option><option selected>Intermediário</option><option>Avançado</option></select></label>
+      <label><span>Dias/semana</span><select id="ai-days"><option>3</option><option>4</option><option selected>5</option><option>6</option></select></label>
+      <label><span>Duração</span><select id="ai-duration"><option>45 min</option><option selected>60 min</option><option>75 min</option><option>90 min</option></select></label>
+      <label class="full"><span>Equipamentos disponíveis</span><input id="ai-equipment" value="Academia completa" placeholder="Ex.: academia completa, halteres, elásticos"></label>
+      <label class="full"><span>Limitações / dores / cuidados</span><textarea id="ai-limitations" placeholder="Ex.: evitar impacto; desconforto no joelho esquerdo"></textarea></label>
+      <label class="full"><span>Foco do ciclo</span><textarea id="ai-focus" placeholder="Ex.: aumentar força de membros inferiores e manter volume de tronco"></textarea></label>
+      <label class="full"><span>Orientações do treinador</span><textarea id="ai-notes" placeholder="Critérios, preferências, exercícios que gosta/não gosta, etc."></textarea></label>
+    </div>
+    <div id="ai-live-status" class="ai-live-status">☁️ IA online: pronta para receber o contexto e gerar uma proposta.</div>
+    <div class="trainer-ai-actions">
+      <button class="trainer-secondary" type="button" onclick="TrainerAI.close()">Cancelar</button>
+      <button class="trainer-primary" type="button" onclick="TrainerAI.generate()">✨ Gerar proposta</button>
+    </div>
+    <div id="ai-result" class="trainer-ai-result" style="display:none"></div>
+  </div>
+</div>
+
+<div class="trainer-modal-backdrop" id="trainer-student-modal">
+  <div class="trainer-modal">
+    <h3>Novo aluno</h3>
+    <p>Cadastre o básico agora. O prontuário e a prescrição serão conectados nas próximas etapas.</p>
+    <div class="trainer-form-grid">
+      <label class="full">Nome completo<input id="new-student-name" placeholder="Ex.: Ana Souza"></label>
+      <label>Apelido<input id="new-student-nick" placeholder="Ex.: Ana"></label>
+      <label>Emoji<input id="new-student-emoji" value="🏋️"></label>
+      <label>Login<input id="new-student-login" placeholder="Ex.: ana.souza"></label>
+      <label>Senha inicial<input id="new-student-pass" value="123456"></label>
+      <label>WhatsApp<input id="new-student-whatsapp" placeholder="(11) 99999-9999"></label>
+      <label>Objetivo<select id="new-student-goal"><option>Hipertrofia</option><option>Emagrecimento</option><option>Performance</option><option>Condicionamento</option><option>Saúde e bem-estar</option></select></label>
+      <label>Nível<select id="new-student-level"><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></label>
+    </div>
+    <div class="trainer-modal-actions">
+      <button class="trainer-secondary" type="button" onclick="TrainerUI.closeStudentModal()">Cancelar</button>
+      <button class="trainer-primary" type="button" onclick="TrainerUI.createStudent()">Cadastrar aluno</button>
+    </div>
+  </div>
+</div>
+
+<div class="trainer-prontuario" id="trainer-prontuario">
+  <div class="trainer-record-shell">
+    <div class="trainer-record-top">
+      <div><div class="trainer-kicker">PRONTUÁRIO INDIVIDUAL</div><h1 style="margin:4px 0 0;font-size:25px">Acompanhamento</h1></div>
+      <button class="trainer-record-back" type="button" onclick="TrainerUI.closeRecord()">← Voltar para alunos</button>
+    </div>
+    <div class="trainer-record-hero"><div class="trainer-record-avatar" id="record-avatar">💗</div><div><h2 id="record-name">Aluno</h2><p id="record-meta">Objetivo · nível · login</p></div></div>
+    <div class="trainer-record-grid">
+      <div class="trainer-record-box"><h3>Resumo</h3><p id="record-summary">Dados do aluno aparecerão aqui.</p><div id="record-ai-status" class="student-card-ai">🤖 Análise automática aparecerá aqui.</div><button class="trainer-secondary" type="button" onclick="TrainerUI.openPrescription();setTimeout(()=>TrainerAI.open(),80)">✨ Revisar proposta com IA</button></div>
+      <div class="trainer-record-box"><h3>Prescrição</h3><p>Edite os treinos do aluno, exercícios, séries, cargas, técnica e vídeos.</p><button class="trainer-primary" type="button" onclick="TrainerUI.openPrescription()">Editar treino</button></div>
+      <div class="trainer-record-box trainer-record-box-wide"><h3>📋 Anamnese padrão</h3><p id="record-anamnesis-status">Aguardando respostas do aluno.</p><small style="display:block;color:#777;margin-top:6px">O link é individual e identifica o aluno automaticamente.</small><button class="trainer-secondary" type="button" onclick="TrainerUI.viewAnamnesis()">Ver anamnese</button> <button class="trainer-secondary" type="button" onclick="TrainerUI.copyAnamnesisLink()">🔗 Copiar link da anamnese</button><button class="trainer-secondary" type="button" onclick="TrainerUI.copyAnamnesisLink();document.getElementById('record-anamnesis-status').textContent='🔗 Link personalizado copiado.';">📨 Enviar link</button></div>
+      <div class="trainer-record-box"><h3>Monitoramento</h3><p>RPE, carga interna, dor, sono e disposição ficarão reunidos aqui.</p></div>
+      <div class="trainer-record-box"><h3>Vídeos</h3><p>Vídeos enviados pelo aluno serão organizados por data e exercício.</p></div>
+      <div class="trainer-record-box"><h3>Fotos</h3><p>Registro de evolução corporal e acompanhamento visual.</p></div>
+      <div class="trainer-record-box"><h3>Configurações</h3><p>Dados de acesso, WhatsApp, objetivo e preferências do aluno.</p></div>
     </div>
   </div>
 </div>
 
 
-<script id="alp-base-js">
+<style id="trainer-v3-cloud-css">
+.cloud-panel{margin-top:24px;border:1px solid #e8d8df;border-radius:16px;padding:18px;background:linear-gradient(180deg,#fff 0%,#fff8fb 100%)}
+.cloud-panel-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.cloud-panel h3{margin:0 0 5px;font-size:1.05rem;color:#5c2a3d}.cloud-panel p{margin:0;color:#8a6874;font-size:.82rem;line-height:1.5}.cloud-status-pill{padding:7px 10px;border-radius:999px;font-size:.72rem;font-weight:700;white-space:nowrap}.cloud-status-pill.offline{background:#f6e9ee;color:#8a6874}.cloud-status-pill.online{background:#e7f6ec;color:#267a43}.cloud-status-pill.warn{background:#fff2db;color:#9a6510}.cloud-grid{display:grid;grid-template-columns:1.5fr 1.2fr .9fr;gap:10px;margin-top:16px}.cloud-grid label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#6f4b5a}.cloud-grid input{padding:11px;border:1px solid #ddd;border-radius:10px;font:inherit;background:#fff}.cloud-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.cloud-sql-box{margin-top:12px;background:#221b21;color:#f7eaf0;padding:14px;border-radius:12px;overflow:auto;font-size:11px;line-height:1.5;white-space:pre-wrap}.cloud-online-note{padding:10px 12px;margin-top:10px;background:#fff7e7;border:1px solid #f1dfb2;border-radius:10px;color:#8b6418;font-size:12px;line-height:1.45}
+@media(max-width:860px){.cloud-grid{grid-template-columns:1fr}}
+</style>
+<style id="trainer-onboarding-auto-css">
+.onboarding-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:#fff2db;color:#93620d;font-size:10px;font-weight:900;margin-left:6px}.ai-ready-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:#e8f7ed;color:#267341;font-size:10px;font-weight:900;margin-top:7px}.student-card-ai{margin:8px 0;padding:9px 10px;background:#fff8fb;border:1px solid #efdce5;border-radius:10px;color:#6e4858;font-size:11px;line-height:1.45}
+</style>
+<style id="trainer-ai-css">
+.trainer-ai-btn{border:1px solid #d6567f;background:linear-gradient(135deg,#fff1f6,#ffe2ec);color:#9f3558;padding:11px 14px;border-radius:11px;font-weight:800;cursor:pointer;box-shadow:0 6px 16px rgba(178,58,95,.10)}
+.trainer-ai-btn:hover{transform:translateY(-1px)}
+.trainer-ai-modal{max-width:900px;width:min(95vw,900px);max-height:92vh;overflow:auto}
+.trainer-ai-intro{margin-top:-2px;color:#7d5d69;font-size:13px;line-height:1.55;background:#fff7fa;border:1px solid #f0d9e3;border-radius:12px;padding:12px 14px}
+.trainer-ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.trainer-ai-grid label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:800;color:#6f4b5a}
+.trainer-ai-grid label.full{grid-column:1/-1}
+.trainer-ai-grid input,.trainer-ai-grid select,.trainer-ai-grid textarea{padding:11px;border:1px solid #ddd;border-radius:10px;font:inherit;background:#fff;color:#332932}
+.trainer-ai-grid textarea{min-height:74px;resize:vertical}
+.trainer-ai-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.trainer-ai-result{margin-top:16px;border:1px solid #ead4dd;border-radius:14px;background:#fffafb;padding:14px}
+.ai-result-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}.ai-result-head h4{margin:0;font-size:18px;color:#522638}.ai-result-head p{margin:3px 0 0;color:#816773;font-size:12px}
+.ai-day{border:1px solid #ecdfe5;border-radius:12px;background:#fff;padding:12px;margin-top:10px}.ai-day strong{color:#5b2a3e}.ai-ex-list{margin-top:8px;display:grid;gap:6px}.ai-ex{display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:8px;background:#fff7fa;border:1px solid #f1e5ea;font-size:12px}.ai-ex span:first-child{font-weight:700;color:#4f3240}.ai-ex span:last-child{color:#8a6874;text-align:right}
+.ai-warning{margin-top:12px;padding:10px 12px;border-radius:10px;background:#fff7e7;border:1px solid #eedfb9;color:#8a621a;font-size:12px;line-height:1.45}
+.ai-live-status{margin-top:12px;padding:10px 12px;border-radius:10px;background:#eefaf2;border:1px solid #ccebd7;color:#276b3f;font-size:12px;line-height:1.45}.ai-live-status.loading{background:#fff7e7;border-color:#eedfb9;color:#8a621a}.ai-live-status.error{background:#fff1f1;border-color:#efc6c6;color:#a02626}
+@media(max-width:700px){.trainer-ai-grid{grid-template-columns:1fr}.trainer-ai-grid label.full{grid-column:auto}.trainer-ai-actions{flex-direction:column}.trainer-ai-actions button{width:100%}}
+</style>
+<style id="trainer-v2-css">
+.trainer-modal-head-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.alp-prescription-status{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;background:#f4f1f2;color:#6b5961;margin:10px 0}.alp-prescription-status.pending{background:#fff4d8;color:#8b6418}.alp-prescription-status.published{background:#e8f7ee;color:#247447}.alp-prescription-status.rejected{background:#fdebec;color:#a62d3e}.alp-prescription-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.alp-prescription-actions button{flex:1;min-width:130px}.alp-student-no-workout{padding:30px 20px;text-align:center;color:var(--text-dim);background:var(--surface);border:1px solid var(--line);border-radius:14px;margin:20px}.alp-student-no-workout h2{color:var(--text);margin-bottom:8px}.alp-student-no-workout p{font-size:13px;line-height:1.5}.
+.trainer-close-x{border:0;background:#f3f3f3;border-radius:10px;width:36px;height:36px;font-size:22px;cursor:pointer}.trainer-prescription-modal{max-width:980px;width:min(96vw,980px);max-height:90vh;overflow:auto}.prescription-toolbar{display:flex;gap:10px;align-items:center;margin:16px 0}.prescription-toolbar select{flex:1;padding:11px;border:1px solid #ddd;border-radius:10px}.prescription-day-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-bottom:12px}.prescription-day-head label{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:12px}.prescription-day-head input{padding:11px;border:1px solid #ddd;border-radius:10px;font:inherit}.prescription-exercise-row{display:grid;grid-template-columns:1.7fr .8fr 1fr 1fr 1.5fr auto;gap:8px;padding:10px;border:1px solid #eee;border-radius:12px;margin-bottom:8px;background:#fff}.prescription-exercise-row input{min-width:0;padding:9px;border:1px solid #ddd;border-radius:8px;font:inherit}.prescription-exercise-row .row-mini{font-size:11px;color:#666}.trainer-danger{border:1px solid #efb5b5;background:#fff5f5;color:#b42318;padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer}.prescription-add-ex{margin-top:8px}.trainer-record-box .trainer-primary{margin-top:10px}@media(max-width:860px){.prescription-exercise-row{grid-template-columns:1fr 1fr}.prescription-day-head{grid-template-columns:1fr}.prescription-exercise-row .remove-ex{grid-column:1/-1}}
+</style>
+\n<script id="trainer-v3-cloud-js">
 (function(){
-  var role='athlete';
-  var ACCOUNTS={
-    athlete:{user:'isa',pass:'isa2026'},
-    trainer:{user:'ageu',pass:'1234'}
+  const CONFIG_KEY='alpSupabaseConfigV3';
+  const DEFAULT_CONFIG={
+    url:'https://cemrnntyibxclbhigsoo.supabase.co',
+    key:'sb_publishable_eqU3R9zwnYnZqvJQOhU5Eg_QI0uLSPf',
+    workspace:'ageu-lins-performance'
   };
+  const SQL=`create table if not exists public.alp_students (
+  workspace_id text not null,
+  id text not null,
+  data jsonb not null,
+  updated_at timestamptz not null default now(),
+  primary key (workspace_id,id)
+);
 
-  function show(id, yes, display){
-    var el=document.getElementById(id);
-    if(el) el.style.display=yes?(display||'flex'):'none';
+create table if not exists public.alp_prescriptions (
+  workspace_id text not null,
+  student_id text not null,
+  workout jsonb not null,
+  updated_at timestamptz not null default now(),
+  primary key (workspace_id,student_id)
+);
+
+-- LABORATÓRIO: permite acesso público para teste.
+-- Antes de colocar dados reais, substitua estas policies por regras
+-- com autenticação/RLS por treinador e aluno.
+alter table public.alp_students enable row level security;
+alter table public.alp_prescriptions enable row level security;
+drop policy if exists "alp_students_lab" on public.alp_students;
+drop policy if exists "alp_prescriptions_lab" on public.alp_prescriptions;
+create policy "alp_students_lab" on public.alp_students for all to anon using (true) with check (true);
+create policy "alp_prescriptions_lab" on public.alp_prescriptions for all to anon using (true) with check (true);`;
+  function read(){try{return JSON.parse(localStorage.getItem(CONFIG_KEY)||'null')}catch(e){return null}}
+  function write(cfg){try{localStorage.setItem(CONFIG_KEY,JSON.stringify(cfg));return true}catch(e){return false}}
+  let client=null;
+  function cfgFromUI(){return {url:(document.getElementById('supabase-url')?.value||'').trim().replace(/\/$/,''),key:(document.getElementById('supabase-key')?.value||'').trim(),workspace:(document.getElementById('supabase-workspace')?.value||'ageu-lins-performance').trim()||'ageu-lins-performance'}}
+  function setStatus(kind,text){const pill=document.getElementById('cloud-status-pill'),msg=document.getElementById('cloud-status-msg'); if(pill){pill.className='cloud-status-pill '+kind; pill.textContent=kind==='online'?'Online':kind==='warn'?'Atenção':'Desconectado'} if(msg)msg.textContent=text||''}
+  function ensureClient(){const c=read(); if(!c||!c.url||!c.key||!window.supabase)return null; if(window.__ALP_SB_CLIENT){client=window.__ALP_SB_CLIENT; return client;} if(!client||client.__cfg!==c){client=window.supabase.createClient(c.url,c.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}); client.__cfg=c; window.__ALP_SB_CLIENT=client;} return client;}
+  async function test(){const c=cfgFromUI(); if(!c.url||!c.key){setStatus('warn','Informe o Project URL e a Publishable Key.');return false;} if(!window.supabase){setStatus('warn','Biblioteca Supabase não carregou. Verifique a conexão com a internet.');return false;} try{const sb=ensureClient(); if(!sb)throw new Error('Não foi possível iniciar o cliente Supabase.'); const {error}=await sb.from('alp_students').select('id').eq('workspace_id',c.workspace).limit(1); if(error){setStatus('warn','Conexão chegou ao projeto, mas a tabela/policies ainda não estão configuradas: '+error.message); return false;} write(c); client=sb; client.__cfg=c; window.__ALP_SB_CLIENT=sb; setStatus('online','Supabase conectado e tabelas acessíveis.'); return true;}catch(e){setStatus('warn','Falha ao conectar: '+(e?.message||e));return false;}}
+  async function pushStudent(st){const sb=ensureClient(); const c=read(); if(!sb||!c)return; const {error}=await sb.from('alp_students').upsert({workspace_id:c.workspace,id:String(st.id),data:st,updated_at:new Date().toISOString()},{onConflict:'workspace_id,id'}); if(error)throw error;}
+  async function pullStudents(){const sb=ensureClient(),c=read(); if(!sb||!c)return null; const {data,error}=await sb.from('alp_students').select('id,data,updated_at').eq('workspace_id',c.workspace).order('updated_at',{ascending:false}); if(error)throw error; return (data||[]).map(r=>r.data).filter(Boolean);}
+  async function pushPrescription(studentId,workout,status='draft',source='trainer',aiOriginal=null){const sb=ensureClient(),c=read(); if(!sb||!c)return false; const row={workspace_id:c.workspace,student_id:String(studentId),workout,status,source,ai_original:aiOriginal||null,updated_at:new Date().toISOString()}; if(status==='published')row.published_at=new Date().toISOString(); const {error}=await sb.from('alp_prescriptions').upsert(row,{onConflict:'workspace_id,student_id'}); if(error)throw error; return true;}
+  async function pullPrescriptionRecord(studentId){const sb=ensureClient(),c=read(); if(!sb||!c)return null; const {data,error}=await sb.from('alp_prescriptions').select('workout,status,published_at,source,ai_original,updated_at').eq('workspace_id',c.workspace).eq('student_id',String(studentId)).maybeSingle(); if(error)throw error; return data||null;}
+  async function pullPrescription(studentId){const r=await pullPrescriptionRecord(studentId); return r?.status==='published' ? (r.workout||null) : null;}
+  async function pullAnamnesis(studentId){const sb=ensureClient(),c=read(); if(!sb||!c)return null; const {data,error}=await sb.from('student_anamnesis').select('*').eq('workspace_id',c.workspace).eq('student_id',String(studentId)).maybeSingle(); if(error)throw error; return data||null;}
+  async function pushAnamnesis(studentId,payload){const sb=ensureClient(),c=read(); if(!sb||!c)return false; const row={...payload,workspace_id:c.workspace,student_id:String(studentId),updated_at:new Date().toISOString()}; delete row.id; const {error}=await sb.from('student_anamnesis').upsert(row,{onConflict:'workspace_id,student_id'}); if(error)throw error; return true;}
+  window.SupabaseCloud={
+    init:function(){
+      let c=read();
+      if(!c||!c.url||!c.key){
+        c=DEFAULT_CONFIG;
+        write(c);
+      }
+      const u=document.getElementById('supabase-url'),k=document.getElementById('supabase-key'),w=document.getElementById('supabase-workspace');
+      if(u)u.value=c.url||'';
+      if(k)k.value=c.key||'';
+      if(w)w.value=c.workspace||DEFAULT_CONFIG.workspace;
+      if(window.supabase && c.url && c.key){
+        try{
+          client=window.supabase.createClient(c.url,c.key,{auth:{persistSession:false,autoRefreshToken:false}});
+          client.__cfg=c;
+          setStatus('online','Supabase conectado automaticamente.');
+        }catch(e){setStatus('warn','Falha ao iniciar conexão automática.');}
+      }
+    },
+    getConfig:function(){return read()},
+    testConnection:test,
+    saveConfig:async function(){const c=cfgFromUI(); if(!c.url||!c.key){setStatus('warn','Preencha Project URL e Publishable Key.');return;} write(c); const ok=await test(); if(ok){setStatus('online','Configuração salva e conexão validada.')}} ,
+    showSQL:function(){const box=document.getElementById('cloud-sql-box'); if(box){box.textContent=SQL;box.style.display=box.style.display==='none'?'block':'none'}},
+    pushStudent, pullStudents, pushPrescription, pullPrescription, pullPrescriptionRecord, pullAnamnesis, pushAnamnesis,
+    markOnline:function(msg){setStatus('online',msg||'Sincronização online ativa.')}
+  };
+})();
+</script>\n<script id="trainer-v1-js">
+(function(){
+  const KEY='alpTrainerStudentsV1';
+  const defaults=[{id:'teste_sync',name:'Aluno Teste Sync',nick:'Teste',login:'teste',whatsapp:'',goal:'Validação de sincronização',level:'Intermediário',emoji:'🧪',status:'active',adherence:100,last:'Teste',attention:''},{id:'isa',name:'Isa Xampson 2.0',nick:'Isa',login:'isa',whatsapp:'',goal:'Hipertrofia',level:'Intermediário',emoji:'💗',status:'active',adherence:92,last:'Hoje',attention:'Dor/recuperação: acompanhar após sessão'},{id:'maria',name:'Maria Silva',nick:'Maria',login:'maria',whatsapp:'',goal:'Emagrecimento',level:'Intermediário',emoji:'🏃‍♀️',status:'attention',adherence:74,last:'Ontem',attention:'3 dias com baixa adesão registrada'}];
+  function load(){try{const raw=localStorage.getItem(KEY);if(raw)return JSON.parse(raw)}catch(e){} return defaults.slice();}
+  async function hydrateRemote(){try{const remote=await SupabaseCloud.pullStudents(); if(Array.isArray(remote)&&remote.length){students=remote; save(students); render(); SupabaseCloud.markOnline('Alunos sincronizados da nuvem.')}}catch(e){console.warn('Supabase alunos:',e)}}
+  async function pushSelectedStudent(){try{if(selected) await SupabaseCloud.pushStudent(selected)}catch(e){console.warn('Supabase aluno:',e)}}
+  function save(list){try{localStorage.setItem(KEY,JSON.stringify(list))}catch(e){} }
+  let students=load(); let selected=null;
+  const titles={dashboard:['Olá, Ageu 👋','Acompanhe seus alunos e veja o que precisa da sua atenção.'],alunos:['Gestão de alunos','Cadastre, pesquise e abra o prontuário de cada aluno.'],treinos:['Prescrição de treinos','Edite e publique a rotina de cada aluno.'],monitoramento:['Monitoramento','Consolide os dados de bem-estar, carga e resposta ao treino.'],videos:['Vídeos','Organize os vídeos enviados pelos alunos por exercício e data.'],evolucao:['Evolução','Acompanhe fotos e indicadores de progresso.'],config:['Configurações','Ajuste as preferências da Central do Treinador.']};
+  function fmtStatus(s){return s==='attention'?['🟡','Atenção','status-attention']:s==='inactive'?['⚪','Inativo','status-inactive']:['🟢','Ativo','status-active']}
+  function initials(n){return (n||'A').split(' ').slice(0,2).map(x=>x[0]).join('').toUpperCase()}
+  function render(){
+    const active=students.filter(s=>s.status!=='inactive').length, attention=students.filter(s=>s.status==='attention').length, adh=students.filter(s=>s.status!=='inactive');
+    document.getElementById('stat-active').textContent=active; document.getElementById('stat-attention').textContent=attention; document.getElementById('stat-workouts').textContent=students.length*4; document.getElementById('stat-adherence').textContent=(adh.length?Math.round(adh.reduce((a,s)=>a+s.adherence,0)/adh.length):0)+'%';
+    const rows=document.getElementById('trainer-dashboard-students'); rows.innerHTML=students.map(s=>rowHtml(s)).join('');
+    const alerts=document.getElementById('trainer-alerts'); const att=students.filter(s=>s.status==='attention'||s.attention).slice(0,4); alerts.innerHTML=att.length?att.map(s=>`<div class="trainer-alert"><div class="alert-tag">${s.status==='attention'?'ATENÇÃO':'ACOMPANHAMENTO'}</div><strong>${s.name}</strong><p>${s.attention||'Sem alerta no momento.'}</p></div>`).join(''):'<div class="trainer-alert"><strong>Carteira em dia</strong><p>Nenhum alerta pendente no momento.</p></div>';
+    renderStudents();
   }
-
-  window.ALPBASE={
-    choose:function(r){
-      role=r;
-      var title=document.getElementById('alpBaseTitle');
-      var sub=document.getElementById('alpBaseSub');
-      var err=document.getElementById('alpBaseError');
-      if(title) title.textContent=r==='athlete'?'Área do aluno':'Área do treinador';
-      if(sub) sub.textContent=r==='athlete'?'Entre para acessar sua introdução personalizada.':'Entre para acessar a área administrativa.';
-      if(err) err.textContent='';
-      document.getElementById('alpBaseUser').value='';
-      document.getElementById('alpBasePass').value='';
-      show('alpBaseRole',false);
-      show('alpBaseLogin',true,'flex');
-      show('alpBaseTrainer',false);
-    },
-
-    login:function(){
-      var u=(document.getElementById('alpBaseUser').value||'').trim().toLowerCase();
-      var p=document.getElementById('alpBasePass').value||'';
-      var err=document.getElementById('alpBaseError');
-      var acc=ACCOUNTS[role];
-
-      if(u!==acc.user || p!==acc.pass){
-        err.textContent='Login ou senha incorretos.';
-        return;
-      }
-
-      show('alpBaseLogin',false);
-
-      if(role==='athlete'){
-        // Critical: force the ORIGINAL Isa introduction after login.
-        try{localStorage.removeItem('isaIntroVista');}catch(e){}
-        if(typeof goToScreen==='function') goToScreen('intro');
-      }else{
-        show('alpBaseTrainer',true,'block');
-      }
-    },
-
-    back:function(){
-      show('alpBaseLogin',false);
-      show('alpBaseTrainer',false);
-      show('alpBaseRole',true,'flex');
-    },
-
-    logout:function(){
-      show('alpBaseTrainer',false);
-      show('alpBaseLogin',false);
-      show('alpBaseRole',true,'flex');
-      role='athlete';
-    }
-  };
-
-  // Always begin at role selection. This layer does not touch the original app.
-  document.addEventListener('DOMContentLoaded',function(){
-    show('alpBaseRole',true,'flex');
-    show('alpBaseLogin',false);
-    show('alpBaseTrainer',false);
-
-    // If the old app already routed itself to hub, restore the original intro
-    // only after the athlete successfully logs in, not automatically here.
-  });
+  function rowHtml(s){const st=fmtStatus(s.status);return `<tr><td><div class="trainer-student-cell"><div class="trainer-student-avatar">${s.emoji||'🏋️'}</div><div><div class="trainer-student-name">${escapeHtml(s.name)} ${s.onboarding_status==='pending_review'?'<span class="onboarding-badge">NOVO CADASTRO</span>':''}</div><div class="trainer-student-sub">@${escapeHtml(s.login)}</div></div></div></td><td>${escapeHtml(s.goal)}</td><td>${escapeHtml(s.last||'—')}</td><td><strong>${s.adherence}%</strong></td><td><span class="status-pill ${st[2]}">${st[0]} ${st[1]}</span></td><td><button class="trainer-link-btn" onclick="TrainerUI.openRecord('${s.id}')">Prontuário</button></td></tr>`}
+  function renderStudents(){const q=(document.getElementById('trainer-search-input')?.value||'').trim().toLowerCase();const f=document.getElementById('trainer-status-filter')?.value||'all';let arr=students.filter(s=>(!q||[s.name,s.nick,s.login,s.goal].join(' ').toLowerCase().includes(q))&&(f==='all'||s.status===f));const el=document.getElementById('trainer-student-grid'); if(!el)return; el.innerHTML=arr.map(s=>{const st=fmtStatus(s.status);return `<article class="trainer-student-card"><div class="trainer-student-card-head"><div class="trainer-student-cell"><div class="trainer-student-avatar">${s.emoji||'🏋️'}</div><div><div class="trainer-student-name">${escapeHtml(s.name)}</div><div class="trainer-student-sub">${escapeHtml(s.goal)} · ${escapeHtml(s.level)}</div></div></div><span class="status-pill ${st[2]}">${st[0]} ${st[1]}</span></div><div class="trainer-student-meta"><div class="trainer-meta-box"><small>ÚLTIMO TREINO</small><strong>${escapeHtml(s.last||'—')}</strong></div><div class="trainer-meta-box"><small>ADESÃO</small><strong>${s.adherence}%</strong></div></div>${s.attention?`<div class="trainer-meta-box" style="margin-bottom:10px"><small>OBSERVAÇÃO</small><strong style="font-size:10px;font-weight:700">${escapeHtml(s.attention)}</strong></div>`:''}${s.ai_status==='generated'?'<div class="ai-ready-badge">✨ IA analisou a anamnese e gerou uma proposta para revisão</div>':''}<div class="trainer-card-actions"><button class="primary-light" onclick="TrainerUI.openRecord('${s.id}')">Abrir prontuário</button><button onclick="TrainerUI.editStudent('${s.id}')">Editar</button></div></article>`}).join('')||'<div style="grid-column:1/-1;color:#777;padding:30px;text-align:center">Nenhum aluno encontrado.</div>'}
+  function escapeHtml(v){return String(v||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+  function section(name){document.querySelectorAll('.trainer-section').forEach(x=>x.style.display='none');document.getElementById('trainer-placeholder-section').style.display='none';document.getElementById('trainer-config-section').style.display='none';if(name==='dashboard')document.getElementById('trainer-dashboard-section').style.display='block';else if(name==='alunos')document.getElementById('trainer-alunos-section').style.display='block';else if(name==='config')document.getElementById('trainer-config-section').style.display='block';else {document.getElementById('trainer-placeholder-section').style.display='block';document.getElementById('trainer-placeholder-title').textContent=titles[name]?.[0]||'Módulo';document.getElementById('trainer-placeholder-text').textContent=titles[name]?.[1]||'';}document.getElementById('trainer-section-title').textContent=titles[name]?.[0]||'Central do Treinador';document.getElementById('trainer-section-subtitle').textContent=titles[name]?.[1]||'';document.querySelectorAll('.trainer-nav-item').forEach(b=>b.classList.toggle('active',b.dataset.section===name));if(name==='dashboard'||name==='alunos')render();}
+  function capturePrescription(){
+    const idx=Number(document.getElementById('prescription-day-select').value)||0;
+    if(!this._draft||!this._draft[idx]) return;
+    this._draft[idx].nome=document.getElementById('prescription-day-name').value.trim()||('Dia '+(idx+1));
+    document.querySelectorAll('#prescription-exercises .prescription-exercise-row').forEach((row,i)=>{
+      const inputs=row.querySelectorAll('input'); const ex=this._draft[idx].exercicios[i]; if(!ex)return;
+      ex.nome=inputs[0].value.trim(); ex.sets=inputs[1].value.trim(); ex.carga=inputs[2].value.trim(); ex.tecnica=inputs[3].value.trim(); ex.video=inputs[4].value.trim();
+    });
+  }
+  
+function normalizeTrainerAIDraft(p){return (p?.days||[]).map((d,i)=>({dia:d.day_number||i+1,nome:d.name||('Dia '+(i+1)),objetivo:d.objective||'',exercicios:(d.exercises||[]).map(x=>({nome:x.name||'',sets:x.sets||'',carga:x.load||'',tecnica:(x.technique||'')+(x.reps?' | Reps: '+x.reps:'')+(x.rest?' | Descanso: '+x.rest:''),video:x.video||''}))}));}
+function renderPrescription(idx){
+    const d=this._draft||[]; const sel=document.getElementById('prescription-day-select'); sel.innerHTML=d.map((x,i)=>`<option value="${i}">Dia ${x.dia} — ${escapeHtml(x.nome)}</option>`).join(''); sel.value=String(Math.max(0,Math.min(idx,d.length-1)));
+    const cur=d[Number(sel.value)||0]; if(!cur)return; document.getElementById('prescription-day-name').value=cur.nome||'';
+    document.getElementById('prescription-exercises').innerHTML=(cur.exercicios||[]).map((ex,i)=>`<div class="prescription-exercise-row" data-index="${i}"><input aria-label="Exercício" value="${escapeHtml(ex.nome)}"><input aria-label="Séries" value="${escapeHtml(ex.sets)}"><input aria-label="Carga" value="${escapeHtml(ex.carga||'')}"><input aria-label="Técnica" value="${escapeHtml(ex.tecnica||'')}"><input aria-label="Vídeo" value="${escapeHtml(ex.video||'')}"><button type="button" class="trainer-danger remove-ex" onclick="TrainerUI.removeExercise(${i})">Excluir</button></div>`).join('')||'<div style="padding:18px;border:1px dashed #ddd;border-radius:12px;color:#777">Nenhum exercício neste dia.</div>';
+  }
+  window.TrainerUI={openStudentModal(){document.getElementById('trainer-student-modal').style.display='flex'},closeStudentModal(){document.getElementById('trainer-student-modal').style.display='none'},async createStudent(){const name=document.getElementById('new-student-name').value.trim();const login=document.getElementById('new-student-login').value.trim().toLowerCase();const password=document.getElementById('new-student-pass').value;if(!name||!login||!password){alert('Nome, usuário e senha são obrigatórios.');return}if(password.length<6){alert('A senha precisa ter pelo menos 6 caracteres.');return}try{const sb=window.__ALP_SB_CLIENT;if(!sb)throw new Error('Sessão Supabase não está disponível.');const {data,error}=await sb.functions.invoke('create-student-account',{body:{name,login,password,nickname:document.getElementById('new-student-nick').value.trim(),whatsapp:document.getElementById('new-student-whatsapp').value.trim(),goal:document.getElementById('new-student-goal').value,level:document.getElementById('new-student-level').value,emoji:document.getElementById('new-student-emoji').value.trim()||'🏋️'}});if(error)throw error;if(!data?.ok)throw new Error(data?.error||'Não foi possível criar o aluno.');const s={id:login,name,nick:document.getElementById('new-student-nick').value.trim()||name.split(' ')[0],login,whatsapp:document.getElementById('new-student-whatsapp').value.trim(),goal:document.getElementById('new-student-goal').value,level:document.getElementById('new-student-level').value,emoji:document.getElementById('new-student-emoji').value.trim()||'🏋️',status:'active',adherence:0,last:'Ainda não registrado',attention:''};students=[...students.filter(x=>x.login!==login),s];save(students);this.closeStudentModal();document.querySelectorAll('.trainer-form-grid input').forEach(i=>{if(i.id!=='new-student-emoji'&&i.id!=='new-student-pass')i.value=''});section('alunos');render();alert('Aluno criado com sucesso. Usuário: '+login); }catch(e){console.error('create student',e);alert('Não foi possível criar o aluno: '+(e?.message||e))}},openRecord(id){selected=students.find(s=>s.id===id);if(!selected)return;document.getElementById('record-avatar').textContent=selected.emoji||'🏋️';document.getElementById('record-name').textContent=selected.name;document.getElementById('record-meta').textContent=`${selected.goal} · ${selected.level} · @${selected.login}`;document.getElementById('record-summary').textContent=`WhatsApp: ${selected.whatsapp||'não cadastrado'}. Adesão atual: ${selected.adherence}%. Último treino: ${selected.last||'—'}.`;const aiBox=document.getElementById('record-ai-status');if(aiBox)aiBox.innerHTML=selected.ai_status==='generated'?'✨ <b>Proposta da IA pronta.</b> A anamnese foi analisada e a proposta aguarda sua validação.':selected.onboarding_status==='pending_review'?'📋 <b>Novo cadastro recebido.</b> Anamnese disponível para análise.':'🤖 Nenhuma proposta automática disponível ainda.';document.getElementById('record-anamnesis-status').textContent='Carregando anamnese…';document.getElementById('trainer-prontuario').style.display='block'; SupabaseCloud.pullAnamnesis(selected.id).then(a=>{document.getElementById('record-anamnesis-status').textContent=a&&a.completed?'✅ Anamnese respondida e disponível para a IA.':'⚠️ Anamnese ainda não respondida.'}).catch(()=>{document.getElementById('record-anamnesis-status').textContent='⚠️ Não foi possível consultar a anamnese agora.'})},closeRecord(){document.getElementById('trainer-prontuario').style.display='none'},viewAnamnesis:async function(){if(!selected)return;const modal=document.getElementById('trainer-anamnesis-modal');const content=document.getElementById('anamnesis-content');content.innerHTML='<div class="anamnesis-item anamnesis-full"><span>Carregando…</span></div>';modal.style.display='flex';try{const a=await SupabaseCloud.pullAnamnesis(selected.id);if(!a){content.innerHTML='<div class="anamnesis-item anamnesis-full"><b>Status</b><span>Este aluno ainda não enviou a anamnese padrão.</span></div>';return}const items=[['Nome completo',a.a1_full_name],['Idade',a.a2_age],['Peso',a.a3_weight_kg?a.a3_weight_kg+' kg':''],['Altura',a.a4_height_cm?a.a4_height_cm+' cm':''],['Cirurgias',a.a5_surgeries],['Dores/lesões atuais',a.a6_current_pain_or_injury],['Medicamentos contínuos',a.a7_continuous_medication],['Condições de saúde',a.a8_diagnosed_health_conditions],['Tempo de treino',a.a9_training_experience],['Objetivo principal',a.a10_main_goal],['Cor favorita',a.q1_favorite_color],['Como chamar',a.q2_preferred_name],['Motivação',a.q3_training_motivation],['Frase/mantra',a.q4_mantra],['Música',a.q5_music],['Estilo de treino',a.q6_training_style],['Dia que mais ama',a.q7_loved_training_day],['Dia que mais odeia',a.q7_hated_training_day],['Sensação final',a.m1_end_of_workout_feeling],['Ritmo',a.m2_pace_preference],['Descanso',a.m3_rest_preference],['Bi-set/superset',a.m4_superset_preference],['Falha',a.m5_failure_preference],['Variedade x repetição',a.m6_variety_preference],['Equipamentos',a.m7_equipment_preferences],['Condução',a.m8_guidance_preference]];content.innerHTML=items.map(([k,v])=>`<div class="anamnesis-item ${['Cirurgias','Dores/lesões atuais','Medicamentos contínuos','Condições de saúde','Equipamentos','Frase/mantra'].includes(k)?'anamnesis-full':''}"><b>${escapeHtml(k)}</b><span>${escapeHtml(v||'—')}</span></div>`).join('')}catch(e){content.innerHTML='<div class="anamnesis-item anamnesis-full"><b>Erro</b><span>Não foi possível carregar a anamnese.</span></div>'}},copyAnamnesisLink(){if(!selected)return;const base=(location.protocol==='file:' ? 'questionario.html' : new URL('questionario.html',window.location.href).toString());const url=new URL(base,location.href);url.searchParams.set('aluno',selected.login||selected.id);url.searchParams.set('nome',selected.name||'');navigator.clipboard?.writeText(url.toString()).then(()=>alert('Link da anamnese copiado para '+(selected.name||'aluno')+'.')).catch(()=>prompt('Copie o link da anamnese:',url.toString()))},closeAnamnesis(){document.getElementById('trainer-anamnesis-modal').style.display='none'},editStudent(id){const s=students.find(x=>x.id===id);if(!s)return;const name=prompt('Nome do aluno:',s.name);if(name===null)return;s.name=name.trim()||s.name;const goal=prompt('Objetivo:',s.goal);if(goal!==null)s.goal=goal.trim()||s.goal;save(students);SupabaseCloud.pushStudent(s).catch(e=>console.warn('Supabase aluno:',e));render()},
+openPrescription:async function(){ if(!selected)return; this._prescriptionId=selected.id; this._draftStatus='draft'; this._draftSource='trainer'; const all=getWorkoutOverrides(); this._draft=JSON.parse(JSON.stringify(all[selected.id]||[])); const modal=document.getElementById('trainer-prescription-modal'); modal.style.display='flex'; modal.scrollTop=0; document.getElementById('prescription-title').textContent='Prescrição — '+selected.name; try{const rec=await SupabaseCloud.pullPrescriptionRecord(selected.id); if(rec){this._draft=JSON.parse(JSON.stringify(rec.workout||[]));this._draftStatus=rec.status||'draft';this._draftSource=rec.source||'trainer';} else if(selected.ai_draft?.days){this._draft=normalizeTrainerAIDraft(selected.ai_draft);this._draftStatus='pending_review';this._draftSource='ai';} if(!this._draft.length)this._draft=JSON.parse(JSON.stringify(TREINO)); const localAll=getWorkoutOverrides(); localAll[selected.id]=this._draft; localStorage.setItem(ATHLETE_WORKOUTS_KEY,JSON.stringify(localAll)); renderPrescription.call(this,0); this.updatePrescriptionStatus();}catch(e){console.warn('Supabase prescrição:',e);if(!this._draft.length)this._draft=JSON.parse(JSON.stringify(TREINO));renderPrescription.call(this,0);this.updatePrescriptionStatus()}} ,
+closePrescription(){document.getElementById('trainer-prescription-modal').style.display='none'; this._draft=null; this._prescriptionId=null; this._draftStatus=null; this._draftSource=null; this._aiOriginal=null;},
+addDay(){const d=this._draft||[]; const next=d.length?Math.max(...d.map(x=>Number(x.dia)||0))+1:1; d.push({dia:next,nome:'Novo dia',exercicios:[]}); this._draft=d; renderPrescription.call(this,d.length-1);},
+removeDay(){ if(!this._draft||this._draft.length<=1){alert('Mantenha pelo menos um dia de treino.');return;} const idx=Number(document.getElementById('prescription-day-select').value)||0; this._draft.splice(idx,1); this._draft.forEach((d,i)=>d.dia=i+1); renderPrescription.call(this,Math.max(0,idx-1)); },
+addExercise(){ if(!this._draft)return; capturePrescription.call(this); const idx=Number(document.getElementById('prescription-day-select').value)||0; this._draft[idx].exercicios.push({nome:'Novo exercício',sets:'3 x 10',carga:'',tecnica:'',video:''}); renderPrescription.call(this,idx); },
+removeExercise(i){ if(!this._draft)return; capturePrescription.call(this); const idx=Number(document.getElementById('prescription-day-select').value)||0; this._draft[idx].exercicios.splice(i,1); renderPrescription.call(this,idx); },__renderPrescription(idx){renderPrescription.call(this,idx)},
+savePrescription:async function(){ if(!this._draft||!this._prescriptionId)return; capturePrescription.call(this); const all=getWorkoutOverrides(); all[this._prescriptionId]=this._draft; localStorage.setItem(ATHLETE_WORKOUTS_KEY,JSON.stringify(all)); const msg=document.getElementById('prescription-msg'); msg.textContent='Salvando…'; try{const ok=await SupabaseCloud.pushPrescription(this._prescriptionId,this._draft,this._draftStatus||'draft',this._draftSource||'trainer',this._aiOriginal||null); msg.textContent=ok?'Prescrição salva. O status atual foi preservado.':'Não foi possível sincronizar.';this.updatePrescriptionStatus();}catch(e){console.warn('Supabase prescrição:',e);msg.textContent='Salva localmente; sincronização online indisponível.';} setTimeout(()=>{msg.textContent=''},3000); },submitReview:async function(){if(!this._draft||!this._prescriptionId)return;capturePrescription.call(this);this._draftStatus='pending_review';this._draftSource=this._draftSource||'trainer';await this.savePrescription();const m=document.getElementById('prescription-msg');if(m)m.textContent='📋 Enviada para validação.';},publishPrescription:async function(){if(!this._draft||!this._prescriptionId)return;capturePrescription.call(this);if(!confirm('Aprovar e publicar esta prescrição para o aluno?'))return;this._draftStatus='published';this._draftSource=this._draftSource||'trainer';await this.savePrescription();const m=document.getElementById('prescription-msg');if(m)m.textContent='✅ Prescrição publicada. O aluno já pode receber este treino.';},rejectPrescription:async function(){if(!this._draft||!this._prescriptionId)return;capturePrescription.call(this);if(!confirm('Rejeitar esta proposta? O aluno não verá esta prescrição.'))return;this._draftStatus='rejected';await this.savePrescription();const m=document.getElementById('prescription-msg');if(m)m.textContent='❌ Prescrição rejeitada.';},updatePrescriptionStatus:function(){const el=document.getElementById('prescription-status-pill');if(!el)return;const map={draft:['Rascunho',''],pending_review:['Aguardando validação','pending'],published:['Publicado','published'],rejected:['Rejeitado','rejected']};const v=map[this._draftStatus]||map.draft;el.textContent='Status: '+v[0];el.className='alp-prescription-status '+v[1];},
+saveConfig(){const n=document.getElementById('trainer-config-name').value.trim();try{localStorage.setItem('alpTrainerName',n)}catch(e){}document.getElementById('trainer-config-msg').textContent='Preferências salvas.'}};
+  document.addEventListener('DOMContentLoaded',async()=>{document.getElementById('trainer-today').textContent=new Intl.DateTimeFormat('pt-BR',{dateStyle:'full'}).format(new Date()); document.querySelectorAll('.trainer-nav-item[data-section]').forEach(b=>b.addEventListener('click',()=>section(b.dataset.section))); document.getElementById('trainer-search-input')?.addEventListener('input',renderStudents);document.getElementById('trainer-status-filter')?.addEventListener('change',renderStudents);document.getElementById('prescription-day-select')?.addEventListener('change',function(){capturePrescription.call(TrainerUI);renderPrescription.call(TrainerUI,Number(this.value)||0)}); SupabaseCloud.init(); render(); section('dashboard'); await hydrateRemote(); SupabaseCloud.markOnline('Base online sincronizada.'); });
 })();
 </script>
 
+<script id="trainer-ai-js">
+(function(){
+  function open(){
+    const m=document.getElementById('trainer-ai-modal'); if(m)m.style.display='flex';
+    const s=document.getElementById('ai-result'); if(s)s.style.display='none';
+    const banner=document.getElementById('ai-anamnesis-banner'); if(banner)banner.textContent='📋 A anamnese padrão deste aluno será enviada como contexto principal para a IA.';
+    setStatus('☁️ IA online: pronta para gerar uma proposta real.', 'ok');
+  }
+  function close(){const m=document.getElementById('trainer-ai-modal'); if(m)m.style.display='none'}
+  function setStatus(text,kind){
+    const el=document.getElementById('ai-live-status');
+    if(!el)return;
+    el.textContent=text;
+    el.className='ai-live-status'+(kind==='loading'?' loading':kind==='error'?' error':'');
+  }
+  function config(){
+    try{return JSON.parse(localStorage.getItem('alpSupabaseConfigV3')||'null')}catch(e){return null}
+  }
+  function currentStudentName(){
+    return (document.getElementById('prescription-title')?.textContent||'Aluno').trim();
+  }
+  function normalizeProposal(p){
+    if(!p || !Array.isArray(p.days)) throw new Error('A IA devolveu uma proposta incompleta.');
+    return {
+      summary:String(p.summary||''),
+      cautions:Array.isArray(p.cautions)?p.cautions.map(String):[],
+      days:p.days.map((d,i)=>({
+        dia:Number(d.day_number)||i+1,
+        nome:String(d.name||`Dia ${i+1}`),
+        objetivo:String(d.objective||''),
+        exercicios:Array.isArray(d.exercises)?d.exercises.map(x=>({
+          nome:String(x.name||''),
+          sets:String(x.sets||''),
+          reps:String(x.reps||''),
+          carga:String(x.load||''),
+          tecnica:String(x.technique||''),
+          rest:String(x.rest||''),
+          video:''
+        })):[]
+      }))
+    };
+  }
+  function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+  async function generate(){
+    const cfg=config();
+    if(!cfg?.url||!cfg?.key){
+      setStatus('Configure a conexão Supabase antes de usar a IA.', 'error');
+      return;
+    }
+    const goal=document.getElementById('ai-goal').value;
+    const level=document.getElementById('ai-level').value;
+    const days=Number(document.getElementById('ai-days').value)||5;
+    const duration=document.getElementById('ai-duration').value;
+    const equipment=document.getElementById('ai-equipment').value.trim()||'Academia completa';
+    const limitations=document.getElementById('ai-limitations').value.trim()||'Nenhum informado';
+    const focus=document.getElementById('ai-focus').value.trim()||'Não informado';
+    const notes=document.getElementById('ai-notes').value.trim()||'Sem orientações adicionais';
+    let anamnesis=null;
+    try{ anamnesis=await SupabaseCloud.pullAnamnesis(window.TrainerUI?window.TrainerUI._prescriptionId:null); }catch(e){ console.warn('Anamnese para IA:',e); }
+    if(!anamnesis){ setStatus('⚠️ Este aluno ainda não possui anamnese padrão salva. A proposta poderá ser gerada apenas com o contexto manual.', 'error'); }
+    setStatus('🧠 Lendo a anamnese e gerando proposta com a IA… aguarde.', 'loading');
+    const btn=document.querySelector('#trainer-ai-modal .trainer-ai-actions .trainer-primary');
+    if(btn){btn.disabled=true;btn.textContent='Gerando…';}
+    try{
+      const url=cfg.url.replace(/\/$/,'')+'/functions/v1/ai-prescription-v2';
+      const currentWorkout=window.TrainerUI?window.TrainerUI._draft:null;
+      const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','apikey':cfg.key,'Authorization':'Bearer '+cfg.key},body:JSON.stringify({
+        studentName:currentStudentName(),goal,level,days,duration,equipment,limitations,focus,notes,currentWorkout,anamnesis
+      })});
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok) throw new Error(data?.error||'Não foi possível gerar a proposta.');
+      const proposal=normalizeProposal(data.proposal);
+      window.__aiProposal=proposal;
+      const result=document.getElementById('ai-result');
+      result.innerHTML='<div class="ai-result-head"><div><h4>Proposta gerada pela IA</h4><p>'+escapeHtml(proposal.summary||'Revise os blocos antes de aplicar.')+'</p></div><span class="status-pill status-active">GERADA</span></div>'+
+        proposal.days.map(d=>'<div class="ai-day"><strong>Dia '+d.dia+' — '+escapeHtml(d.nome)+'</strong><div style="font-size:11px;color:#8a6874;margin-top:3px">'+escapeHtml(d.objetivo)+'</div><div class="ai-ex-list">'+
+        d.exercicios.map(x=>'<div class="ai-ex"><span>'+escapeHtml(x.nome)+'</span><span>'+escapeHtml(x.sets)+' · '+escapeHtml(x.reps)+' · '+escapeHtml(x.rest)+(x.load?' · '+escapeHtml(x.load):'')+'</span></div>').join('')+
+        '</div></div>').join('')+
+        (proposal.cautions.length?'<div class="ai-warning"><strong>Cuidados para revisão:</strong><br>'+proposal.cautions.map(escapeHtml).join('<br>')+'</div>':'')+
+        '<div class="trainer-modal-actions" style="margin-top:12px"><button class="trainer-secondary" type="button" onclick="TrainerAI.applyToDraft()">Aplicar proposta ao rascunho</button><button class="trainer-secondary" type="button" onclick="TrainerAI.close()">Fechar</button></div>';
+      result.style.display='block';
+      setStatus('✅ Proposta gerada. Revise tudo antes de salvar/publicar.', 'ok');
+    }catch(err){
+      console.error('TrainerAI:',err);
+      const msg=String(err?.message||err);
+      if(/OPENAI_KEY_MISSING|OPENAI_API_KEY|não configurada/i.test(msg)) setStatus('⚠️ A função de IA está instalada, mas a chave OPENAI_API_KEY ainda não foi configurada no Supabase.', 'error');
+      else setStatus('❌ '+msg, 'error');
+    }finally{
+      if(btn){btn.disabled=false;btn.textContent='✨ Gerar proposta';}
+    }
+  }
+  function applyToDraft(){
+    const ui=window.TrainerUI; const proposal=window.__aiProposal;
+    if(!ui||!proposal||!ui._draft){alert('Abra primeiro uma prescrição de aluno.');return}
+    ui._draftStatus='pending_review';ui._draftSource='ai';ui._aiOriginal=proposal;ui._draft=proposal.days.map((d,i)=>({dia:d.dia||i+1,nome:d.nome||('Dia '+(i+1)),objetivo:d.objetivo||'',exercicios:(d.exercicios||[]).map(x=>({nome:x.nome,sets:x.sets,carga:x.carga||'',tecnica:(x.tecnica||'')+(x.reps?` | Reps: ${x.reps}`:'')+(x.rest?` | Descanso: ${x.rest}`:''),video:x.video||''}))}));
+    if(typeof ui.__renderPrescription==='function') ui.__renderPrescription(0);
+    close();
+    const msg=document.getElementById('prescription-msg'); if(msg){msg.textContent='Proposta real da IA aplicada ao rascunho. Revise antes de salvar.';msg.className='trainer-inline-msg'}
+  }
+  window.TrainerAI={open,close,generate,applyToDraft};
+})();
+</script>
+<script id="alp-base-js">
+(function(){
+  const SB_URL='https://cemrnntyibxclbhigsoo.supabase.co';
+  const SB_KEY='sb_publishable_eqU3R9zwnYnZqvJQOhU5Eg_QI0uLSPf';
+  const WORKSPACE='ageu-lins-performance';
+  let sb=null;
+  function showLogin(){const el=document.getElementById('alpBaseLogin');if(el)el.style.display='flex';}
+  function hideLogin(){const el=document.getElementById('alpBaseLogin');if(el)el.style.display='none';}
+  function setBusy(b){const btn=document.getElementById('alpBaseEnter'),load=document.getElementById('alpBaseLoading');if(btn){btn.disabled=b;btn.textContent=b?'Entrando…':'Entrar';}if(load)load.style.display=b?'block':'none';}
+  function error(msg){const e=document.getElementById('alpBaseError');if(e)e.textContent=msg||'';}
+  function client(){if(window.__ALP_SB_CLIENT){sb=window.__ALP_SB_CLIENT;return sb;}if(sb)return sb;if(!window.supabase)throw new Error('A biblioteca do Supabase não carregou.');sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});window.__ALP_SB_CLIENT=sb;return sb;}
+  async function enterArea(profile){
+    hideLogin();
+    if(profile.role==='trainer'){
+      document.body.classList.add('alp-auth-trainer');
+      return;
+    }
+    const login=(profile.login||'').toLowerCase();
+    try{localStorage.setItem('alp_auth_login',login);localStorage.setItem('alp_auth_role','student');}catch(e){}
+    try{
+      const remote=window.SupabaseCloud?.pullPrescription ? await window.SupabaseCloud.pullPrescription(login) : null;
+      const all=getWorkoutOverrides()||{};
+      if(Array.isArray(remote)&&remote.length){all[login]=remote;localStorage.setItem(ATHLETE_WORKOUTS_KEY,JSON.stringify(all));}
+      else {delete all[login];localStorage.setItem(ATHLETE_WORKOUTS_KEY,JSON.stringify(all));}
+      if(typeof renderTreinoScreen==='function')renderTreinoScreen(remote||[]);
+    }catch(e){console.warn('Falha ao sincronizar prescrição',e);if(typeof renderTreinoScreen==='function')renderTreinoScreen([])}
+    try{localStorage.removeItem('isaIntroVista');}catch(e){}
+    if(typeof goToScreen==='function')goToScreen('intro');
+  }
+  window.ALPBASE={
+    async login(){
+      const u=(document.getElementById('alpBaseUser')?.value||'').trim();
+      const p=(document.getElementById('alpBasePass')?.value||'');
+      error('');if(!u||!p){error('Informe usuário e senha.');return;}setBusy(true);
+      try{
+        const c=client();
+        const {data:authEmail,error:resolveError}=await c.rpc('resolve_login_email',{p_login:u});
+        if(resolveError)throw resolveError;
+        if(!authEmail)throw new Error('Usuário não encontrado.');
+        const {data,error:signError}=await c.auth.signInWithPassword({email:authEmail,password:p});
+        if(signError)throw signError;
+        const uid=data?.user?.id;if(!uid)throw new Error('Sessão não criada.');
+        const {data:profile,error:profileError}=await c.from('profiles').select('*').eq('id',uid).maybeSingle();
+        if(profileError)throw profileError;
+        if(!profile||profile.status!=='active')throw new Error('Perfil sem acesso ativo.');
+        if(profile.workspace_id&&profile.workspace_id!==WORKSPACE)throw new Error('Perfil não pertence a este workspace.');
+        await enterArea(profile);
+      }catch(e){
+        console.error('ALP login',e);
+        const msg=String(e?.message||e);
+        error(/Invalid login credentials/i.test(msg)?'Usuário ou senha incorretos.':msg);
+        try{await sb?.auth?.signOut();}catch(_){}
+      }finally{setBusy(false);}
+    },
+    async logout(){try{await client().auth.signOut();}catch(e){}try{localStorage.removeItem('alp_auth_login');localStorage.removeItem('alp_auth_role');}catch(e){}location.reload();}
+  };
+  document.addEventListener('DOMContentLoaded',async function(){
+    try{const saved=localStorage.getItem('alp_saved_login');if(saved){const el=document.getElementById('alpBaseUser');if(el)el.value=saved;const ck=document.getElementById('alpRemember');if(ck)ck.checked=true;}}catch(e){}
+    // Começa sempre pelo login; sessão existente é restaurada automaticamente.
+    try{
+      const c=client();const {data}=await c.auth.getSession();const session=data?.session;
+      if(session?.user?.id){
+        const {data:profile}=await c.from('profiles').select('*').eq('id',session.user.id).maybeSingle();
+        if(profile&&profile.status==='active'){await enterArea(profile);return;}
+        await c.auth.signOut();
+      }
+    }catch(e){console.error('ALP session restore',e)}
+    showLogin();
+  });
+})();
+</script>
 </body>
 </html>
