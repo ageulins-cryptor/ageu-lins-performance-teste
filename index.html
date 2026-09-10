@@ -3191,9 +3191,11 @@ saveConfig(){const n=document.getElementById('trainer-config-name').value.trim()
   const SB_KEY='sb_publishable_eqU3R9zwnYnZqvJQOhU5Eg_QI0uLSPf';
   const WORKSPACE='ageu-lins-performance';
   let sb=null;
+  let recoveryPending=false;
+  let domReady=false;
   function showLogin(){const el=document.getElementById('alpBaseLogin');if(el)el.style.display='flex';}
   function hideLogin(){const el=document.getElementById('alpBaseLogin');if(el)el.style.display='none';}
-  function showRecovery(){const el=document.getElementById('alpPasswordRecovery');if(el)el.style.display='flex';hideLogin();}
+  function showRecovery(){recoveryPending=true;const el=document.getElementById('alpPasswordRecovery');if(el)el.style.display='flex';hideLogin();}
   function setBusy(b){const btn=document.getElementById('alpBaseEnter'),load=document.getElementById('alpBaseLoading');if(btn){btn.disabled=b;btn.textContent=b?'Entrando…':'Entrar';}if(load)load.style.display=b?'block':'none';}
   function error(msg){const e=document.getElementById('alpBaseError');if(e)e.textContent=msg||'';}
   function recoveryMsg(msg,ok){const e=document.getElementById('alpRecoveryMsg');if(e){e.textContent=msg||'';e.style.color=ok?'#2d7a50':'#9b3153';}}
@@ -3283,13 +3285,20 @@ saveConfig(){const n=document.getElementById('trainer-config-name').value.trim()
     logout(){try{client().auth.signOut();}catch(e){}try{localStorage.removeItem('alp_auth_login');localStorage.removeItem('alp_auth_role');}catch(e){}location.reload();}
   };
   document.addEventListener('DOMContentLoaded',async function(){
+    domReady=true;
     try{const saved=localStorage.getItem('alp_saved_login');if(saved){const el=document.getElementById('alpBaseUser');if(el)el.value=saved;const ck=document.getElementById('alpRemember');if(ck)ck.checked=true;}}catch(e){}
     document.getElementById('alpForgotPassword')?.addEventListener('click',startPasswordRecovery);
     document.getElementById('alpSaveNewPass')?.addEventListener('click',finishPasswordRecovery);
     try{
       const c=client();
-      c.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY')showRecovery();});
+      c.auth.onAuthStateChange((event)=>{
+        if(event==='PASSWORD_RECOVERY'){
+          recoveryPending=true;
+          if(domReady) showRecovery();
+        }
+      });
       if(isRecoveryUrl()){showRecovery();return;}
+      if(recoveryPending){showRecovery();return;}
       const {data}=await c.auth.getSession();const session=data?.session;
       if(session?.user?.id){
         const {data:profile}=await c.from('profiles').select('*').eq('id',session.user.id).maybeSingle();
